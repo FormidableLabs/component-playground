@@ -22,12 +22,27 @@ const Preview = React.createClass({
     },
 
     _compileCode() {
-      return JSXTransform.transformWithDetails(
-          '(function(' + Object.keys(this.props.scope).join(',') + ', mountNode) {' +
+      if (this.props.noRender) {
+        return JSXTransform.transformWithDetails(
+            '(function(' + Object.keys(this.props.scope).join(',') + ', mountNode) {' +
+              'return React.createClass({' +
+                'render: function(){' +
+                  'return (' +
+                    this.props.code +
+                  ')' +
+                '}' +
+              '});' +
+            '\n});',
+        { harmony: true }
+        ).code;
+      } else {
+        return JSXTransform.transformWithDetails(
+            '(function(' + Object.keys(this.props.scope).join(',') + ', mountNode) {' +
               this.props.code +
-          '\n});',
-      { harmony: true }
-      ).code;
+            '\n});',
+        { harmony: true }
+        ).code;
+      }
     },
 
     _setTimeout() {
@@ -51,7 +66,14 @@ const Preview = React.createClass({
         }
         scope.push(mountNode)
         var compiledCode = this._compileCode();
-        eval(compiledCode).apply(null, scope)
+        if (this.props.noRender) {
+          var Component = React.createElement(
+            eval(compiledCode).apply(null, scope)
+          );
+          React.render(Component, mountNode);
+        } else {
+          eval(compiledCode).apply(null, scope)
+        }
       } catch (err) {
         this._setTimeout(function() {
           React.render(

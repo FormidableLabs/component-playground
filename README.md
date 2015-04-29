@@ -85,3 +85,20 @@ When evaluating the JSX, it needs to be provided a scope object. At the very lea
 ```
 
 Any module/component that is used inside the playground needs to be added to the scope object. See `/demo` for an example of how this works.
+
+###theme
+_React.PropTypes.string_
+
+String specifying which CodeMirror theme to initialize with. Defaults to 'monokai'.
+
+###noRender
+_React.PropTypes.bool_
+
+If set to true, removes the need to create a class or call React.render within the example code.
+When true, examples should be structured as the interior of a render method, see below:
+
+```
+<Button buttonStyle={this._getButtonStyle()}>
+  <p>My Button</p>
+</Button>
+```

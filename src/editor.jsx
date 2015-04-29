@@ -11,7 +11,7 @@ const Editor = React.createClass({
       lineWrapping: true,
       smartIndent: false,
       matchBrackets: true,
-      theme: 'monokai',
+      theme: this.props.theme,
       readOnly: this.props.readOnly
     });
     this.editor.on('change', this._handleChange);
