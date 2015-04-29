@@ -85,3 +85,36 @@ When evaluating the JSX, it needs to be provided a scope object. At the very lea
 ```
 
 Any module/component that is used inside the playground needs to be added to the scope object. See `/demo` for an example of how this works.
+
+####collapsableCode
+_React.PropTypes.bool_
+
+Allows the user to collapse the code block.
+
+```
+<Playground collapsableCode={true} codeText={componentExample} scope={{React: React}}/>
+```
+
+####docClass
+_React.PropTypes.renderable_
+
+A component class that will be used to auto-generate docs based on that component's `propTypes`. See `propDescriptionMap` below for how to annotate the generate prop docs.
+
+```
+<Playground docClass={MyComponent} codeText={componentExample} scope={{React: React}}/>
+```
+
+####propDescriptionMap
+_React.PropTypes.string_
+
+Annotation map for the docClass. The key is the prop to annotate, the value is the description of that prop.
+
+```
+<Playground
+  docClass={MyComponent}
+  propDescriptionMap={{
+    collapsableCode: "Allows the user to collapse the code block"
+  }}
+  codeText={componentExample}
+  scope={{React: React}}/>
+```

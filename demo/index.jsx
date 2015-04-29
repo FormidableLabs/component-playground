@@ -16,6 +16,15 @@ var Index = React.createClass({
     return (
       <div className="component-documentation">
         <Playground codeText={componentExample} scope={{React: React, Button: Button}}/>
+        <Playground codeText={componentExample} scope={{React: React, Button: Button}} collapsableCode={true}/>
+        <Playground
+          codeText={componentExample}
+          scope={{React: React, Button: Button}}
+          propDescriptionMap={{
+            buttonStyle: "style object for inline styles"
+          }}
+          docClass={Button}
+          collapsableCode={true} />
       </div>
     );
   }
