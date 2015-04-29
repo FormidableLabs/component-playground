@@ -28,7 +28,5 @@ $RECYCLE.BIN/
 # App specific
 
 node_modules/
-bower_components/
 .tmp
 lib
-/src/scripts/main.js
