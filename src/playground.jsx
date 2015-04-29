@@ -3,8 +3,8 @@
 
 import React from 'react/addons';
 
-import Editor from "./editor.jsx";
-import Preview from "./preview.jsx";
+import Editor from "./editor";
+import Preview from "./preview";
 
 const ReactPlayground = React.createClass({
   propTypes: {
