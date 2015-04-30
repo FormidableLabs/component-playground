@@ -1,6 +1,7 @@
 'use strict';
 
 var webpack = require('webpack');
+var path = require('path');
 
 module.exports = webpack({
   cache: true,
@@ -29,6 +30,10 @@ module.exports = webpack({
         test: /\.json$/,
         loader: "json-loader"
       }
+    ],
+    noParse: [
+        /browser[\\\/]*\.js$/,
+        path.join(__dirname, "node_modules", "babel-core")
     ]
   },
   plugins: [

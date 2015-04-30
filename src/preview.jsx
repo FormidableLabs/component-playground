@@ -3,6 +3,7 @@
 
 import React from 'react/addons';
 import JSXTransform from 'react-tools';
+import babel from 'babel-core/browser';
 
 const Preview = React.createClass({
     propTypes: {
@@ -23,7 +24,7 @@ const Preview = React.createClass({
 
     _compileCode() {
       if (this.props.noRender) {
-        return JSXTransform.transformWithDetails(
+        return babel.transform(
             '(function(' + Object.keys(this.props.scope).join(',') + ', mountNode) {' +
               'return React.createClass({' +
                 'render: function(){' +
@@ -33,14 +34,14 @@ const Preview = React.createClass({
                 '}' +
               '});' +
             '\n});',
-        { harmony: true }
+        { stage: 1 }
         ).code;
       } else {
-        return JSXTransform.transformWithDetails(
+        return babel.transform(
             '(function(' + Object.keys(this.props.scope).join(',') + ', mountNode) {' +
               this.props.code +
             '\n});',
-        { harmony: true }
+        { stage: 1 }
         ).code;
       }
     },

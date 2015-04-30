@@ -1,6 +1,6 @@
 {
   "name": "component-playground",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A component for rendering React components with editable source and live preview",
   "main": "index.js",
   "scripts": {
@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/FormidableLabs/component-playground#readme",
   "dependencies": {
-    "react-tools": "^0.13.2"
+    "babel-core": "^5.1.13",
   },
   "peerDependencies": {
     "react": "0.13.x"
