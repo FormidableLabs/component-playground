@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/FormidableLabs/component-playground#readme",
   "dependencies": {
-    "babel-core": "^5.1.13",
+    "babel-core": "^5.1.13"
   },
   "peerDependencies": {
     "react": "0.13.x"

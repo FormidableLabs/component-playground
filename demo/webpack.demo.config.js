@@ -30,10 +30,6 @@ module.exports = webpack({
         test: /\.json$/,
         loader: "json-loader"
       }
-    ],
-    noParse: [
-        /browser[\\\/]*\.js$/,
-        path.join(__dirname, "node_modules", "babel-core")
     ]
   },
   plugins: [
