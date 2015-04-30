@@ -6,11 +6,36 @@ body {
 
 .playground {
   max-width: 800px;
-  margin: auto;
+  margin: 10px auto;
   box-shadow: 0px 0px 5px rgba(0,0,0,0.25);
+  border-radius: 5px;
+  overflow: hidden;
 }
-.playgroundCode, .CodeMirror {
-  border-radius: 5px 5px 0px 0px;
+
+.playgroundCode .CodeMirror{
+
+}
+
+.playground.collapsableCode .playgroundCode {
+  height: 0;
+  overflow: hidden;
+}
+
+.playground.collapsableCode .playgroundCode.expandedCode {
+  height: auto;
+}
+
+.playgroundToggleCodeLink {
+  cursor: pointer;
+  font-family: monospace;
+  position: relative;
+  right: 0;
+  display: inline-block;
+  padding: 5px;
+}
+
+.playgroundToggleCodeLink:hover {
+  color: #aaa;
 }
 
 .CodeMirror {
@@ -19,9 +44,8 @@ body {
 
 .playgroundPreview {
   background: white;
-  border-radius: 0px 0px 5px 5px;
   padding: 10px;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .playgroundError {

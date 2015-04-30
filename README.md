@@ -102,3 +102,36 @@ When true, examples should be structured as the interior of a render method, see
   <p>My Button</p>
 </Button>
 ```
+
+####collapsableCode
+_React.PropTypes.bool_
+
+Allows the user to collapse the code block.
+
+```
+<Playground collapsableCode={true} codeText={componentExample} scope={{React: React}}/>
+```
+
+####docClass
+_React.PropTypes.renderable_
+
+A component class that will be used to auto-generate docs based on that component's `propTypes`. See `propDescriptionMap` below for how to annotate the generate prop docs.
+
+```
+<Playground docClass={MyComponent} codeText={componentExample} scope={{React: React}}/>
+```
+
+####propDescriptionMap
+_React.PropTypes.string_
+
+Annotation map for the docClass. The key is the prop to annotate, the value is the description of that prop.
+
+```
+<Playground
+  docClass={MyComponent}
+  propDescriptionMap={{
+    collapsableCode: "Allows the user to collapse the code block"
+  }}
+  codeText={componentExample}
+  scope={{React: React}}/>
+```

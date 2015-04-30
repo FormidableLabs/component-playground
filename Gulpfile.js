@@ -35,7 +35,7 @@ gulp.task('demo', ['build'], function(callback) {
       }
   }).listen(8081, "localhost", function(err) {
     if(err) throw new gutil.PluginError("webpack-dev-server", err);
-    gutil.log("[demo]", "http://localhost:8080/");
+    gutil.log("[demo]", "http://localhost:8081/");
   });
 });
 
