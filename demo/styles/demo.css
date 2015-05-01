@@ -62,6 +62,7 @@ header .hljs {
   border-radius: 3px;
   padding: 20px;
   font-size: 14px;
+  color: white;
 }
 
 h2 {
@@ -112,12 +113,18 @@ h2 {
 }
 
 .playgroundPreview {
+  position: relative;
   background: white;
-  padding: 10px;
   overflow: auto;
 }
 
+.playgroundPreview .previewArea {
+  padding: 10px;
+}
+
 .playgroundError {
+  position: absolute;
+  width: 100%;
   padding: 10px;
   font-size: 12px;
   color: white;

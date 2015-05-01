@@ -11,6 +11,12 @@ const Preview = React.createClass({
       scope: React.PropTypes.object.isRequired
     },
 
+    getInitialState() {
+      return {
+        error: null
+      }
+    },
+
     componentDidMount() {
       this._executeCode();
     },
@@ -55,17 +61,17 @@ const Preview = React.createClass({
       var mountNode = this.refs.mount.getDOMNode();
 
       try {
-        React.unmountComponentAtNode(mountNode);
-      } catch (e) { }
 
-      try {
         var scope = [];
+
         for(var s in this.props.scope) {
           if(this.props.scope.hasOwnProperty(s)){
             scope.push(this.props.scope[s]);
           }
         }
+
         scope.push(mountNode)
+
         var compiledCode = this._compileCode();
         if (this.props.noRender) {
           var Component = React.createElement(
@@ -75,18 +81,27 @@ const Preview = React.createClass({
         } else {
           eval(compiledCode).apply(null, scope)
         }
+
+        this.setState({
+          error: null
+        });
       } catch (err) {
+        var self = this;
         this._setTimeout(function() {
-          React.render(
-            <div className="playgroundError">{err.toString()}</div>,
-            mountNode
-          );
+          self.setState({
+            error: err.toString()
+          });
         }, 500);
       }
     },
 
     render() {
-        return <div ref="mount" />;
+        return (
+          <div>
+            {this.state.error !== null ? <div className="playgroundError">{this.state.error}</div> : null}
+            <div ref="mount" className="previewArea"/>
+          </div>
+        );
     },
 });
 
