@@ -33,3 +33,19 @@
   text-decoration: underline;
   color: white !important;
 }
+
+.hljs-keyword, .hljs-winutils, .method, .hljs-addition, .css .hljs-tag, .hljs-request, .hljs-status, .nginx .hljs-title {
+  color: #F2777A;
+}
+
+.hljs-title, .hljs-localvars, .hljs-chunk, .hljs-decorator, .hljs-built_in, .hljs-identifier, .vhdl .hljs-literal, .hljs-id, .css .hljs-function, .hljs-name {
+  color: #6699CC;
+}
+
+.hljs-number, .hljs-command, .hljs-string, .hljs-tag .hljs-value, .hljs-rule .hljs-value, .hljs-phpdoc, .hljs-dartdoc, .tex .hljs-formula, .hljs-regexp, .hljs-hexcolor, .hljs-link_url {
+  color: #99C794;
+}
+
+.hljs-attribute, .hljs-variable, .lisp .hljs-body, .smalltalk .hljs-number, .hljs-constant, .hljs-class .hljs-title, .hljs-parent, .hljs-type, .hljs-link_reference {
+  color: #F2777A;
+}

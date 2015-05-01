@@ -6,8 +6,8 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-size: 18px;
-  font-family: 'Quattrocento', serif;
+  font-size: 16px;
+  font-family: 'Oswald', sans-serif;
 }
 
 body {
@@ -41,6 +41,11 @@ header h1 {
   font-size: 55px;
 }
 
+code.hljs {
+  font-size: 14px;
+  padding: 20px;
+}
+
 @media (max-width: 800px) {
   header h1 {
     font-size: 36px;
@@ -66,9 +71,29 @@ header .hljs {
 }
 
 h2 {
-  color: #555;
-  text-align: center;
+  margin: 25px 0px 15px;
+  font-size: 24px;
+  color: #222;
   font-family: 'Oswald', sans-serif;
+}
+
+h4 {
+  margin: 0;
+  color: #222;
+  font-size: 18px;
+}
+
+em {
+  font-size: 14px;
+  margin-top: 10px;
+  display: block;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: #aaa;
+  margin-top: 20px;
 }
 
 .main {
@@ -79,7 +104,7 @@ h2 {
 
 .playground {
   overflow: hidden;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .playgroundCode .CodeMirror{
