@@ -12,6 +12,7 @@ var eslint= require('gulp-eslint');
 var karma = require('karma').server;
 
 var webpackDemoConfig = require('./demo/webpack.demo.config.js');
+var webpackDistConfig = require('./webpack.gh-pages.config.js');
 
 gulp.task('clean', function(cb){
   del(['lib'], cb)
@@ -21,6 +22,12 @@ gulp.task("babel", ['clean'], function() {
   return gulp.src('src/*.js*')
         .pipe(babel())
         .pipe(gulp.dest('lib'));
+});
+
+gulp.task('pages', function(){
+  return gulp.src('demo/index.jsx')
+    .pipe(gwebpack(webpackDistConfig))
+    .pipe(gulp.dest('dist/assets/'));
 });
 
 gulp.task('demo', ['build'], function(callback) {
