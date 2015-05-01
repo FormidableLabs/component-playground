@@ -17,7 +17,7 @@ const Button = React.createClass({
 
   render() {
     return (
-      <button type="button" onClick={this.props.onClick} style={this.props.buttonStyle}>
+      <button type="button" onClick={this.props.onClick} style={this.props.style}>
         {this.props.children}
       </button>
     );

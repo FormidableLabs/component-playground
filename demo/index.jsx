@@ -4,6 +4,7 @@
 var React = require('react/addons');
 var Playground = require('playground');
 var Button = require('./components/button');
+var Radium = require('radium');
 
 require('./styles/syntax.css');
 require('./styles/codemirror.css');
@@ -16,7 +17,7 @@ var Index = React.createClass({
       <div className="component-documentation">
         <Playground
           codeText={componentExample}
-          scope={{React: React, Button: Button}}/>
+          scope={{React: React, Button: Button, Radium: Radium}}/>
       </div>
     );
   }

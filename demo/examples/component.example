@@ -1,28 +1,35 @@
-var ComponentExample = React.createClass({
-  _getButtonStyle() {
-    return {
-      background: '#3498db',
-      border: 0,
-      borderRadius: 3,
-      boxShadow: '0px 5px 0px #2980b9',
-      color: 'white',
-      display: 'block',
-      fontSize: 14,
-      fontWeight: 'bold',
-      margin: "20px auto",
-      minWidth: 200,
-      outline: 0,
-      padding: 10
+var ComponentExample = React.createClass(Radium.wrap({
+    render: function() {
+      return (
+        <button type="button" style={[styles]}>
+          <p>My Button</p>
+        </button>
+      )
     }
-  },
+}));
 
-  render: function() {
-    return (
-      <Button buttonStyle={this._getButtonStyle()}>
-        <p>My Button</p>
-      </Button>
-    )
+var styles = {
+  background: '#3498db',
+  border: 0,
+  borderRadius: 3,
+  boxShadow: '0px 5px 0px #2980b9',
+  color: 'white',
+  display: 'block',
+  fontSize: 14,
+  fontWeight: 'bold',
+  margin: "20px auto",
+  minWidth: 200,
+  outline: 0,
+  padding: 10,
+  ":hover": {
+    background: '#2980b9',
+    boxShadow: '0px 5px 0px #1070a9',
+  },
+  ":active": {
+    boxShadow: "none",
+    top: 5,
+    position: 'relative'
   }
-});
+}
 
 React.render(<ComponentExample/>, mountNode);
