@@ -14,7 +14,7 @@ body {
   background: #efefef;
 }
 
-header {
+header, footer {
   width: 100%;
   background-image: -ms-linear-gradient(left, #3498DB 0%, #9B59B6 100%);
   background-image: -moz-linear-gradient(left, #3498DB 0%, #9B59B6 100%);
@@ -39,6 +39,31 @@ header h1 {
   color: white;
   font-weight: 700;
   font-size: 55px;
+}
+
+footer {
+  padding: 40px;
+  color: white;
+}
+
+footer a {
+  color: white;
+}
+
+footer p {
+  display: block;
+}
+
+footer .footer-content {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+
+p.desc {
+  font-style: italic;
+  margin: 40px;
+  font-size: 18px;
 }
 
 code.hljs {
