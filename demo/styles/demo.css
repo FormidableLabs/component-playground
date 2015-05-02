@@ -46,12 +46,36 @@ footer {
   color: white;
 }
 
-footer a {
+footer p a {
   color: white;
 }
 
 footer p {
   display: block;
+}
+
+a.button {
+  text-decoration: none;
+  color: white;
+  padding: 20px;
+  margin: 0px auto;
+  display: block;
+  background: #3498DB;
+  box-shadow: 0px 5px 0px #2980b9;
+  border-radius: 3px;
+  max-width: 200px;
+  text-align: center;
+}
+
+a.button:hover {
+  background: #2980b9;
+  box-shadow: 0px 5px 0px #1070a9;
+}
+
+a.button:active {
+  position: relative;
+  box-shadow: none;
+  top: 5px;
 }
 
 footer .footer-content {
@@ -72,6 +96,9 @@ code.hljs {
 }
 
 @media (max-width: 800px) {
+  header, footer {
+    padding: 40px 20px;
+  }
   header h1 {
     font-size: 36px;
   }
