@@ -108,7 +108,7 @@ When true, examples should be structured as the interior of a render method, see
 </Button>
 ```
 
-####collapsableCode
+###collapsableCode
 _React.PropTypes.bool_
 
 Allows the user to collapse the code block.
@@ -117,8 +117,8 @@ Allows the user to collapse the code block.
 <Playground collapsableCode={true} codeText={componentExample} scope={{React: React}}/>
 ```
 
-####docClass
-_React.PropTypes.renderable_
+###docClass
+_React.PropTypes.node_
 
 A component class that will be used to auto-generate docs based on that component's `propTypes`. See `propDescriptionMap` below for how to annotate the generate prop docs.
 
@@ -126,7 +126,7 @@ A component class that will be used to auto-generate docs based on that componen
 <Playground docClass={MyComponent} codeText={componentExample} scope={{React: React}}/>
 ```
 
-####propDescriptionMap
+###propDescriptionMap
 _React.PropTypes.string_
 
 Annotation map for the docClass. The key is the prop to annotate, the value is the description of that prop.
@@ -139,4 +139,15 @@ Annotation map for the docClass. The key is the prop to annotate, the value is t
   }}
   codeText={componentExample}
   scope={{React: React}}/>
+```
+
+####es6Console
+_React.PropTypes.bool_
+
+Turns preview into a simple console for testing out ES6 code. Use `console.log()` in the playground to generate output.
+
+```
+<Playground
+  es6Console={true}
+  codeText={es6Example} />
 ```
