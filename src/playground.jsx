@@ -5,6 +5,7 @@ import React from 'react/addons';
 
 import Editor from "./editor";
 import Preview from "./preview";
+import EsPreview from "./es6-preview";
 import Doc from "./doc";
 
 const ReactPlayground = React.createClass({
@@ -15,7 +16,8 @@ const ReactPlayground = React.createClass({
     docClass: React.PropTypes.renderable,
     propDescriptionMap: React.PropTypes.string,
     theme: React.PropTypes.string,
-    noRender: React.PropTypes.bool
+    noRender: React.PropTypes.bool,
+    es6Console: React.PropTypes.bool
   },
 
   getDefaultProps() {
@@ -67,10 +69,16 @@ const ReactPlayground = React.createClass({
           : ""
         }
         <div className="playgroundPreview">
+          {this.props.es6Console ?
+            <EsPreview
+              code={this.state.code}
+              scope={this.props.scope} />
+          :
           <Preview
             code={this.state.code}
             scope={this.props.scope}
-            noRender={this.props.noRender}/>
+            noRender={this.props.noRender} />
+          }
         </div>
       </div>
     );
