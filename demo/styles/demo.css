@@ -154,6 +154,17 @@ hr {
   padding: 20px;
 }
 
+.in-use {
+  text-align: center;
+  margin: 50px 0px 20px;
+}
+
+.in-use h4 {
+  color: #555;
+  font-weight: normal;
+  font-size: 14px;
+}
+
 .playground {
   overflow: hidden;
   font-size: 14px;
