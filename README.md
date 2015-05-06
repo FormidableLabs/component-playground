@@ -141,7 +141,7 @@ Annotation map for the docClass. The key is the prop to annotate, the value is t
   scope={{React: React}}/>
 ```
 
-####es6Console
+###es6Console
 _React.PropTypes.bool_
 
 Turns preview into a simple console for testing out ES6 code. Use `console.log()` in the playground to generate output.

@@ -2,7 +2,6 @@
 'use strict';
 
 import React from 'react/addons';
-import JSXTransform from 'react-tools';
 import babel from 'babel-core/browser';
 
 const Preview = React.createClass({

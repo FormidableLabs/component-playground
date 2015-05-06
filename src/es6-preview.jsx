@@ -2,7 +2,7 @@
 'use strict';
 
 import React from 'react/addons';
-import JSXTransform from 'react-tools';
+import babel from 'babel-core/browser';
 
 const Preview = React.createClass({
     propTypes: {
@@ -22,7 +22,7 @@ const Preview = React.createClass({
     },
 
     _compileCode() {
-      return JSXTransform.transformWithDetails(
+      return babel.transform(
         '(function(' + Object.keys(this.props.scope).join(',') + ') {' +
           'var list = []; \n' +
           'var console = { log(x) { list.push(x) } }; \n' +
@@ -30,7 +30,7 @@ const Preview = React.createClass({
           ' \n return list;' +
         '\n});',
 
-      { harmony: true }
+      { stage: 1 }
       ).code;
     },
 
