@@ -10,6 +10,7 @@ require('./styles/codemirror.css');
 require('./styles/demo.css');
 
 var componentExample = require("raw!./examples/component.example");
+var es6Example = require("raw!./examples/es6.example");
 
 var Index = React.createClass({
   render() {
@@ -25,6 +26,7 @@ var Index = React.createClass({
           }}
           docClass={Button}
           collapsableCode={true} />
+        <Playground codeText={es6Example} es6Console={true} scope={{React: React, Button: Button}} />
       </div>
     );
   }
