@@ -4,6 +4,11 @@ A component for rendering React components with editable source and live preview
 ![Component Playground]
 (http://i.imgur.com/se3avpr.png)
 
+
+###Demo
+
+[http://projects.formidablelabs.com/component-playground](http://projects.formidablelabs.com/component-playground)
+
 ###Installation
 
 ```
