@@ -3,6 +3,7 @@
 
 import React from 'react/addons';
 import babel from 'babel-core/browser';
+import { format } from 'util'
 
 const Preview = React.createClass({
     propTypes: {
@@ -23,12 +24,39 @@ const Preview = React.createClass({
 
     _compileCode() {
       return babel.transform(
-        '(function(' + Object.keys(this.props.scope).join(',') + ') {' +
-          'var list = []; \n' +
-          'var console = { log(x) { list.push(x) } }; \n' +
-          this.props.code +
-          ' \n return list;' +
-        '\n});',
+        `(function(format, ${Object.keys(this.props.scope).join(',')}, mountNode) {
+          return React.createClass({
+            getInitialState(){ return { log: [] }},
+
+            componentDidMount(){
+              var console = {
+                log: (...args) => this.setState(state => ({log: state.log.concat(format(...args))}) )
+              };
+
+              ;(function(){
+                ${this.props.code}
+              })()
+            },
+
+            render() {
+              return (
+                <div style={{padding: 15}}>
+                  {this.state.log.map((x, idx) => {
+                    return (
+                      <div key={idx}
+                        style={{
+                          borderBottom: "1px solid #ccc",
+                          padding: "4px 0"
+                        }}>
+                        {x}
+                      </div>
+                    );
+                  })}
+                </div>
+              )
+            }
+          });
+        });`,
 
       { stage: 1 }
       ).code;
@@ -47,7 +75,7 @@ const Preview = React.createClass({
       } catch (e) { }
 
       try {
-        var scope = [];
+        var scope = [format];
         for(var s in this.props.scope) {
           if(this.props.scope.hasOwnProperty(s)){
             scope.push(this.props.scope[s]);
@@ -55,27 +83,10 @@ const Preview = React.createClass({
         }
         scope.push(mountNode)
         var compiledCode = this._compileCode();
+
         var Component = React.createElement(
-          React.createClass({
-            render() {
-              return (
-                <div style={{padding: 15}}>
-                  {eval(compiledCode).apply(null, scope).map((x) => {
-                    return (
-                      <div
-                        style={{
-                          borderBottom: "1px solid #ccc",
-                          padding: "4px 0"
-                        }}>
-                        {x}
-                      </div>
-                    );
-                  })}
-                </div>
-              );
-            }
-          })
-        );
+            eval(compiledCode).apply(null, scope)
+          );
         React.render(Component, mountNode);
       } catch (err) {
         this._setTimeout(function() {
