@@ -1,6 +1,6 @@
 /* eslint new-cap:0 no-unused-vars:0 */
 'use strict';
-
+require('babel-core/polyfill')
 var React = require('react/addons');
 var Playground = require('playground');
 var Button = require('./components/button');
@@ -16,7 +16,7 @@ var Index = React.createClass({
   render() {
     return (
       <div className="component-documentation">
-        <Playground codeText={componentExample} scope={{React: React, Button: Button}}/>
+        <Playground codeText={componentExample} scope={{React: React, Button: Button}} babelConfig={{ stage: 0 }}/>
         <Playground codeText={componentExample} scope={{React: React, Button: Button}} collapsableCode={true}/>
         <Playground
           codeText={componentExample}
