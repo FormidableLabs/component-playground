@@ -17,7 +17,8 @@ const ReactPlayground = React.createClass({
     propDescriptionMap: React.PropTypes.string,
     theme: React.PropTypes.string,
     noRender: React.PropTypes.bool,
-    es6Console: React.PropTypes.bool
+    es6Console: React.PropTypes.bool,
+    babelConfig: React.PropTypes.object
   },
 
   getDefaultProps() {
@@ -77,6 +78,7 @@ const ReactPlayground = React.createClass({
           <Preview
             code={this.state.code}
             scope={this.props.scope}
+            babelConfig={this.props.babelConfig}
             noRender={this.props.noRender} />
           }
         </div>
