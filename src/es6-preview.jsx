@@ -53,9 +53,7 @@ const wrapMap = {
             {(first ? "" : ", ")  + key}
           </span>
           {': '}
-          <span style={{color: "#F2777A"}}>
-            {'"' + obj[key] + '"'}
-            </span>
+          {wrapMap["wrap" + getType(obj[key])](obj[key])}
         </span>
       );
 
