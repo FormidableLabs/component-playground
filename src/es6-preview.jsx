@@ -97,8 +97,8 @@ const Preview = React.createClass({
       return babel.transform(
         '(function(' + Object.keys(this.props.scope).join(',') + ') {' +
           'var list = []; \n' +
-          'var console = { log(x) {' +
-            'list.push(x)' +
+          'var console = { log(...x) {' +
+            'list.push({val: x, multipleArgs: x.length !== 1})' +
           '} }; \n' +
           this.props.code +
           ' \n return list;' +
@@ -131,17 +131,27 @@ const Preview = React.createClass({
         var compiledCode = this._compileCode();
         var Component = React.createElement(
           React.createClass({
+            _createConsoleLine(x, multipleArgs) {
+              return (
+                <span style={{marginRight: "20px"}}>
+                  {multipleArgs ?
+                    x.map((y) => { return this._createConsoleLine([y], false); }) :
+                    wrapMap["wrap" + getType(x[0])](x[0])}
+                </span>
+              );
+            },
+
             render() {
               return (
                 <div style={{padding: 15, fontFamily: "Consolas, Courier, monospace"}}>
-                  {eval(compiledCode).apply(null, scope).map((x) => {
+                  {eval(compiledCode).apply(null, scope).map(x => {
                     return (
                       <div
                         style={{
                           borderBottom: "1px solid #ccc",
                           padding: "4px 0"
                         }}>
-                        {wrapMap["wrap" + getType(x)](x)}
+                        {this._createConsoleLine(x.val, x.multipleArgs)}
                       </div>
                     );
                   })}
