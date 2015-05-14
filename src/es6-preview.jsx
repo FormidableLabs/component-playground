@@ -25,6 +25,10 @@ const wrapMap = {
     return <span style={{color: "#F2777A"}}>{'"' + str + '"'}</span>
   },
 
+  wrapboolean(bool) {
+    return <span style={{color: "#48A1CF"}}>{bool ? "true" : "false"}</span>
+  },
+
   wraparray(arr) {
     return (
       <span>
