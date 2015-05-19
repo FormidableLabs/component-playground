@@ -30,7 +30,6 @@
     "react": "0.13.x"
   },
   "devDependencies": {
-    "babel-core": "^4.7.16",
     "babel-eslint": "^2.0.2",
     "babel-loader": "^5.0.0",
     "chai": "^2.2.0",
