@@ -83,7 +83,14 @@ const wrapMap = {
 const Preview = React.createClass({
     propTypes: {
       code: React.PropTypes.string.isRequired,
-      scope: React.PropTypes.object.isRequired
+      scope: React.PropTypes.object.isRequired,
+      babelConfig: React.PropTypes.object
+    },
+
+    getDefaultProps() {
+      return {
+        babelConfig: {stage: 1}
+      }
     },
 
     componentDidMount() {
@@ -108,7 +115,7 @@ const Preview = React.createClass({
           ' \n return list;' +
         '\n});',
 
-      { stage: 1 }
+      this.props.babelConfig
       ).code;
     },
 
@@ -177,7 +184,7 @@ const Preview = React.createClass({
 
     render() {
         return <div ref="mount" />;
-    },
+    }
 });
 
 export default Preview;

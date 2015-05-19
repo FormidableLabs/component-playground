@@ -7,12 +7,19 @@ import babel from 'babel-core/browser';
 const Preview = React.createClass({
     propTypes: {
       code: React.PropTypes.string.isRequired,
-      scope: React.PropTypes.object.isRequired
+      scope: React.PropTypes.object.isRequired,
+      babelConfig: React.PropTypes.object
     },
 
     getInitialState() {
       return {
         error: null
+      }
+    },
+
+    getDefaultProps() {
+      return {
+        babelConfig: {stage: 1}
       }
     },
 
@@ -39,14 +46,14 @@ const Preview = React.createClass({
                 '}' +
               '});' +
             '\n});',
-        { stage: 1 }
+        this.props.babelConfig
         ).code;
       } else {
         return babel.transform(
             '(function(' + Object.keys(this.props.scope).join(',') + ', mountNode) {' +
               this.props.code +
             '\n});',
-        { stage: 1 }
+        this.props.babelConfig
         ).code;
       }
     },

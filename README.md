@@ -151,3 +151,14 @@ Turns preview into a simple console for testing out ES6 code. Use `console.log()
   es6Console={true}
   codeText={es6Example} />
 ```
+
+###babelConfig
+_React.PropTypes.object_
+
+An object of [configuration options](http://babeljs.io/docs/usage/options/) that the playground should pass to babel. Use to adjust, or limit the features you want the playground to support.
+
+```
+<Playground
+  babelConfig={{ stage: 0, loose: ['all']}}
+  codeText={es6Example} />
+```
