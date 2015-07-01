@@ -29,18 +29,17 @@ const Preview = React.createClass({
 
     _compileCode() {
       if (this.props.noRender) {
-        return babel.transform(
-            '(function(' + Object.keys(this.props.scope).join(',') + ', mountNode) {' +
-              'return React.createClass({' +
-                'render: function(){' +
-                  'return (' +
-                    this.props.code +
-                  ')' +
-                '}' +
-              '});' +
-            '\n});',
-        { stage: 1 }
-        ).code;
+        return babel.transform(`
+          (function(${Object.keys(this.props.scope).join(',')}, mountNode) {
+            return React.createClass({
+              render: function(){
+                return (
+                  ${this.props.code}
+                );
+              }
+            });
+          });
+        `, { stage: 1 }).code;
       } else {
         return babel.transform(
             '(function(' + Object.keys(this.props.scope).join(',') + ', mountNode) {' +
