@@ -14,13 +14,13 @@ var karma = require('karma').server;
 var webpackDemoConfig = require('./demo/webpack.demo.config.js');
 
 gulp.task('clean', function(cb){
-  del(['lib'], cb)
+  del(['dist'], cb)
 });
 
 gulp.task("babel", ['clean'], function() {
-  return gulp.src('src/*.js*')
+  return gulp.src('lib/*.js*')
         .pipe(babel())
-        .pipe(gulp.dest('lib'));
+        .pipe(gulp.dest('dist'));
 });
 
 gulp.task('demo', ['build'], function(callback) {
@@ -40,7 +40,7 @@ gulp.task('demo', ['build'], function(callback) {
 });
 
 gulp.task('lint', function () {
-  return gulp.src(['src/**/*.js'])
+  return gulp.src(['lib/**/*.js'])
     .pipe(eslint())
     .pipe(eslint.format())
 });
