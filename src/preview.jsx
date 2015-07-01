@@ -41,12 +41,11 @@ const Preview = React.createClass({
           });
         `, { stage: 1 }).code;
       } else {
-        return babel.transform(
-            '(function(' + Object.keys(this.props.scope).join(',') + ', mountNode) {' +
-              this.props.code +
-            '\n});',
-        { stage: 1 }
-        ).code;
+        return babel.transform(`
+          (function(${Object.keys(this.props.scope).join(',')}, mountNode) {
+            ${this.props.code}
+          });
+        `, { stage: 1 }).code;
       }
     },
 
