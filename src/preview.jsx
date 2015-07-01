@@ -29,10 +29,18 @@ const Preview = React.createClass({
 
     _compileCode() {
       if (this.props.noRender) {
+        const generateContextTypes = function(context) {
+          const keys = Object.keys(context).map(val => `${val}: React.PropTypes.any.isRequired`);
+          return `{ ${keys.join(", ")} }`;
+        };
+
         return babel.transform(`
-          (function(${Object.keys(this.props.scope).join(',')}, mountNode) {
+          (function(${Object.keys(this.props.scope).join(', ')}, mountNode) {
             return React.createClass({
-              render: function(){
+              // childContextTypes: { test: React.PropTypes.string },
+              childContextTypes: ${generateContextTypes(this.props.context)},
+              getChildContext: function () { return ${JSON.stringify(this.props.context)}; },
+              render: function() {
                 return (
                   ${this.props.code}
                 );

@@ -1,5 +1,5 @@
 # component-playground
-A component for rendering React components with editable source and live preview
+A component for rendering React Components and ES6 code with editable source and live preview
 
 ![Component Playground]
 (http://i.imgur.com/se3avpr.png)
@@ -60,24 +60,12 @@ React.render(<Index/>, document.getElementById('root'));
 ####`codeText`
 _React.PropTypes.string.isRequired_
 
-`codeText` takes a string of JSX markup as its value. While you can just pass it a string, I find it is easier to make a separate file and use Webpack's raw loader to load in the raw source. In the example above I use the .example extension, and an examples folder to organize my samples. The only requirement for this code is that at the bottom you need to add:
-
-```
-React.render(<YourComponentName/>, mountNode);
-```
+`codeText` takes a string of JSX markup as its value. While you can just pass it a string, I find it is easier to make a separate file and use Webpack's raw loader to load in the raw source. In the example above I use the .example extension, and an examples folder to organize my samples.
 
 An example file would look like:
 
 ```
-var ComponentExample = React.createClass({
-  render: function() {
-    return (
-        <p>Hi</p>
-    )
-  }
-});
-
-React.render(<ComponentExample/>, mountNode);
+<Button style={{background: '#3498db'}}>Hi</Button>
 ```
 
 ####scope
@@ -95,18 +83,6 @@ Any module/component that is used inside the playground needs to be added to the
 _React.PropTypes.string_
 
 String specifying which CodeMirror theme to initialize with. Defaults to 'monokai'.
-
-###noRender
-_React.PropTypes.bool_
-
-If set to true, removes the need to create a class or call React.render within the example code.
-When true, examples should be structured as the interior of a render method, see below:
-
-```
-<Button buttonStyle={this._getButtonStyle()}>
-  <p>My Button</p>
-</Button>
-```
 
 ###collapsableCode
 _React.PropTypes.bool_
@@ -150,4 +126,25 @@ Turns preview into a simple console for testing out ES6 code. Use `console.log()
 <Playground
   es6Console={true}
   codeText={es6Example} />
+```
+
+###noRender - (Deprecated, Remove at 1.x)
+_React.PropTypes.bool_
+
+If set to false, allows you bypass the `component-playground`'s component wrapper and render method.
+You can use this option to write higher order components directly in your example code and use your
+own Render method.
+NODE: This option **requires** that the `React.render` method be in your code
+_Deprecated in favor of writing example components. See #19 for more information_
+
+```
+var ComponentExample = React.createClass({
+  render: function() {
+    return (
+        <p>Hi</p>
+    )
+  }
+});
+
+React.render(<ComponentExample/>, mountNode);
 ```
