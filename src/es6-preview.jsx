@@ -98,18 +98,16 @@ const Preview = React.createClass({
     },
 
     _compileCode() {
-      return babel.transform(
-        '(function(' + Object.keys(this.props.scope).join(',') + ') {' +
-          'var list = []; \n' +
-          'var console = { log(...x) {' +
-            'list.push({val: x, multipleArgs: x.length !== 1})' +
-          '} }; \n' +
-          this.props.code +
-          ' \n return list;' +
-        '\n});',
-
-      { stage: 1 }
-      ).code;
+      return babel.transform(`
+        (function(${Object.keys(this.props.scope).join(',')}) {
+          var list = [];
+          var console = { log(...x) {
+            list.push({val: x, multipleArgs: x.length !== 1})
+          }};
+          ${this.props.code}
+          return list;
+        });
+      `, { stage: 1 }).code;
     },
 
     _setTimeout() {
