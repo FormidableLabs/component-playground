@@ -72,5 +72,5 @@
     "postinstall": "gulp build"
   },
 
-  "license": "MIT",
+  "license": "MIT"
 }
