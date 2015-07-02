@@ -1,8 +1,7 @@
-/* eslint new-cap:0 no-unused-vars:0 */
-'use strict';
+"use strict";
 
-import React from 'react/addons';
-import babel from 'babel-core/browser';
+import React from "react/addons";
+import babel from "babel-core/browser";
 
 const Preview = React.createClass({
     propTypes: {
@@ -13,7 +12,7 @@ const Preview = React.createClass({
     getInitialState() {
       return {
         error: null
-      }
+      };
     },
 
     componentDidMount() {
@@ -29,18 +28,18 @@ const Preview = React.createClass({
 
     _compileCode() {
       if (this.props.noRender) {
-        const generateContextTypes = function(context) {
+        const generateContextTypes = function (context) {
           const keys = Object.keys(context).map(val => `${val}: React.PropTypes.any.isRequired`);
           return `{ ${keys.join(", ")} }`;
         };
 
         return babel.transform(`
-          (function(${Object.keys(this.props.scope).join(', ')}, mountNode) {
+          (function (${Object.keys(this.props.scope).join(", ")}, mountNode) {
             return React.createClass({
               // childContextTypes: { test: React.PropTypes.string },
               childContextTypes: ${generateContextTypes(this.props.context)},
               getChildContext: function () { return ${JSON.stringify(this.props.context)}; },
-              render: function() {
+              render: function () {
                 return (
                   ${this.props.code}
                 );
@@ -50,7 +49,7 @@ const Preview = React.createClass({
         `, { stage: 1 }).code;
       } else {
         return babel.transform(`
-          (function(${Object.keys(this.props.scope).join(',')}, mountNode) {
+          (function (${Object.keys(this.props.scope).join(",")}, mountNode) {
             ${this.props.code}
           });
         `, { stage: 1 }).code;
@@ -69,13 +68,13 @@ const Preview = React.createClass({
 
         var scope = [];
 
-        for(var s in this.props.scope) {
-          if(this.props.scope.hasOwnProperty(s)){
+        for (var s in this.props.scope) {
+          if (this.props.scope.hasOwnProperty(s)) {
             scope.push(this.props.scope[s]);
           }
         }
 
-        scope.push(mountNode)
+        scope.push(mountNode);
 
         var compiledCode = this._compileCode();
         if (this.props.noRender) {
@@ -84,7 +83,7 @@ const Preview = React.createClass({
           );
           React.render(Component, mountNode);
         } else {
-          eval(compiledCode).apply(null, scope)
+          eval(compiledCode).apply(null, scope);
         }
 
         this.setState({
@@ -92,7 +91,7 @@ const Preview = React.createClass({
         });
       } catch (err) {
         var self = this;
-        this._setTimeout(function() {
+        this._setTimeout(function () {
           self.setState({
             error: err.toString()
           });
@@ -101,13 +100,15 @@ const Preview = React.createClass({
     },
 
     render() {
-        return (
-          <div>
-            {this.state.error !== null ? <div className="playgroundError">{this.state.error}</div> : null}
-            <div ref="mount" className="previewArea"/>
-          </div>
-        );
-    },
+      return (
+        <div>
+          {this.state.error !== null ?
+            <div className="playgroundError">{this.state.error}</div> :
+            null}
+          <div ref="mount" className="previewArea"/>
+        </div>
+      );
+    }
 });
 
 export default Preview;

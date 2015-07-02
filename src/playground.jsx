@@ -1,7 +1,8 @@
-/* eslint new-cap:0 no-unused-vars:0 */
-'use strict';
+/* no-unused-vars:0 */
+"use strict";
+
 import polyfill from "babel/polyfill";
-import React from 'react/addons';
+import React from "react/addons";
 
 import Editor from "./editor";
 import Preview from "./preview";
@@ -23,10 +24,10 @@ const ReactPlayground = React.createClass({
 
   getDefaultProps() {
     return {
-      theme: 'monokai',
+      theme: "monokai",
       noRender: true,
       context: {}
-    }
+    };
   },
 
   getInitialState() {
@@ -62,7 +63,7 @@ const ReactPlayground = React.createClass({
             propDescriptionMap={this.props.propDescriptionMap} />
           : ""
         }
-        <div className={"playgroundCode"  + (this.state.expandedCode ? " expandedCode" : "")}>
+        <div className={"playgroundCode" + (this.state.expandedCode ? " expandedCode" : "")}>
           <Editor
             onChange={this._handleCodeChange}
             className="playgroundStage"
@@ -92,7 +93,7 @@ const ReactPlayground = React.createClass({
         </div>
       </div>
     );
-  },
+  }
 });
 
 export default ReactPlayground;

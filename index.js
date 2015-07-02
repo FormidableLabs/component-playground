@@ -1,3 +1,5 @@
-var Playground = require('./lib/playground');
+"use strict";
+
+var Playground = require("./lib/playground");
 
 module.exports = Playground;

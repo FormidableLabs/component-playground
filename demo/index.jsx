@@ -1,17 +1,17 @@
 /* eslint new-cap:0 no-unused-vars:0 */
-'use strict';
+"use strict";
 
-var React = require('react/addons');
-var Playground = require('playground');
+var React = require("react/addons");
+var Playground = require("playground");
 
-require('./styles/syntax.css');
-require('./styles/codemirror.css');
-require('./styles/demo.css');
+require("./styles/syntax.css");
+require("./styles/codemirror.css");
+require("./styles/demo.css");
 
-var Button = require('./components/button');
+var Button = require("./components/button");
 var componentExample = require("raw!./examples/component.example");
 
-var DebugInfo = require('./components/debug-info');
+var DebugInfo = require("./components/debug-info");
 var contextExample = require("raw!./examples/context.example");
 
 var es6Example = require("raw!./examples/es6.example");
@@ -48,4 +48,4 @@ var Index = React.createClass({
   }
 });
 
-React.render(<Index/>, document.getElementById('root'));
+React.render(<Index/>, document.getElementById("root"));
