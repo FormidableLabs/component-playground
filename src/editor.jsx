@@ -30,7 +30,7 @@ const Editor = React.createClass({
   },
 
   render() {
-    var editor = <textarea ref="editor" defaultValue={this.props.codeText} />;
+    const editor = <textarea ref="editor" defaultValue={this.props.codeText} />;
 
     return (
       <div style={this.props.style} className={this.props.className}>

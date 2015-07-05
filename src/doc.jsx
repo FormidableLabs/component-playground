@@ -2,7 +2,7 @@
 
 import React from "react/addons";
 
-var propTypesArray = [{
+const propTypesArray = [{
   key: "array",
   test: React.PropTypes.array,
   isRequired: React.PropTypes.array.isRequired
@@ -36,13 +36,13 @@ var propTypesArray = [{
   isRequired: React.PropTypes.element.isRequired
 }];
 
-var getReactPropType = function (propTypeFunc) {
-  var propType = {
+const getReactPropType = function (propTypeFunc) {
+  const propType = {
     name: "custom",
     isRequire: false
   };
 
-  for (var i = 0; i < propTypesArray.length; i++) {
+  for (let i = 0; i < propTypesArray.length; i++) {
     if (propTypeFunc === propTypesArray[i].test) {
       propType.name = propTypesArray[i].key;
 
@@ -73,12 +73,12 @@ module.exports = React.createClass({
     };
   },
   render() {
-    var propTypes = [];
+    const propTypes = [];
 
-    for (var propName in this.props.componentClass.propTypes) {
+    for (const propName in this.props.componentClass.propTypes) {
       if (this.props.ignore.indexOf(propName)) {
         propTypes.push({
-          propName: propName,
+          propName,
           type: getReactPropType(this.props.componentClass.propTypes[propName]),
           description: this.props.propDescriptionMap[propName] || ""
         });

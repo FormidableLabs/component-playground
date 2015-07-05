@@ -39,16 +39,25 @@ gulp.task("demo", ["build"], function () {
   });
 });
 
-gulp.task("lint", function () {
+gulp.task("lint:react", function () {
   return gulp.src([
       "src/**/*.jsx",
-      "demo/**/*.jsx",
+      "demo/**/*.jsx"
+    ])
+    .pipe(eslint({configFile: '.eslintrc-react'}))
+    .pipe(eslint.format());
+});
+
+gulp.task("lint:es5", function () {
+  return gulp.src([
       "./Gulpfile.js",
       "./index.js"
     ])
-    .pipe(eslint())
+    .pipe(eslint({configFile: '.eslintrc-es5'}))
     .pipe(eslint.format());
 });
+
+gulp.task("lint", ["lint:es5", "lint:react"]);
 
 
 gulp.task("karma", ["lint"], function () {
