@@ -1,7 +1,7 @@
 /* eslint new-cap:0 no-unused-vars:0 */
-'use strict';
+"use strict";
 
-import React from 'react/addons';
+import React from "react/addons";
 
 const Button = React.createClass({
   contextTypes: {
@@ -10,7 +10,7 @@ const Button = React.createClass({
 
   render() {
     return (
-      <h1>ENV: {this.context.environment || 'development'}</h1>
+      <h1>ENV: {this.context.environment || "development"}</h1>
     );
   }
 });

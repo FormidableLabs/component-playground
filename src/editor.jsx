@@ -1,12 +1,12 @@
 /* eslint new-cap:0 no-unused-vars:0 */
-'use strict';
+"use strict";
 
-import React from 'react/addons';
+import React from "react/addons";
 
 const Editor = React.createClass({
   componentDidMount() {
     this.editor = CodeMirror.fromTextArea(this.refs.editor.getDOMNode(), {
-      mode: 'javascript',
+      mode: "javascript",
       lineNumbers: false,
       lineWrapping: true,
       smartIndent: false,
@@ -14,7 +14,7 @@ const Editor = React.createClass({
       theme: this.props.theme,
       readOnly: this.props.readOnly
     });
-    this.editor.on('change', this._handleChange);
+    this.editor.on("change", this._handleChange);
   },
 
   componentDidUpdate() {

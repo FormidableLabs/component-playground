@@ -1,44 +1,44 @@
-'use strict';
+"use strict";
 
-import React from 'react/addons';
+import React from "react/addons";
 
 var propTypesArray = [{
-  key: 'array',
+  key: "array",
   test: React.PropTypes.array,
   isRequired: React.PropTypes.array.isRequired
 }, {
-  key: 'boolean',
+  key: "boolean",
   test: React.PropTypes.bool,
   isRequired: React.PropTypes.bool.isRequired
 }, {
-  key: 'function',
+  key: "function",
   test: React.PropTypes.func,
   isRequired: React.PropTypes.func.isRequired
 }, {
-  key: 'number',
+  key: "number",
   test: React.PropTypes.number,
   isRequired: React.PropTypes.number.isRequired
 }, {
-  key: 'object',
+  key: "object",
   test: React.PropTypes.object,
   isRequired: React.PropTypes.array.isRequired
 }, {
-  key: 'string',
+  key: "string",
   test: React.PropTypes.string,
   isRequired: React.PropTypes.string.isRequired
 }, {
-  key: 'node',
+  key: "node",
   test: React.PropTypes.node,
   isRequired: React.PropTypes.node.isRequired
 }, {
-  key: 'element',
+  key: "element",
   test: React.PropTypes.element,
   isRequired: React.PropTypes.element.isRequired
 }];
 
 var getReactPropType = function (propTypeFunc) {
   var propType = {
-    name: 'custom',
+    name: "custom",
     isRequire: false
   };
 
@@ -58,7 +58,7 @@ var getReactPropType = function (propTypeFunc) {
   }
 
   return propType;
-}
+};
 
 module.exports = React.createClass({
   propTypes: {
@@ -80,7 +80,7 @@ module.exports = React.createClass({
         propTypes.push({
           propName: propName,
           type: getReactPropType(this.props.componentClass.propTypes[propName]),
-          description: this.props.propDescriptionMap[propName] || ''
+          description: this.props.propDescriptionMap[propName] || ""
         });
       }
     }
@@ -92,9 +92,9 @@ module.exports = React.createClass({
             return (
               <li key={propObj.propName}>
                 <b>{propObj.propName}</b>
-                <i>{': ' + propObj.type.name}</i>
-                {propObj.description && ' - ' + propObj.description}
-                <b>{propObj.type.isRequired ? ' required' : ''}</b>
+                <i>{": " + propObj.type.name}</i>
+                {propObj.description && " - " + propObj.description}
+                <b>{propObj.type.isRequired ? " required" : ""}</b>
               </li>
             );
           })}
