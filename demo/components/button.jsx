@@ -1,7 +1,7 @@
 /* eslint new-cap:0 no-unused-vars:0 */
-'use strict';
+"use strict";
 
-import React from 'react/addons';
+import React from "react/addons";
 
 const Button = React.createClass({
   propTypes: {
@@ -12,7 +12,7 @@ const Button = React.createClass({
   getDefaultProps() {
     return {
       darkMode: false
-    }
+    };
   },
 
   render() {
@@ -21,7 +21,7 @@ const Button = React.createClass({
         {this.props.children}
       </button>
     );
-  },
+  }
 });
 
 export default Button;

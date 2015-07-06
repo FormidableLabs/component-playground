@@ -1,7 +1,8 @@
-/* eslint new-cap:0 no-unused-vars:0 */
-'use strict';
+/* no-unused-vars:0 */
+"use strict";
+
 import polyfill from "babel/polyfill";
-import React from 'react/addons';
+import React from "react/addons";
 
 import Editor from "./editor";
 import Preview from "./preview";
@@ -17,14 +18,16 @@ const ReactPlayground = React.createClass({
     propDescriptionMap: React.PropTypes.string,
     theme: React.PropTypes.string,
     noRender: React.PropTypes.bool,
-    es6Console: React.PropTypes.bool
+    es6Console: React.PropTypes.bool,
+    context: React.PropTypes.object
   },
 
   getDefaultProps() {
     return {
-      theme: 'monokai',
-      noRender: false
-    }
+      theme: "monokai",
+      noRender: true,
+      context: {}
+    };
   },
 
   getInitialState() {
@@ -45,6 +48,13 @@ const ReactPlayground = React.createClass({
   },
 
   render() {
+    if (this.props.noRender === false) {
+      console.warn(`
+        Deprecation warning: noRender is being deprecated in favor of wrapped components and will be removed in the 1.x release.
+        https://github.com/FormidableLabs/component-playground/issues/19 for details.
+      `);
+    }
+
     return (
       <div className={"playground" + (this.props.collapsableCode ? " collapsableCode" : "")}>
         {this.props.docClass ?
@@ -53,7 +63,7 @@ const ReactPlayground = React.createClass({
             propDescriptionMap={this.props.propDescriptionMap} />
           : ""
         }
-        <div className={"playgroundCode"  + (this.state.expandedCode ? " expandedCode" : "")}>
+        <div className={"playgroundCode" + (this.state.expandedCode ? " expandedCode" : "")}>
           <Editor
             onChange={this._handleCodeChange}
             className="playgroundStage"
@@ -75,6 +85,7 @@ const ReactPlayground = React.createClass({
               scope={this.props.scope} />
           :
           <Preview
+            context={this.props.context}
             code={this.state.code}
             scope={this.props.scope}
             noRender={this.props.noRender} />
@@ -82,7 +93,7 @@ const ReactPlayground = React.createClass({
         </div>
       </div>
     );
-  },
+  }
 });
 
 export default ReactPlayground;
