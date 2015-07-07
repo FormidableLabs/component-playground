@@ -1,0 +1,7 @@
+---
+extends:
+  - "defaults/configurations/walmart/es6-react"
+  - "defaults/environments/browser"
+
+globals:
+  "CodeMirror": false

@@ -47,10 +47,10 @@ const wrapMap = {
   },
 
   wrapobject(obj) {
-    let pairs = [];
+    const pairs = [];
     let first = true;
 
-    for (let key in obj) {
+    for (const key in obj) {
       pairs.push(
         <span>
           <span style={{color: "#8A6BA1"}}>
@@ -116,7 +116,7 @@ const Preview = React.createClass({
   },
 
   _executeCode() {
-    var mountNode = this.refs.mount.getDOMNode();
+    const mountNode = this.refs.mount.getDOMNode();
 
     try {
       React.unmountComponentAtNode(mountNode);
@@ -125,15 +125,15 @@ const Preview = React.createClass({
     }
 
     try {
-      var scope = [];
-      for (var s in this.props.scope) {
+      const scope = [];
+      for (const s in this.props.scope) {
         if (this.props.scope.hasOwnProperty(s)) {
           scope.push(this.props.scope[s]);
         }
       }
       scope.push(mountNode);
-      var compiledCode = this._compileCode();
-      var Component = React.createElement(
+      const compiledCode = this._compileCode();
+      const Component = React.createElement(
         React.createClass({
           _createConsoleLine(x, multipleArgs) {
             return (

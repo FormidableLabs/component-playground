@@ -1,35 +1,35 @@
-/* eslint new-cap:0 no-unused-vars:0 */
+/* eslint new-cap:0 no-unused-lets:0 */
 "use strict";
 
-var React = require("react/addons");
-var Playground = require("playground");
+import React from "react/addons";
+import Playground from "playground";
 
 require("./styles/syntax.css");
 require("./styles/codemirror.css");
 require("./styles/demo.css");
 
-var Button = require("./components/button");
-var componentExample = require("raw!./examples/component.example");
+const Button = require("./components/button");
+const componentExample = require("raw!./examples/component.example");
 
-var DebugInfo = require("./components/debug-info");
-var contextExample = require("raw!./examples/context.example");
+const DebugInfo = require("./components/debug-info");
+const contextExample = require("raw!./examples/context.example");
 
-var es6Example = require("raw!./examples/es6.example");
+const es6Example = require("raw!./examples/es6.example");
 
-var Index = React.createClass({
+const Index = React.createClass({
   render() {
     return (
       <div className="component-documentation">
         <Playground
           codeText={componentExample}
-          scope={{React: React, Button: Button}}/>
+          scope={{React, Button}}/>
         <Playground
           codeText={componentExample}
-          scope={{React: React, Button: Button}}
+          scope={{React, Button}}
           collapsableCode={true}/>
         <Playground
           codeText={componentExample}
-          scope={{React: React, Button: Button}}
+          scope={{React, Button}}
           propDescriptionMap={{
             buttonStyle: "style object for inline styles"
           }}
@@ -38,11 +38,11 @@ var Index = React.createClass({
         <Playground
           context={{environment: "staging"}}
           codeText={contextExample}
-          scope={{React: React, DebugInfo: DebugInfo}}/>
+          scope={{React, DebugInfo}}/>
         <Playground
           codeText={es6Example}
           es6Console={true}
-          scope={{React: React, Button: Button}}/>
+          scope={{React, Button}}/>
       </div>
     );
   }
