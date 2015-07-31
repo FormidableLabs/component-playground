@@ -82,12 +82,14 @@ const ReactPlayground = React.createClass({
           {this.props.es6Console ?
             <EsPreview
               code={this.state.code}
+              lineNumbers={this.props.lineNumbers}
               scope={this.props.scope} />
           :
           <Preview
             context={this.props.context}
             code={this.state.code}
             scope={this.props.scope}
+            lineNumbers={this.props.lineNumbers}
             noRender={this.props.noRender} />
           }
         </div>
