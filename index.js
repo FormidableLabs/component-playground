@@ -1,5 +1,5 @@
 "use strict";
 
-var Playground = require("./lib/playground");
+var Playground = require("./src/playground.jsx");
 
 module.exports = Playground;

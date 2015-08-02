@@ -4,10 +4,10 @@
 import polyfill from "babel/polyfill";
 import React from "react/addons";
 
-import Editor from "./editor";
-import Preview from "./preview";
-import EsPreview from "./es6-preview";
-import Doc from "./doc";
+import Editor from "./editor.jsx";
+import Preview from "./preview.jsx";
+import EsPreview from "./es6-preview.jsx";
+import Doc from "./doc.jsx";
 
 const ReactPlayground = React.createClass({
   propTypes: {
