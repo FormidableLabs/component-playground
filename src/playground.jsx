@@ -96,6 +96,7 @@ const ReactPlayground = React.createClass({
         <Editor
           onChange={this._handleCodeChange}
           className="playgroundStage"
+          lineNumbers={this.props.lineNumbers}
           codeText={this.state.code}
           theme={this.props.theme}/>
       </div>
