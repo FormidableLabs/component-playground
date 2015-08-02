@@ -21,7 +21,8 @@ const ReactPlayground = React.createClass({
     es6Console: React.PropTypes.bool,
     context: React.PropTypes.object,
     lineNumbers: React.PropTypes.bool,
-    previewFirst: React.PropTypes.bool
+    previewFirst: React.PropTypes.bool,
+    mode: React.PropTypes.string
   },
 
   getDefaultProps() {
@@ -97,6 +98,7 @@ const ReactPlayground = React.createClass({
           onChange={this._handleCodeChange}
           className="playgroundStage"
           lineNumbers={this.props.lineNumbers}
+          mode={this.props.mode}
           codeText={this.state.code}
           theme={this.props.theme}/>
       </div>
