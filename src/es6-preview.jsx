@@ -2,7 +2,7 @@
 "use strict";
 
 import React from "react/addons";
-import babel from "babel-core/browser";
+import {tranformWithConsole, getScope} from "./compiler";
 
 const getType = function (el) {
   let t = typeof el;
@@ -98,16 +98,7 @@ const Preview = React.createClass({
   },
 
   _compileCode() {
-    return babel.transform(`
-      (function(${Object.keys(this.props.scope).join(",")}) {
-        var list = [];
-        var console = { log(...x) {
-          list.push({val: x, multipleArgs: x.length !== 1})
-        }};
-        ${this.props.code}
-        return list;
-      });
-    `, { stage: 1 }).code;
+    return tranformWithConsole(this.props.code, this.props.scope);
   },
 
   _setTimeout() {
@@ -125,12 +116,14 @@ const Preview = React.createClass({
     }
 
     try {
-      const scope = [];
+      const scope = getScope();
+
       for (const s in this.props.scope) {
         if (this.props.scope.hasOwnProperty(s)) {
           scope.push(this.props.scope[s]);
         }
       }
+
       scope.push(mountNode);
       const compiledCode = this._compileCode();
       const Component = React.createElement(

@@ -2,6 +2,7 @@
 
 import React from "react/addons";
 import babel from "babel-core/browser";
+import {transform, getScope} from "./compiler";
 
 const Preview = React.createClass({
   propTypes: {
@@ -27,33 +28,7 @@ const Preview = React.createClass({
   },
 
   _compileCode() {
-    if (this.props.noRender) {
-      const generateContextTypes = function (context) {
-        const keys = Object.keys(context).map(val => `${val}: React.PropTypes.any.isRequired`);
-        return `{ ${keys.join(", ")} }`;
-      };
-
-      return babel.transform(`
-        (function (${Object.keys(this.props.scope).join(", ")}, mountNode) {
-          return React.createClass({
-            // childContextTypes: { test: React.PropTypes.string },
-            childContextTypes: ${generateContextTypes(this.props.context)},
-            getChildContext: function () { return ${JSON.stringify(this.props.context)}; },
-            render: function () {
-              return (
-                ${this.props.code}
-              );
-            }
-          });
-        });
-      `, { stage: 1 }).code;
-    } else {
-      return babel.transform(`
-        (function (${Object.keys(this.props.scope).join(",")}, mountNode) {
-          ${this.props.code}
-        });
-      `, { stage: 1 }).code;
-    }
+    return transform(this.props.code, this.props.scope, this.props.context, this.props.noRender);
   },
 
   _setTimeout() {
@@ -65,7 +40,7 @@ const Preview = React.createClass({
     const mountNode = this.refs.mount.getDOMNode();
 
     try {
-      const scope = [];
+      const scope = getScope();
 
       for (const s in this.props.scope) {
         if (this.props.scope.hasOwnProperty(s)) {
@@ -76,6 +51,7 @@ const Preview = React.createClass({
       scope.push(mountNode);
 
       const compiledCode = this._compileCode();
+
       if (this.props.noRender) {
         const Component = React.createElement(
           eval(compiledCode).apply(null, scope)

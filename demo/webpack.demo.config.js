@@ -18,7 +18,7 @@ module.exports = webpack({
   module: {
     loaders: [{
         test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
+        exclude: /node_modules|babel-plugin-playground/,
         loader: 'babel-loader?stage=1'
       }, {
         test: /\.css$/,
@@ -38,7 +38,7 @@ module.exports = webpack({
   ],
   resolve: {
     root: [__dirname],
-    modulesDirectories: ['node_modules', 'src'],
+    modulesDirectories: ['node_modules', 'babel-plugin-playground', 'src'],
     extensions: ['','.js','.jsx']
   }
 });
