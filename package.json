@@ -7,29 +7,27 @@
     "live",
     "component"
   ],
-
   "version": "0.1.1",
   "author": "Ken Wheeler",
-
   "homepage": "https://github.com/FormidableLabs/component-playground#readme",
   "bugs": {
     "url": "https://github.com/FormidableLabs/component-playground/issues"
   },
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FormidableLabs/component-playground.git"
   },
   "private": false,
-
   "dependencies": {
-    "babel": "^5.1.11",
-    "babel-core": "^5.1.13"
+    "babel-core": "^5.8.22",
+    "babel-runtime": "^5.8.20",
+    "json-loader": "^0.5.2"
   },
   "peerDependencies": {
     "react": "0.13.x"
   },
   "devDependencies": {
+    "babel": "^5.8.21",
     "babel-eslint": "^3.1.23",
     "babel-loader": "^5.3.0",
     "chai": "^3.0.0",
@@ -64,12 +62,10 @@
     "webpack": "^1.10.1",
     "webpack-dev-server": "^1.7.0"
   },
-
   "main": "index.js",
-  "engines":{
+  "engines": {
     "node": ">= 0.10.0"
   },
   "scripts": {},
-
   "license": "MIT"
 }

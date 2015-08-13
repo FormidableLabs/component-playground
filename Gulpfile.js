@@ -17,7 +17,7 @@ gulp.task("clean", function (cb) {
 
 gulp.task("babel", ["clean"], function () {
   return gulp.src("src/*.js*")
-    .pipe(babel())
+    .pipe(babel({optional: ["runtime"]}))
     .pipe(gulp.dest("lib"));
 });
 

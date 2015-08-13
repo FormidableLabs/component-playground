@@ -1,7 +1,6 @@
 /* no-unused-vars:0 */
 "use strict";
 
-import polyfill from "babel/polyfill";
 import React from "react/addons";
 
 import Editor from "./editor";
