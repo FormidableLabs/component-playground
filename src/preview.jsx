@@ -1,7 +1,7 @@
 "use strict";
 
 import React from "react/addons";
-import babel from "babel-core/lib/api/browser";
+import babel from "babel-core/browser";
 
 const Preview = React.createClass({
     propTypes: {

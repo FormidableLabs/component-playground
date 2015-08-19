@@ -2,7 +2,7 @@
 "use strict";
 
 import React from "react/addons";
-import babel from "babel-core/lib/api/browser";
+import babel from "babel-core/browser";
 
 const getType = function (el) {
   let t = typeof el;
