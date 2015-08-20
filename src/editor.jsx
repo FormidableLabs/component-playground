@@ -6,8 +6,8 @@ import React from "react/addons";
 const Editor = React.createClass({
   componentDidMount() {
     this.editor = CodeMirror.fromTextArea(this.refs.editor.getDOMNode(), {
-      mode: "javascript",
-      lineNumbers: false,
+      mode: this.props.mode || "javascript",
+      lineNumbers: this.props.lineNumbers,
       lineWrapping: true,
       smartIndent: false,
       matchBrackets: true,

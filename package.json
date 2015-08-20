@@ -68,6 +68,11 @@
     "node": ">= 0.10.0"
   },
   "scripts": {},
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  },
 
   "license": "MIT"
 }
