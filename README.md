@@ -4,18 +4,17 @@ A component for rendering React Components and ES6 code with editable source and
 ![Component Playground]
 (http://i.imgur.com/se3avpr.png)
 
-
-###Demo
+### Demo
 
 [http://projects.formidablelabs.com/component-playground](http://projects.formidablelabs.com/component-playground)
 
-###Installation
+### Installation
 
 ```
 npm install component-playground
 ```
 
-###Set up
+### Set up
 
 In your html document, add the required CodeMirror scripts at the bottom, before your bundle script:
 
@@ -55,9 +54,9 @@ var Index = React.createClass({
 React.render(<Index/>, document.getElementById('root'));
 ```
 
-###Props
+### Props
 
-####`codeText`
+#### `codeText`
 _React.PropTypes.string.isRequired_
 
 `codeText` takes a string of JSX markup as its value. While you can just pass it a string, I find it is easier to make a separate file and use Webpack's raw loader to load in the raw source. In the example above I use the .example extension, and an examples folder to organize my samples.
@@ -68,7 +67,7 @@ An example file would look like:
 <Button style={{background: '#3498db'}}>Hi</Button>
 ```
 
-####scope
+#### scope
 _React.PropTypes.object.isRequired_
 
 When evaluating the JSX, it needs to be provided a scope object. At the very least, React needs to be provided to the scope, if any custom tags aren't being used. See below:
@@ -79,12 +78,12 @@ When evaluating the JSX, it needs to be provided a scope object. At the very lea
 
 Any module/component that is used inside the playground needs to be added to the scope object. See `/demo` for an example of how this works.
 
-###theme
+### theme
 _React.PropTypes.string_
 
 String specifying which CodeMirror theme to initialize with. Defaults to 'monokai'.
 
-###collapsableCode
+### collapsableCode
 _React.PropTypes.bool_
 
 Allows the user to collapse the code block.
@@ -93,7 +92,20 @@ Allows the user to collapse the code block.
 <Playground collapsableCode={true} codeText={componentExample} scope={{React: React}}/>
 ```
 
-###docClass
+### initiallyExpanded
+_React.PropTypes.bool_
+
+Makes collapsable code block initially expanded.
+
+```
+<Playground
+  collapsableCode={true}
+  initiallyExpanded={true}
+  codeText={componentExample}
+  scope={{React: React}}/>
+```
+
+### docClass
 _React.PropTypes.node_
 
 A component class that will be used to auto-generate docs based on that component's `propTypes`. See `propDescriptionMap` below for how to annotate the generate prop docs.
@@ -102,7 +114,7 @@ A component class that will be used to auto-generate docs based on that componen
 <Playground docClass={MyComponent} codeText={componentExample} scope={{React: React}}/>
 ```
 
-###propDescriptionMap
+### propDescriptionMap
 _React.PropTypes.string_
 
 Annotation map for the docClass. The key is the prop to annotate, the value is the description of that prop.
@@ -117,7 +129,7 @@ Annotation map for the docClass. The key is the prop to annotate, the value is t
   scope={{React: React}}/>
 ```
 
-###es6Console
+### es6Console
 _React.PropTypes.bool_
 
 Turns preview into a simple console for testing out ES6 code. Use `console.log()` in the playground to generate output.
@@ -128,7 +140,7 @@ Turns preview into a simple console for testing out ES6 code. Use `console.log()
   codeText={es6Example} />
 ```
 
-###noRender - (Deprecated, Remove at 1.x)
+### noRender - (Deprecated, Remove at 1.x)
 _React.PropTypes.bool_
 
 If set to false, allows you bypass the `component-playground`'s component wrapper and render method.

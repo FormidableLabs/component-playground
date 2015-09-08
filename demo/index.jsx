@@ -20,13 +20,29 @@ var Index = React.createClass({
   render() {
     return (
       <div className="component-documentation">
+        <h2>Default</h2>
+
         <Playground
           codeText={componentExample}
           scope={{React: React, Button: Button}}/>
+
+        <h2>Collapsable Code</h2>
+
         <Playground
           codeText={componentExample}
           scope={{React: React, Button: Button}}
           collapsableCode={true}/>
+
+        <h2>Collapsable Code (Expanded by Default)</h2>
+
+        <Playground
+          codeText={componentExample}
+          scope={{React: React, Button: Button}}
+          collapsableCode={true}
+          initiallyExpanded/>
+
+        <h2>Prop Descriptions</h2>
+
         <Playground
           codeText={componentExample}
           scope={{React: React, Button: Button}}
@@ -35,10 +51,16 @@ var Index = React.createClass({
           }}
           docClass={Button}
           collapsableCode={true}/>
+
+        <h2>With Context</h2>
+
         <Playground
           context={{environment: "staging"}}
           codeText={contextExample}
           scope={{React: React, DebugInfo: DebugInfo}}/>
+
+        <h2>ES6 Console</h2>
+
         <Playground
           codeText={es6Example}
           es6Console={true}

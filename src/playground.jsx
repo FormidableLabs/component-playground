@@ -19,21 +19,23 @@ const ReactPlayground = React.createClass({
     theme: React.PropTypes.string,
     noRender: React.PropTypes.bool,
     es6Console: React.PropTypes.bool,
-    context: React.PropTypes.object
+    context: React.PropTypes.object,
+    initiallyExpanded: React.PropTypes.bool
   },
 
   getDefaultProps() {
     return {
       theme: "monokai",
       noRender: true,
-      context: {}
+      context: {},
+      initiallyExpanded: false
     };
   },
 
   getInitialState() {
     return {
       code: this.props.codeText,
-      expandedCode: false
+      expandedCode: this.props.initiallyExpanded
     };
   },
 
