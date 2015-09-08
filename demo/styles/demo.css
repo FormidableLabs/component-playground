@@ -4,8 +4,12 @@ body {
 
 #root { padding: 40px 20px; }
 
-.playground {
+.component-documentation {
+  margin: 0 auto;
   max-width: 800px;
+}
+
+.playground {
   margin: 10px auto;
   box-shadow: 0px 0px 5px rgba(0,0,0,0.25);
   border-radius: 5px;
