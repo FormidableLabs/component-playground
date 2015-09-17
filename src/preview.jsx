@@ -1,12 +1,13 @@
 "use strict";
 
-import React from "react/addons";
+import React from "react";
 import babel from "babel-core/browser";
 
 const Preview = React.createClass({
     propTypes: {
-      code: React.PropTypes.string.isRequired,
-      scope: React.PropTypes.object.isRequired
+      code: PropTypes.string.isRequired,
+      scope: PropTypes.object.isRequired,
+      previewComponent: PropTypes.node
     },
 
     getInitialState() {
@@ -90,9 +91,8 @@ const Preview = React.createClass({
           error: null
         });
       } catch (err) {
-        var self = this;
-        this._setTimeout(function () {
-          self.setState({
+        this._setTimeout(() => {
+          this.setState({
             error: err.toString()
           });
         }, 500);

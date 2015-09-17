@@ -1,6 +1,6 @@
 "use strict";
 
-import React from "react/addons";
+import React from "react";
 
 var propTypesArray = [{
   key: "array",
@@ -60,7 +60,7 @@ var getReactPropType = function (propTypeFunc) {
   return propType;
 };
 
-module.exports = React.createClass({
+export default React.createClass({
   propTypes: {
     componentClass: React.PropTypes.renderable,
     propDescriptionMap: React.PropTypes.object,
