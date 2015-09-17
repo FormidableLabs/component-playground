@@ -16,6 +16,12 @@ const Preview = React.createClass({
       };
     },
 
+    getDefaultProps() {
+      return {
+        previewComponent: 'div'
+      }
+    },
+
     componentDidMount() {
       this._executeCode();
     },
@@ -82,7 +88,10 @@ const Preview = React.createClass({
           var Component = React.createElement(
             eval(compiledCode).apply(null, scope)
           );
-          React.render(Component, mountNode);
+          React.render(
+            React.createElement(this.props.previewComponent, {}, Component),
+            mountNode
+          );
         } else {
           eval(compiledCode).apply(null, scope);
         }
