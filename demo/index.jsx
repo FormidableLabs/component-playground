@@ -1,7 +1,7 @@
 /* eslint new-cap:0 no-unused-vars:0 */
 "use strict";
 
-var React = require("react/addons");
+var React = require("react");
 var Playground = require("playground");
 
 require("./styles/syntax.css");

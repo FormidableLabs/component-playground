@@ -1,8 +1,8 @@
-/* no-unused-vars:0 */
+/* eslint no-unused-vars:0 */
 "use strict";
 
 import polyfill from "babel/polyfill";
-import React from "react/addons";
+import React from "react";
 
 import Editor from "./editor";
 import Preview from "./preview";
@@ -20,7 +20,8 @@ const ReactPlayground = React.createClass({
     noRender: React.PropTypes.bool,
     es6Console: React.PropTypes.bool,
     context: React.PropTypes.object,
-    initiallyExpanded: React.PropTypes.bool
+    initiallyExpanded: React.PropTypes.bool,
+    previewComponent: React.PropTypes.node
   },
 
   getDefaultProps() {
@@ -90,7 +91,8 @@ const ReactPlayground = React.createClass({
             context={this.props.context}
             code={this.state.code}
             scope={this.props.scope}
-            noRender={this.props.noRender} />
+            noRender={this.props.noRender}
+            previewComponent={this.props.previewComponent} />
           }
         </div>
       </div>

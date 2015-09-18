@@ -1,18 +1,25 @@
 "use strict";
 
-import React from "react/addons";
+import React from "react";
 import babel from "babel-core/browser";
 
 const Preview = React.createClass({
     propTypes: {
-      code: React.PropTypes.string.isRequired,
-      scope: React.PropTypes.object.isRequired
+      code: PropTypes.string.isRequired,
+      scope: PropTypes.object.isRequired,
+      previewComponent: PropTypes.node
     },
 
     getInitialState() {
       return {
         error: null
       };
+    },
+
+    getDefaultProps() {
+      return {
+        previewComponent: 'div'
+      }
     },
 
     componentDidMount() {
@@ -81,7 +88,10 @@ const Preview = React.createClass({
           var Component = React.createElement(
             eval(compiledCode).apply(null, scope)
           );
-          React.render(Component, mountNode);
+          React.render(
+            React.createElement(this.props.previewComponent, {}, Component),
+            mountNode
+          );
         } else {
           eval(compiledCode).apply(null, scope);
         }
@@ -90,9 +100,8 @@ const Preview = React.createClass({
           error: null
         });
       } catch (err) {
-        var self = this;
-        this._setTimeout(function () {
-          self.setState({
+        this._setTimeout(() => {
+          this.setState({
             error: err.toString()
           });
         }, 500);
