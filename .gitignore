@@ -1,54 +1,35 @@
-# --------------------
-# OSX Files
-# --------------------
+### SublimeText ###
+*.sublime-workspace
+
+### OSX ###
 .DS_Store
 .AppleDouble
 .LSOverride
 Icon
+
+# Thumbnails
 ._*
+
+# Files that might appear on external disk
 .Spotlight-V100
 .Trashes
 
-# --------------------
-# Windows Files
-# --------------------
+### Windows ###
+# Windows image file caches
 Thumbs.db
 ehthumbs.db
+
+# Folder config file
 Desktop.ini
+
+# Recycle Bin used on file shares
 $RECYCLE.BIN/
-*.cab
-*.msi
-*.msm
-*.msp
-*.lnk
 
-# --------------------
-# Sublime Text Files
-# --------------------
-*.sublime-project
-*.sublime-workspace
+# App specific
 
-# --------------------
-# IntelliJ Files
-# --------------------
-*.iml
-*.ipr
-*.iws
-.idea/
-out/
-
-# --------------------
-# Eclipse Files
-# --------------------
-.project
-.metadata
-*.bak
-.classpath
-.settings/
-
-# --------------------
-# App Files
-# --------------------
-node_modules/
+coverage
+node_modules
+bower_components
 .tmp
 lib
+npm-debug.log
