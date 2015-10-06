@@ -1,77 +1,49 @@
-'use strict';
+"use strict";
+/*
+ * Karma Configuration: "full" version.
+ *
+ * This configuration runs a temporary `webpack-dev-server` and builds
+ * the test files one-off for just a single run. This is appropriate for a
+ * CI environment or if you're not otherwise running `npm run dev|hot`.
+ */
+var webpackCfg = require("./webpack.config.test");
 
-var path = require('path');
+// BUG: Karma 0.13 is broken for circular imports
+// TODO: Upgrade Karma to 0.13 when upstream bug is fixed.
+// https://github.com/FormidableLabs/
+//        formidable-react-component-boilerplate/issues/25
 
 module.exports = function (config) {
+  // Start with the "dev" (webpack-dev-server is already running) config
+  // and add in the webpack stuff.
+  require("./karma.conf.dev")(config);
+
+  // Overrides.
   config.set({
-    basePath: '',
-    frameworks: ['mocha', 'sinon-chai'],
-    files: [
-      'test/helpers/**/*.js',
-      'test/specs/**/*.spec.js'
-    ],
     preprocessors: {
-      'test/specs/**/*.spec.js': ['webpack']
+      "test/client/main.js": ["webpack"]
     },
-    webpack: {
-      cache: true,
-      module: {
-        loaders: [{
-          test: /\.js$/,
-          exclude: [/node_modules/],
-          loader: 'babel-loader'
-        },{
-          test: /\.css$/,
-          loader: "style-loader!css-loader"
-        }, {
-          test: /\.styl$/,
-          loader: "style-loader!css-loader!stylus-loader"
-        }],
-        postLoaders: [{
-          test: /\.js$/,
-          exclude: /(node_modules|bower_components|plugins|[.]spec[.]js)/,
-          loader: 'istanbul-instrumenter'
-        }]
-      },
-      resolve: {
-        root: [__dirname],
-        modulesDirectories: ['node_modules', 'src']
-      }
-    },
-    webpackServer: {
-      stats: {
-        colors: true
-      }
-    },
-    exclude: [],
-    port: 8080,
-    logLevel: config.LOG_INFO,
-    colors: true,
-    autoWatch: false,
-    browsers: ['PhantomJS'],
-    'PhantomJS_Desktop': {
-      base: 'PhantomJS',
-        options: {
-          viewportSize: {
-            width: 1000,
-            height: 600
-        }
-      }
-    },
-    reporters: ['mocha', 'coverage'],
-    browserNoActivityTimeout: 60000,
-    plugins: [
-      require('karma-coverage'),
-      require('karma-mocha'),
-      require('karma-mocha-reporter'),
-      require('karma-phantomjs-launcher'),
-      require('karma-sinon-chai'),
-      require('karma-webpack')
+    files: [
+      // Sinon has issues with webpack. Do global include.
+      "node_modules/sinon/pkg/sinon.js",
+
+      // Test bundle (created via local webpack-dev-server in this config).
+      "test/client/main.js"
     ],
-    coverageReporter: {
-      type : 'text'
-    },
-    captureTimeout: 60000,
-    singleRun: true
+    webpack: webpackCfg,
+    webpackServer: {
+      port: 3002, // Choose a non-conflicting port (3000 app, 3001 test dev)
+      quiet: false,
+      noInfo: true,
+      stats: {
+        assets: false,
+        colors: true,
+        version: false,
+        hash: false,
+        timings: false,
+        chunks: false,
+        chunkModules: false
+      }
+    }
   });
 };
