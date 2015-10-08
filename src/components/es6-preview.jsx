@@ -2,6 +2,7 @@
 "use strict";
 
 import React from "react";
+import ReactDom from "react-dom";
 import babel from "babel-core/browser";
 
 const getType = function (el) {
@@ -116,10 +117,10 @@ const Preview = React.createClass({
   },
 
   _executeCode() {
-    var mountNode = this.refs.mount.getDOMNode();
+    var mountNode = this.refs.mount;
 
     try {
-      React.unmountComponentAtNode(mountNode);
+      ReactDom.unmountComponentAtNode(mountNode);
     } catch (e) {
       console.error(e);
     }
@@ -165,10 +166,10 @@ const Preview = React.createClass({
           }
         })
       );
-      React.render(Component, mountNode);
+      ReactDom.render(Component, mountNode);
     } catch (err) {
       this._setTimeout(function () {
-        React.render(
+        ReactDom.render(
           <div className="playgroundError">{err.toString()}</div>,
           mountNode
         );

@@ -2,6 +2,7 @@
 "use strict";
 
 var React = require("react");
+var ReactDom = require("react-dom");
 var Playground = require("../src/index");
 
 require("./styles/syntax.css");
@@ -70,4 +71,4 @@ var Index = React.createClass({
   }
 });
 
-React.render(<Index/>, document.getElementById("content"));
+ReactDom.render(<Index/>, document.getElementById("content"));

@@ -5,7 +5,7 @@ import React from "react";
 
 const Editor = React.createClass({
   componentDidMount() {
-    this.editor = CodeMirror.fromTextArea(this.refs.editor.getDOMNode(), {
+    this.editor = CodeMirror.fromTextArea(this.refs.editor, {
       mode: "javascript",
       lineNumbers: false,
       lineWrapping: true,

@@ -1,6 +1,7 @@
 "use strict";
 
 import React from "react";
+import ReactDom from "react-dom";
 import babel from "babel-core/browser";
 
 const Preview = React.createClass({
@@ -69,7 +70,7 @@ const Preview = React.createClass({
     },
 
     _executeCode() {
-      var mountNode = this.refs.mount.getDOMNode();
+      var mountNode = this.refs.mount;
 
       try {
 
@@ -88,7 +89,7 @@ const Preview = React.createClass({
           var Component = React.createElement(
             eval(compiledCode).apply(null, scope)
           );
-          React.render(
+          ReactDom.render(
             React.createElement(this.props.previewComponent, {}, Component),
             mountNode
           );
