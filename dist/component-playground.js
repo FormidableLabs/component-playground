@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("react"));
+		module.exports = factory(require("react"), require("react-dom"));
 	else if(typeof define === 'function' && define.amd)
-		define(["react"], factory);
+		define(["react", "react-dom"], factory);
 	else if(typeof exports === 'object')
-		exports["ComponentPlayground"] = factory(require("react"));
+		exports["ComponentPlayground"] = factory(require("react"), require("react-dom"));
 	else
-		root["ComponentPlayground"] = factory(root["React"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_186__) {
+		root["ComponentPlayground"] = factory(root["React"], root["ReactDom"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_186__, __WEBPACK_EXTERNAL_MODULE_189__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -87,11 +87,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _preview2 = _interopRequireDefault(_preview);
 	
-	var _es6Preview = __webpack_require__(194);
+	var _es6Preview = __webpack_require__(195);
 	
 	var _es6Preview2 = _interopRequireDefault(_es6Preview);
 	
-	var _doc = __webpack_require__(195);
+	var _doc = __webpack_require__(196);
 	
 	var _doc2 = _interopRequireDefault(_doc);
 	
@@ -5212,7 +5212,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  displayName: "Editor",
 	
 	  componentDidMount: function componentDidMount() {
-	    this.editor = CodeMirror.fromTextArea(this.refs.editor.getDOMNode(), {
+	    this.editor = CodeMirror.fromTextArea(this.refs.editor, {
 	      mode: "javascript",
 	      lineNumbers: false,
 	      lineWrapping: true,
@@ -5266,7 +5266,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _babelCoreBrowser = __webpack_require__(189);
+	var _reactDom = __webpack_require__(189);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _babelCoreBrowser = __webpack_require__(190);
 	
 	var _babelCoreBrowser2 = _interopRequireDefault(_babelCoreBrowser);
 	
@@ -5325,7 +5329,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  _executeCode: function _executeCode() {
 	    var _this = this;
 	
-	    var mountNode = this.refs.mount.getDOMNode();
+	    var mountNode = this.refs.mount;
 	
 	    try {
 	
@@ -5342,7 +5346,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var compiledCode = this._compileCode();
 	      if (this.props.noRender) {
 	        var Component = _react2["default"].createElement(eval(compiledCode).apply(null, scope));
-	        _react2["default"].render(_react2["default"].createElement(this.props.previewComponent, {}, Component), mountNode);
+	        _reactDom2["default"].render(_react2["default"].createElement(this.props.previewComponent, {}, Component), mountNode);
 	      } else {
 	        eval(compiledCode).apply(null, scope);
 	      }
@@ -5378,6 +5382,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 189 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_189__;
+
+/***/ },
+/* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var require;var require;/* WEBPACK VAR INJECTION */(function(Buffer, global) {
@@ -75358,10 +75368,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.nonASCIIwhitespace = nonASCIIwhitespace;
 	},{}]},{},[31])(31)
 	});
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(190).Buffer, (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(191).Buffer, (function() { return this; }())))
 
 /***/ },
-/* 190 */
+/* 191 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer, global) {/*!
@@ -75372,9 +75382,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	/* eslint-disable no-proto */
 	
-	var base64 = __webpack_require__(191)
-	var ieee754 = __webpack_require__(192)
-	var isArray = __webpack_require__(193)
+	var base64 = __webpack_require__(192)
+	var ieee754 = __webpack_require__(193)
+	var isArray = __webpack_require__(194)
 	
 	exports.Buffer = Buffer
 	exports.SlowBuffer = SlowBuffer
@@ -76907,10 +76917,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return i
 	}
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(190).Buffer, (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(191).Buffer, (function() { return this; }())))
 
 /***/ },
-/* 191 */
+/* 192 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
@@ -77040,7 +77050,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 192 */
+/* 193 */
 /***/ function(module, exports) {
 
 	exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -77130,7 +77140,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 193 */
+/* 194 */
 /***/ function(module, exports) {
 
 	
@@ -77169,7 +77179,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 194 */
+/* 195 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* eslint new-cap:0 no-unused-vars:0 */
@@ -77185,7 +77195,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _babelCoreBrowser = __webpack_require__(189);
+	var _reactDom = __webpack_require__(189);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _babelCoreBrowser = __webpack_require__(190);
 	
 	var _babelCoreBrowser2 = _interopRequireDefault(_babelCoreBrowser);
 	
@@ -77326,10 +77340,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 	
 	  _executeCode: function _executeCode() {
-	    var mountNode = this.refs.mount.getDOMNode();
+	    var mountNode = this.refs.mount;
 	
 	    try {
-	      _react2["default"].unmountComponentAtNode(mountNode);
+	      _reactDom2["default"].unmountComponentAtNode(mountNode);
 	    } catch (e) {
 	      console.error(e);
 	    }
@@ -77377,10 +77391,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	          );
 	        }
 	      }));
-	      _react2["default"].render(Component, mountNode);
+	      _reactDom2["default"].render(Component, mountNode);
 	    } catch (err) {
 	      this._setTimeout(function () {
-	        _react2["default"].render(_react2["default"].createElement(
+	        _reactDom2["default"].render(_react2["default"].createElement(
 	          "div",
 	          { className: "playgroundError" },
 	          err.toString()
@@ -77398,7 +77412,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports["default"];
 
 /***/ },
-/* 195 */
+/* 196 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
