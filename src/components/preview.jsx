@@ -54,13 +54,13 @@ const Preview = React.createClass({
               }
             });
           });
-        `, { stage: 1 }).code;
+        `, { stage: 0 }).code;
       } else {
         return babel.transform(`
           (function (${Object.keys(this.props.scope).join(",")}, mountNode) {
             ${this.props.code}
           });
-        `, { stage: 1 }).code;
+        `, { stage: 0 }).code;
       }
     },
 
