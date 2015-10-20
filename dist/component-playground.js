@@ -128,6 +128,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	  },
 	
+	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	    this.setState({ code: nextProps.codeText });
+	  },
+	
 	  _handleCodeChange: function _handleCodeChange(code) {
 	    this.setState({ code: code });
 	  },

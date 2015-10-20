@@ -40,6 +40,10 @@ const ReactPlayground = React.createClass({
     };
   },
 
+  componentWillReceiveProps(nextProps) {
+   this.setState({code: nextProps.codeText});
+  },
+
   _handleCodeChange(code) {
     this.setState({ code });
   },
