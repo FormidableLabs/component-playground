@@ -23,6 +23,12 @@ const Editor = React.createClass({
     }
   },
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.codeText !== nextProps.codeText) {
+      this.editor.setValue(nextProps.codeText);
+    }
+  },
+
   _handleChange() {
     if (!this.props.readOnly && this.props.onChange) {
       this.props.onChange(this.editor.getValue());
