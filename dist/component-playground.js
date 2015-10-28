@@ -5234,6 +5234,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  },
 	
+	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	    if (this.props.codeText !== nextProps.codeText) {
+	      this.editor.setValue(nextProps.codeText);
+	    }
+	  },
+	
 	  _handleChange: function _handleChange() {
 	    if (!this.props.readOnly && this.props.onChange) {
 	      this.props.onChange(this.editor.getValue());
