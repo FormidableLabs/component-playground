@@ -124,16 +124,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	  getInitialState: function getInitialState() {
 	    return {
 	      code: this.props.codeText,
-	      expandedCode: this.props.initiallyExpanded
+	      expandedCode: this.props.initiallyExpanded,
+	      external: true
 	    };
 	  },
 	
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	    this.setState({ code: nextProps.codeText });
+	    this.setState({
+	      code: nextProps.codeText,
+	      external: true
+	    });
 	  },
 	
 	  _handleCodeChange: function _handleCodeChange(code) {
-	    this.setState({ code: code });
+	    this.setState({
+	      code: code,
+	      external: false
+	    });
 	  },
 	
 	  _toggleCode: function _toggleCode() {
@@ -160,6 +167,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          onChange: this._handleCodeChange,
 	          className: "playgroundStage",
 	          codeText: this.state.code,
+	          external: this.state.external,
 	          theme: this.props.theme })
 	      ),
 	      this.props.collapsableCode ? _react2["default"].createElement(
@@ -5229,14 +5237,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 	
 	  componentDidUpdate: function componentDidUpdate() {
-	    if (this.props.readOnly) {
+	    if (this.props.readOnly || this.props.external) {
 	      this.editor.setValue(this.props.codeText);
-	    }
-	  },
-	
-	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	    if (this.props.codeText !== nextProps.codeText) {
-	      this.editor.setValue(nextProps.codeText);
 	    }
 	  },
 	
