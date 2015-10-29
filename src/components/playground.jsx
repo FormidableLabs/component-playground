@@ -36,16 +36,23 @@ const ReactPlayground = React.createClass({
   getInitialState() {
     return {
       code: this.props.codeText,
-      expandedCode: this.props.initiallyExpanded
+      expandedCode: this.props.initiallyExpanded,
+      external: true
     };
   },
 
   componentWillReceiveProps(nextProps) {
-   this.setState({code: nextProps.codeText});
+    this.setState({
+      code: nextProps.codeText,
+      external: true
+    });
   },
 
   _handleCodeChange(code) {
-    this.setState({ code });
+    this.setState({
+      code,
+      external: false
+    });
   },
 
   _toggleCode() {
@@ -75,6 +82,7 @@ const ReactPlayground = React.createClass({
             onChange={this._handleCodeChange}
             className="playgroundStage"
             codeText={this.state.code}
+            external={this.state.external}
             theme={this.props.theme} />
         </div>
         {this.props.collapsableCode ?

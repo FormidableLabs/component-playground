@@ -18,14 +18,8 @@ const Editor = React.createClass({
   },
 
   componentDidUpdate() {
-    if (this.props.readOnly) {
+    if (this.props.readOnly || this.props.external) {
       this.editor.setValue(this.props.codeText);
-    }
-  },
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.codeText !== nextProps.codeText) {
-      this.editor.setValue(nextProps.codeText);
     }
   },
 
