@@ -30,7 +30,7 @@ In the head of your document, either add the css files from the demo or from a C
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.0.0/theme/monokai.min.css"/>
 ```
 
-In your JSX, require the component as use it like this:
+In your JSX, require the component and use it like this:
 
 ```javascript
 'use strict';
