@@ -2,6 +2,7 @@
 
 import React from "react";
 import ReactDom from "react-dom";
+import ReactDOMServer from "react-dom/server";
 import babel from "babel-core/browser";
 
 const Preview = React.createClass({
@@ -89,6 +90,7 @@ const Preview = React.createClass({
           var Component = React.createElement(
             eval(compiledCode).apply(null, scope)
           );
+          ReactDOMServer.renderToString(React.createElement(this.props.previewComponent, {}, Component));
           ReactDom.render(
             React.createElement(this.props.previewComponent, {}, Component),
             mountNode
