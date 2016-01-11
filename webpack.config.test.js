@@ -19,7 +19,8 @@ module.exports = {
   resolve: _.merge({}, prodCfg.resolve, {
     alias: {
       // Allow root import of `src/FOO` from ROOT/src.
-      src: path.join(__dirname, "src")
+      src: path.join(__dirname, "src"),
+      demo: path.join(__dirname, "demo")
     }
   }),
   plugins: [

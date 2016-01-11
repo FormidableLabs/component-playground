@@ -1,126 +1,121 @@
+/* eslint  no-invalid-this:0, no-new-func:0, no-unused-vars:0 */
 "use strict";
 
-import React from "react";
+import React, {Component, PropTypes} from "react";
 import ReactDom from "react-dom";
-import ReactDOMServer from "react-dom/server";
-import babel from "babel-core/browser";
+import {transform} from "babel-standalone";
 
-const Preview = React.createClass({
-    propTypes: {
-      code: React.PropTypes.string.isRequired,
-      scope: React.PropTypes.object.isRequired,
-      previewComponent: React.PropTypes.node
-    },
+const babelrc = {presets: ["es2015", "react", "stage-0"]};
+const values = (v) => Object.keys(v).map((k) => v[k]);
 
-    getInitialState() {
-      return {
-        error: null
+const wrapFunc = (scope, content) => {
+
+  const keys = Object.keys(scope);
+  const fn = new Function(keys.concat("mountNode", "$$context", "exports"), content);
+
+  return (current, context, mountNode) => {
+    const exports = {};
+    const args = keys.map((k) => current[k]).concat(mountNode, context, exports);
+    fn(...args);
+    return exports.default;
+  };
+};
+
+export default class Preview extends Component {
+  static propTypes = {
+    code: PropTypes.string.isRequired,
+    scope: PropTypes.object.isRequired,
+    previewComponent: PropTypes.node,
+    noRender: PropTypes.bool,
+    context: PropTypes.object
+  };
+
+  static defaultProps = {
+    previewComponent: "div"
+  };
+
+  constructor(...rest) {
+    super(...rest);
+    this.state = {
+      error: null
+    };
+  }
+
+
+  componentDidMount() {
+    this._executeCode();
+  }
+
+  _compileCode() {
+    if (this.props.noRender) {
+      const generateContextTypes = (context) => {
+        const keys = Object.keys(context)
+          .map((val) => `${JSON.stringify(val)}: React.PropTypes.any.isRequired`);
+        return `{ ${keys.join(", ")} }`;
       };
-    },
-
-    getDefaultProps() {
-      return {
-        previewComponent: 'div'
+      let ctxStr = "";
+      if (this.props.context) {
+        ctxStr = `
+        childContextTypes: ${generateContextTypes(this.props.context)},
+        getChildContext: function () { return $$context },
+        `;
       }
-    },
-
-    componentDidMount() {
-      this._executeCode();
-    },
-
-    componentDidUpdate(prevProps) {
-      clearTimeout(this.timeoutID);
-      if (this.props.code !== prevProps.code) {
-        this._executeCode();
-      }
-    },
-
-    _compileCode() {
-      if (this.props.noRender) {
-        const generateContextTypes = function (context) {
-          const keys = Object.keys(context).map(val => `${val}: React.PropTypes.any.isRequired`);
-          return `{ ${keys.join(", ")} }`;
-        };
-
-        return babel.transform(`
-          (function (${Object.keys(this.props.scope).join(", ")}, mountNode) {
-            return React.createClass({
-              // childContextTypes: { test: React.PropTypes.string },
-              childContextTypes: ${generateContextTypes(this.props.context)},
-              getChildContext: function () { return ${JSON.stringify(this.props.context)}; },
+      return wrapFunc(this.props.scope, transform(`
+            exports.default =  React.createClass({
+              ${ctxStr}
               render: function () {
                 return (
                   ${this.props.code}
                 );
               }
             });
-          });
-        `, { stage: 1 }).code;
-      } else {
-        return babel.transform(`
-          (function (${Object.keys(this.props.scope).join(",")}, mountNode) {
+        `, babelrc).code);
+    } else {
+      return wrapFunc(this.props.scope, transform(`
             ${this.props.code}
-          });
-        `, { stage: 1 }).code;
-      }
-    },
-
-    _setTimeout() {
-      clearTimeout(this.timeoutID);
-      this.timeoutID = setTimeout.apply(null, arguments);
-    },
-
-    _executeCode() {
-      var mountNode = this.refs.mount;
-
-      try {
-
-        var scope = [];
-
-        for (var s in this.props.scope) {
-          if (this.props.scope.hasOwnProperty(s)) {
-            scope.push(this.props.scope[s]);
-          }
-        }
-
-        scope.push(mountNode);
-
-        var compiledCode = this._compileCode();
-        if (this.props.noRender) {
-          var Component = React.createElement(
-            eval(compiledCode).apply(null, scope)
-          );
-          ReactDOMServer.renderToString(React.createElement(this.props.previewComponent, {}, Component));
-          ReactDom.render(
-            React.createElement(this.props.previewComponent, {}, Component),
-            mountNode
-          );
-        } else {
-          eval(compiledCode).apply(null, scope);
-        }
-
-        this.setState({
-          error: null
-        });
-      } catch (err) {
-        this._setTimeout(() => {
-          this.setState({
-            error: err.toString()
-          });
-        }, 500);
-      }
-    },
-
-    render() {
-      return (
-        <div>
-          {this.state.error !== null ?
-            <div className="playgroundError">{this.state.error}</div> :
-            null}
-          <div ref="mount" className="previewArea"/>
-        </div>
-      );
+        `, babelrc).code);
     }
-});
+  }
 
-export default Preview;
+  _setTimeout(...args) {
+    clearTimeout(this.timeoutID);
+    this.timeoutID = setTimeout(...args);
+  }
+
+  _executeCode() {
+    const mountNode = this.refs.mount;
+
+    try {
+
+      const compiledCode = this._compileCode();
+      if (this.props.noRender) {
+        const EvalComponent = compiledCode(this.props.scope, this.props.context, mountNode);
+        ReactDom.render(React.createElement(EvalComponent, {}), mountNode);
+      } else {
+        const EvalComponent = compiledCode(this.props.scope, mountNode);
+        ReactDom.render(React.createElement(EvalComponent, {}), mountNode);
+      }
+
+      this.setState({
+        error: null
+      });
+    } catch (err) {
+      this._setTimeout(() => {
+        this.setState({
+          error: err.toString()
+        });
+      }, 500);
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        {this.state.error !== null ?
+        <div className="playgroundError">{this.state.error}</div> :
+          null}
+        <div ref="mount" className="previewArea"/>
+      </div>
+    );
+  }
+}

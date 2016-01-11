@@ -1,1 +1,1 @@
-module.exports = require("./components/playground");
+module.exports = require("./components/playground").default;

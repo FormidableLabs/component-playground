@@ -1,3 +1,4 @@
+/* eslint global-require:0 */
 "use strict";
 /*
  * Karma Configuration: "full" version.
@@ -12,7 +13,14 @@ var webpackCfg = require("./webpack.config.test");
 // TODO: Upgrade Karma to 0.13 when upstream bug is fixed.
 // https://github.com/FormidableLabs/
 //        formidable-react-component-boilerplate/issues/25
-
+var isHot = /test-hot/.test(process.env.npm_lifecycle_event);
+var preprocess = ["webpack"];
+if (isHot) {
+  var webpack = require("webpack");
+  webpackCfg.plugins.push(new webpack.HotModuleReplacementPlugin());
+  preprocess.push("sourcemap");
+  webpackCfg.devtool = "#inline-source-map";
+}
 module.exports = function (config) {
   // Start with the "dev" (webpack-dev-server is already running) config
   // and add in the webpack stuff.
@@ -21,7 +29,7 @@ module.exports = function (config) {
   // Overrides.
   config.set({
     preprocessors: {
-      "test/client/main.js": ["webpack"]
+      "test/client/main.js": preprocess
     },
     files: [
       // Sinon has issues with webpack. Do global include.

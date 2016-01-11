@@ -2,3 +2,12 @@
 extends:
   - "defaults/configurations/walmart/es6-react"
   - ".eslintrc-base"
+
+globals:
+  document: false
+  console: false
+  setTimeout: false
+  clearTimeout: false
+
+rules:
+  no-invalid-this: 0
