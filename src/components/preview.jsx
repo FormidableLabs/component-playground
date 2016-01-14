@@ -5,7 +5,6 @@ import React, {Component, PropTypes} from "react";
 import ReactDom from "react-dom";
 import {transform} from "babel-standalone";
 
-const babelrc = {presets: ["es2015", "react", "stage-0"]};
 const values = (v) => Object.keys(v).map((k) => v[k]);
 
 const wrapFunc = (scope, content) => {
@@ -22,6 +21,7 @@ const wrapFunc = (scope, content) => {
 };
 
 export default class Preview extends Component {
+  static babelrc = {presets: ["es2015", "react", "stage-0"]};
   static propTypes = {
     code: PropTypes.string.isRequired,
     scope: PropTypes.object.isRequired,
@@ -69,11 +69,11 @@ export default class Preview extends Component {
                 );
               }
             });
-        `, babelrc).code);
+        `, Preview.babelrc).code);
     } else {
       return wrapFunc(this.props.scope, transform(`
             ${this.props.code}
-        `, babelrc).code);
+        `, Preview.babelrc).code);
     }
   }
 
