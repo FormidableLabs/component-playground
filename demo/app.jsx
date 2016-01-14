@@ -1,23 +1,22 @@
-/* eslint new-cap:0 no-unused-vars:0 */
+/* eslint new-cap:0, no-unused-vars:0, no-undef:0 */
 "use strict";
 
-var React = require("react");
-var ReactDom = require("react-dom");
-var Playground = require("../src/index");
+import React, {Component} from "react";
+import ReactDom, {render} from "react-dom";
+import Playground from "../src/index";
+import Button from "./components/button";
+import DebugInfo from "./components/debug-info.jsx";
+//examples
+import contextExample from "raw!./examples/context.example";
+import es6Example from "raw!./examples/es6.example";
+import componentExample from "raw!./examples/component.example";
 
 require("./styles/syntax.css");
 require("./styles/codemirror.css");
 require("./styles/demo.css");
 
-var Button = require("./components/button");
-var componentExample = require("raw!./examples/component.example");
 
-var DebugInfo = require("./components/debug-info");
-var contextExample = require("raw!./examples/context.example");
-
-var es6Example = require("raw!./examples/es6.example");
-
-var Index = React.createClass({
+class Index extends Component {
   render() {
     return (
       <div className="component-documentation">
@@ -25,50 +24,56 @@ var Index = React.createClass({
 
         <Playground
           codeText={componentExample}
-          scope={{React: React, Button: Button}}/>
+          scope={{React, Button}}
+        />
 
         <h2>Collapsable Code</h2>
 
         <Playground
           codeText={componentExample}
-          scope={{React: React, Button: Button}}
-          collapsableCode={true}/>
+          scope={{React, Button}}
+          collapsableCode
+        />
 
         <h2>Collapsable Code (Expanded by Default)</h2>
 
         <Playground
           codeText={componentExample}
-          scope={{React: React, Button: Button}}
-          collapsableCode={true}
-          initiallyExpanded/>
+          scope={{React, Button}}
+          collapsableCode
+          initiallyExpanded
+        />
 
         <h2>Prop Descriptions</h2>
 
         <Playground
           codeText={componentExample}
-          scope={{React: React, Button: Button}}
+          scope={{React, Button}}
           propDescriptionMap={{
             buttonStyle: "style object for inline styles"
           }}
           docClass={Button}
-          collapsableCode={true}/>
+          collapsableCode
+        />
 
         <h2>With Context</h2>
 
         <Playground
           context={{environment: "staging"}}
           codeText={contextExample}
-          scope={{React: React, DebugInfo: DebugInfo}}/>
+          scope={{React, DebugInfo}}
+        />
 
         <h2>ES6 Console</h2>
 
         <Playground
           codeText={es6Example}
-          es6Console={true}
-          scope={{React: React, Button: Button}}/>
+          es6Console
+          scope={{React, Button}}
+        />
       </div>
     );
   }
-});
+}
 
 ReactDom.render(<Index/>, document.getElementById("content"));

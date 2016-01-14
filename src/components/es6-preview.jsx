@@ -1,29 +1,22 @@
-/* eslint new-cap:0 no-unused-vars:0 */
+/* eslint no-unused-vars:0, no-use-before-define:0,  no-console:0,no-eval:0 */
 "use strict";
 
-import React from "react";
+import React, {Component, PropTypes} from "react";
 import ReactDom from "react-dom";
-import babel from "babel-core/browser";
+import {transform} from "babel-standalone";
+import "babel-polyfill";
 
-const getType = function (el) {
-  let t = typeof el;
+const babelrc = {presets: ["es2015", "react", "stage-0"]};
 
-  if (Array.isArray(el)) {
-    t = "array";
-  } else if (el === null) {
-    t = "null";
-  }
-
-  return t;
-};
+const values = (v) => Object.keys(v).map((k) => v[k]);
 
 const wrapMap = {
   wrapnumber(num) {
     return (<span style={{color: "#6170d5"}}>{num}</span>);
   },
-
   wrapstring(str) {
-    return (<span style={{color: "#F2777A"}}>{"'" + str + "'"}</span>);
+    str = `'${str}'`;
+    return (<span style={{color: "#F2777A"}}>{str}</span>);
   },
 
   wrapboolean(bool) {
@@ -31,34 +24,29 @@ const wrapMap = {
   },
 
   wraparray(arr) {
-    return (
-      <span>
-        {"["}
-        {arr.map((entry, i) => {
-          return (
-            <span key={i}>
-              {wrapMap["wrap" + getType(entry)](entry)}
-              {i !== arr.length - 1 ? ", " : ""}
-            </span>
-          );
-        })}
-        {"]"}
-      </span>
-    );
+    return (<span>
+      {"["}
+      {arr.map((entry, i) =>
+      <span key={i}>
+        {getType(entry)}
+        {i !== arr.length - 1 ? ", " : ""}
+      </span>)}
+      {"]"}
+    </span>);
   },
 
   wrapobject(obj) {
-    let pairs = [];
+    const pairs = [];
     let first = true;
 
-    for (let key in obj) {
+    for (const key in obj) {
       pairs.push(
         <span key={key}>
           <span style={{color: "#8A6BA1"}}>
             {(first ? "" : ", ") + key}
           </span>
           {": "}
-          {wrapMap["wrap" + getType(obj[key])](obj[key])}
+          {getType(obj[key])}
         </span>
       );
 
@@ -81,25 +69,33 @@ const wrapMap = {
   }
 };
 
-const Preview = React.createClass({
-  propTypes: {
-    code: React.PropTypes.string.isRequired,
-    scope: React.PropTypes.object.isRequired
-  },
+const getType = function (el) {
+  let t = typeof el;
 
-  componentDidMount() {
-    this._executeCode();
-  },
+  if (Array.isArray(el)) {
+    t = "array";
+  } else if (el === null) {
+    t = "null";
+  }
+
+  return wrapMap[`wrap${t}`](el);
+};
+
+export default class Preview extends Component {
+  static propTypes = {
+    code: PropTypes.string.isRequired,
+    scope: PropTypes.object.isRequired
+  };
 
   componentDidUpdate(prevProps) {
     clearTimeout(this.timeoutID);
     if (this.props.code !== prevProps.code) {
       this._executeCode();
     }
-  },
+  }
 
   _compileCode() {
-    return babel.transform(`
+    return transform(`
       (function(${Object.keys(this.props.scope).join(",")}) {
         var list = [];
         var console = { log(...x) {
@@ -108,16 +104,16 @@ const Preview = React.createClass({
         ${this.props.code}
         return list;
       });
-    `, { stage: 1 }).code;
-  },
+    `, babelrc).code;
+  }
 
-  _setTimeout() {
+  _setTimeout = (...args) => {
     clearTimeout(this.timeoutID);
-    this.timeoutID = setTimeout.apply(null, arguments);
-  },
+    this.timeoutID = setTimeout(...args);
+  };
 
   _executeCode() {
-    var mountNode = this.refs.mount;
+    const mountNode = this.refs.mount;
 
     try {
       ReactDom.unmountComponentAtNode(mountNode);
@@ -126,22 +122,17 @@ const Preview = React.createClass({
     }
 
     try {
-      var scope = [];
-      for (var s in this.props.scope) {
-        if (this.props.scope.hasOwnProperty(s)) {
-          scope.push(this.props.scope[s]);
-        }
-      }
+      const scope = values(this.props.scope);
       scope.push(mountNode);
-      var compiledCode = this._compileCode();
-      var Component = React.createElement(
+      const compiledCode = this._compileCode();
+      const CompiledComponent = React.createElement(
         React.createClass({
           _createConsoleLine(x, multipleArgs) {
             return (
               <span style={{marginRight: "20px"}}>
                 {multipleArgs ?
                   x.map((y) => { return this._createConsoleLine([y], false); }) :
-                  wrapMap["wrap" + getType(x[0])](x[0])}
+                  getType(x[0])}
               </span>
             );
           },
@@ -149,37 +140,30 @@ const Preview = React.createClass({
           render() {
             return (
               <div style={{padding: 15, fontFamily: "Consolas, Courier, monospace"}}>
-                {eval(compiledCode).apply(null, scope).map( (x, i) => {
+                {eval(compiledCode)(...scope).map((x, i) => {
                   return (
-                    <div
-                      key={i}
-                      style={{
-                        borderBottom: "1px solid #ccc",
-                        padding: "4px 0"
-                      }}>
-                      {this._createConsoleLine(x.val, x.multipleArgs)}
-                    </div>
-                  );
+                  <div key={i} style={{borderBottom: "1px solid #ccc", padding: "4px 0"}}>
+                    {this._createConsoleLine(x.val, x.multipleArgs)}
+                  </div>
+                    );
                 })}
               </div>
             );
           }
         })
       );
-      ReactDom.render(Component, mountNode);
+      ReactDom.render(CompiledComponent, mountNode);
     } catch (err) {
-      this._setTimeout(function () {
+      this._setTimeout(() => {
         ReactDom.render(
           <div className="playgroundError">{err.toString()}</div>,
           mountNode
         );
       }, 500);
     }
-  },
+  }
 
   render() {
-    return <div ref="mount" />;
+    return <div ref="mount"/>;
   }
-});
-
-export default Preview;
+}

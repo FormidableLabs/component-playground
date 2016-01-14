@@ -1,19 +1,18 @@
 /* eslint new-cap:0 no-unused-vars:0 */
 "use strict";
 
-import React from "react";
+import React, {Component} from "react";
 
-const Button = React.createClass({
-  propTypes: {
+export default class Button extends Component {
+
+  static propTypes = {
     buttonStyle: React.PropTypes.object,
     onClick: React.PropTypes.func
-  },
+  };
 
-  getDefaultProps() {
-    return {
-      darkMode: false
-    };
-  },
+  static defaultProps = {
+    darkMode: false
+  };
 
   render() {
     return (
@@ -22,6 +21,4 @@ const Button = React.createClass({
       </button>
     );
   }
-});
-
-export default Button;
+}
