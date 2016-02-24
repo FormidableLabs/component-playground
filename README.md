@@ -36,6 +36,7 @@ In your JSX, require the component and use it like this:
 'use strict';
 
 var React = require('react/addons');
+var ReactDOM = require('react-dom');
 var Playground = require('component-playground');
 var Button = require('./components/button');
 
@@ -51,7 +52,7 @@ var Index = React.createClass({
   }
 });
 
-React.render(<Index/>, document.getElementById('root'));
+ReactDOM.render(<Index/>, document.getElementById('root'));
 ```
 
 ### Props
