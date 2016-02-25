@@ -50,5 +50,6 @@ out/
 # App Files
 # --------------------
 .tmp
+dist/*.map
 lib
 node_modules/
