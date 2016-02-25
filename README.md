@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/FormidableLabs/component-playground.svg?branch=master)](https://travis-ci.org/FormidableLabs/component-playground)
+![](https://badge-size.herokuapp.com/FormidableLabs/component-playground/master/dist/component-playground.min.js?compression=gzip)
+
 # component-playground
 A component for rendering React Components and ES6 code with editable source and live preview
 
