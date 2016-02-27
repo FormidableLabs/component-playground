@@ -5470,7 +5470,6 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 193 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* eslint new-cap:0 no-unused-vars:0 */
 	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
@@ -5516,7 +5515,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      editor
 	    );
 	  }
-	});
+	}); /* eslint new-cap:0 no-unused-vars:0 */
+	
 	
 	exports.default = Editor;
 
@@ -93794,8 +93794,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 	  render: function render() {
 	    var propTypes = [];
+	    var propName = undefined;
 	
-	    for (var propName in this.props.componentClass.propTypes) {
+	    for (propName in this.props.componentClass.propTypes) {
 	      if (this.props.ignore.indexOf(propName)) {
 	        propTypes.push({
 	          propName: propName,
