@@ -147,7 +147,7 @@ sure that you have a very modern `npm` binary:
 $ npm install -g npm
 ```
 
-Built files in `dist/` should **not** be committeed during development or PRs.
+Built files in `dist/` should **not** be committed during development or PRs.
 Instead we _only_ build and commit them for published, tagged releases. So
 the basic workflow is:
 
@@ -156,19 +156,21 @@ the basic workflow is:
 $ git pull
 $ git status # (should be no changes)
 
+# Add version notes
+$ vim CHANGELOG.md
+$ git commit -a -m "Update CHANGELOG"
+
 # Choose a semantic update for the new version.
 # If you're unsure, read about semantic versioning at http://semver.org/
-$ npm version major|minor|patch -m "Version %s - INSERT_REASONS"
+$ npm version major|minor|patch -m "Version %s - List of features"
 
 # ... the `dist/` and `lib/` directories are now built, `package.json` is
 # updated, and the appropriate files are committed to git (but unpushed).
 #
 # *Note*: `lib/` is uncommitted, but built and must be present to push to npm.
 
-# Check that everything looks good in last commit and push.
-$ git diff HEAD^ HEAD
-$ git push && git push --tags
-# ... the project is now pushed to GitHub and available to `bower`.
+# Push the commit and tag
+$ git push --follow-tags
 
 # And finally publish to `npm`!
 $ npm publish
