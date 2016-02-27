@@ -1,5 +1,23 @@
 # Component Playground Changelog
 
+## 1.2.0 (2016-02-26)
+
+  * Use `ReactDOM.render` in example
+  * Ignore source maps in git and npm
+  * Update DEVELOPMENT guide publishing instructions
+  * Upgrade babel-loader and babel-lint
+  * Add travis and gzip badges
+
+## 1.1.0 (2016-02-12)
+
+  * Upgrade to Babel6
+  * Silence deprecation warning in production
+  * Check for lib before postinstall
+  * Fix issue where undefined errors did not throw
+  * Fix bug where editor based edits reset cursor position
+  * Fix issue where the editor's code didn't update when updated via props
+  * Fix issues around code reloading properly when changed via props
+
 ## 1.0.1 (2015-10-20)
 
 ## 1.0.0 (2015-10-08)
@@ -12,6 +30,8 @@
 ## 0.1.2 (2015-10-06)
 
   * Remove postinstall step
+
+## 0.1.1 (2015-07-06)
 
 ## 0.1.0 (2015-07-06)
 
