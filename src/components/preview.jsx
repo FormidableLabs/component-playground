@@ -1,5 +1,3 @@
-"use strict";
-
 import React from "react";
 import ReactDom from "react-dom";
 import ReactDOMServer from "react-dom/server";
@@ -20,8 +18,8 @@ const Preview = React.createClass({
 
     getDefaultProps() {
       return {
-        previewComponent: 'div'
-      }
+        previewComponent: "div"
+      };
     },
 
     componentDidMount() {
@@ -29,7 +27,7 @@ const Preview = React.createClass({
     },
 
     componentDidUpdate(prevProps) {
-      clearTimeout(this.timeoutID);
+      clearTimeout(this.timeoutID); //eslint-disable-line no-undef
       if (this.props.code !== prevProps.code) {
         this._executeCode();
       }
@@ -66,18 +64,18 @@ const Preview = React.createClass({
     },
 
     _setTimeout() {
-      clearTimeout(this.timeoutID);
-      this.timeoutID = setTimeout.apply(null, arguments);
+      clearTimeout(this.timeoutID); //eslint-disable-line no-undef
+      this.timeoutID = setTimeout.apply(null, arguments); //eslint-disable-line no-undef
     },
 
     _executeCode() {
-      var mountNode = this.refs.mount;
+      const mountNode = this.refs.mount;
 
       try {
 
-        var scope = [];
+        const scope = [];
 
-        for (var s in this.props.scope) {
+        for (const s in this.props.scope) {
           if (this.props.scope.hasOwnProperty(s)) {
             scope.push(this.props.scope[s]);
           }
@@ -85,10 +83,10 @@ const Preview = React.createClass({
 
         scope.push(mountNode);
 
-        var compiledCode = this._compileCode();
+        const compiledCode = this._compileCode();
         if (this.props.noRender) {
           var Component = React.createElement(
-            eval(compiledCode).apply(null, scope)
+            eval(compiledCode).apply(null, scope) //eslint-disable-line no-eval
           );
           ReactDOMServer.renderToString(React.createElement(this.props.previewComponent, {}, Component));
           ReactDom.render(
@@ -96,7 +94,7 @@ const Preview = React.createClass({
             mountNode
           );
         } else {
-          eval(compiledCode).apply(null, scope);
+          eval(compiledCode).apply(null, scope); //eslint-disable-line no-eval
         }
 
         this.setState({

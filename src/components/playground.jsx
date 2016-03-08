@@ -1,5 +1,4 @@
 /* eslint no-unused-vars:0 */
-"use strict";
 
 import polyfill from "babel/polyfill";
 import React from "react";
@@ -64,14 +63,14 @@ const ReactPlayground = React.createClass({
   render() {
     if (this.props.noRender === false) {
       if (process.env.NODE_ENV !== "production") {
-        /* eslint-disable no-console */
+        /* eslint-disable no-console no-undef max-len */
         if (typeof console !== "undefined" && console.warn) {
           console.warn(`
             Deprecation warning: noRender is being deprecated in favor of wrapped components and will be removed in the 1.x release.
             https://github.com/FormidableLabs/component-playground/issues/19 for details.
           `);
         }
-        /* eslint-enable no-console */
+        /* eslint-enable no-console no-undef max-len */
       }
     }
 

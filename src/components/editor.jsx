@@ -3,10 +3,19 @@
 
 import React from "react";
 import CodeMirror from "codemirror";
-require('codemirror/mode/javascript/javascript');
+require("codemirror/mode/javascript/javascript");
 
 
 const Editor = React.createClass({
+  propTypes: {
+    theme: React.PropTypes.string,
+    readOnly: React.PropTypes.bool,
+    external: React.PropTypes.bool,
+    codeText: React.PropTypes.string,
+    onChange: React.PropTypes.func,
+    style: React.PropTypes.object,
+    className: React.PropTypes.string
+  },
   componentDidMount() {
     this.editor = CodeMirror.fromTextArea(this.refs.editor, {
       mode: "javascript",
@@ -33,7 +42,7 @@ const Editor = React.createClass({
   },
 
   render() {
-    var editor = <textarea ref="editor" defaultValue={this.props.codeText} />;
+    const editor = <textarea ref="editor" defaultValue={this.props.codeText} />;
 
     return (
       <div style={this.props.style} className={this.props.className}>
