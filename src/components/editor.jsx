@@ -2,6 +2,9 @@
 "use strict";
 
 import React from "react";
+import CodeMirror from "codemirror";
+require('codemirror/mode/javascript/javascript');
+
 
 const Editor = React.createClass({
   componentDidMount() {
