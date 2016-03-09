@@ -6,6 +6,11 @@ var _ = require("lodash");
 var testCfg = require("./webpack.config.test");
 
 module.exports = _.merge({}, testCfg, {
+  isparta: {
+    babel: {
+      presets: ["es2015", "stage-1", "react"]
+    }
+  },
   module: {
     preLoaders: [
       // Manually instrument client code for code coverage.
@@ -13,7 +18,7 @@ module.exports = _.merge({}, testCfg, {
       {
         test: /src\/.*\.jsx?$/,
         exclude: /(test|node_modules)\//,
-        loader: "isparta?{ babel: { stage: 1 } }"
+        loader: "isparta"
       }
     ]
   }
