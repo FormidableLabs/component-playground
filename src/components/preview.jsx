@@ -27,7 +27,7 @@ const Preview = React.createClass({
     },
 
     componentDidUpdate(prevProps) {
-      clearTimeout(this.timeoutID); //eslint-disable-line no-undef
+      clearTimeout(this.timeoutID); //eslint-disable-line
       if (this.props.code !== prevProps.code) {
         this._executeCode();
       }

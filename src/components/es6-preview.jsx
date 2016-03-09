@@ -90,7 +90,7 @@ const Preview = React.createClass({
   },
 
   componentDidUpdate(prevProps) {
-    clearTimeout(this.timeoutID); //eslint-disable-line no-undef
+    clearTimeout(this.timeoutID); //eslint-disable-line
     if (this.props.code !== prevProps.code) {
       this._executeCode();
     }
@@ -110,8 +110,8 @@ const Preview = React.createClass({
   },
 
   _setTimeout() {
-    clearTimeout(this.timeoutID); //eslint-disable-line no-undef
-    this.timeoutID = setTimeout.apply(null, arguments); //eslint-disable-line no-undef
+    clearTimeout(this.timeoutID); //eslint-disable-line
+    this.timeoutID = setTimeout.apply(null, arguments); //eslint-disable-line
   },
 
   _executeCode() {
@@ -120,7 +120,7 @@ const Preview = React.createClass({
     try {
       ReactDom.unmountComponentAtNode(mountNode);
     } catch (e) {
-      console.error(e); //eslint-disable-line no-console no-undef
+      console.error(e); //eslint-disable-line
     }
 
     try {
@@ -147,7 +147,7 @@ const Preview = React.createClass({
           render() {
             return (
               <div style={{padding: 15, fontFamily: "Consolas, Courier, monospace"}}>
-                {eval(compiledCode).apply(null, scope).map( (x, i) => { //eslint-disable-line no-eval
+                {eval(compiledCode).apply(null, scope).map( (x, i) => {//eslint-disable-line
                   return (
                     <div
                       key={i}

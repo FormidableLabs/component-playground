@@ -70,4 +70,4 @@ var Index = React.createClass({
   }
 });
 
-ReactDom.render(<Index/>, document.getElementById("content")); //eslint-disable-line no-undef
+ReactDom.render(<Index/>, document.getElementById("content")); //eslint-disable-line
