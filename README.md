@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/FormidableLabs/component-playground.svg?branch=master)](https://travis-ci.org/FormidableLabs/component-playground)
+![](https://badge-size.herokuapp.com/FormidableLabs/component-playground/master/dist/component-playground.min.js?compression=gzip)
+
 # component-playground
 A component for rendering React Components and ES6 code with editable source and live preview
 
@@ -29,6 +32,7 @@ In your JSX, require the component and use it like this:
 'use strict';
 
 var React = require('react/addons');
+var ReactDOM = require('react-dom');
 var Playground = require('component-playground');
 var Button = require('./components/button');
 
@@ -44,7 +48,7 @@ var Index = React.createClass({
   }
 });
 
-React.render(<Index/>, document.getElementById('root'));
+ReactDOM.render(<Index/>, document.getElementById('root'));
 ```
 
 ### Props

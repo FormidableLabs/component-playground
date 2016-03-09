@@ -1,26 +1,26 @@
 # --------------------
 # OSX Files
 # --------------------
-.DS_Store
-.AppleDouble
-.LSOverride
-Icon
 ._*
+.AppleDouble
+.DS_Store
+.LSOverride
 .Spotlight-V100
 .Trashes
+Icon
 
 # --------------------
 # Windows Files
 # --------------------
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-$RECYCLE.BIN/
 *.cab
+*.lnk
 *.msi
 *.msm
 *.msp
-*.lnk
+$RECYCLE.BIN/
+Desktop.ini
+ehthumbs.db
+Thumbs.db
 
 # --------------------
 # Sublime Text Files
@@ -31,24 +31,31 @@ $RECYCLE.BIN/
 # --------------------
 # IntelliJ Files
 # --------------------
+.idea/
 *.iml
 *.ipr
 *.iws
-.idea/
 out/
 
 # --------------------
 # Eclipse Files
 # --------------------
-.project
-.metadata
-*.bak
 .classpath
+.metadata
+.project
 .settings/
+*.bak
+
+
+# --------------------
+# Cruft
+# --------------------
+*.log
 
 # --------------------
 # App Files
 # --------------------
-node_modules/
 .tmp
+dist/*.map
 lib
+node_modules/

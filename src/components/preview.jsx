@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDom from "react-dom";
 import ReactDOMServer from "react-dom/server";
-import babel from "babel-core/browser";
+import { transform } from "babel-standalone";
 
 const Preview = React.createClass({
     propTypes: {
@@ -40,7 +40,7 @@ const Preview = React.createClass({
           return `{ ${keys.join(", ")} }`;
         };
 
-        return babel.transform(`
+        return transform(`
           (function (${Object.keys(this.props.scope).join(", ")}, mountNode) {
             return React.createClass({
               // childContextTypes: { test: React.PropTypes.string },
@@ -53,13 +53,13 @@ const Preview = React.createClass({
               }
             });
           });
-        `, { stage: 1 }).code;
+        `, { presets: ["es2015", "react", "stage-1"] } ).code;
       } else {
-        return babel.transform(`
+        return transform(`
           (function (${Object.keys(this.props.scope).join(",")}, mountNode) {
             ${this.props.code}
           });
-        `, { stage: 1 }).code;
+        `, { presets: ["es2015", "react", "stage-1"] }).code;
       }
     },
 

@@ -1,7 +1,7 @@
 /* eslint new-cap:0 no-unused-vars:0 */
 import React from "react";
 import ReactDom from "react-dom";
-import babel from "babel-core/browser";
+import { transform } from "babel-standalone";
 
 const getType = function (el) {
   let t = typeof el;
@@ -97,7 +97,7 @@ const Preview = React.createClass({
   },
 
   _compileCode() {
-    return babel.transform(`
+    return transform(`
       (function(${Object.keys(this.props.scope).join(",")}) {
         var list = [];
         var console = { log(...x) {
@@ -106,7 +106,7 @@ const Preview = React.createClass({
         ${this.props.code}
         return list;
       });
-    `, { stage: 1 }).code;
+    `, { presets: ["es2015", "react", "stage-1"] }).code;
   },
 
   _setTimeout() {

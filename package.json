@@ -1,6 +1,6 @@
 {
   "name": "component-playground",
-  "version": "1.0.5",
+  "version": "1.2.0",
   "description": "A component for rendering React components with editable source and live preview",
   "keywords": [
     "React",
@@ -21,14 +21,14 @@
   },
   "scripts": {
     "postinstall": "node -e \"require('fs').stat('lib', function(e,s){process.exit(e || !s.isDirectory() ? 1 : 0)})\" || npm run build-lib",
-    "preversion": "npm run check",
+    "preversion": "npm run test",
     "version": "npm run clean && npm run build && git add -A dist",
     "clean-dist": "rimraf dist",
     "build-dist-min": "webpack --config webpack.config.js",
     "build-dist-dev": "webpack --config webpack.config.dev.js",
     "build-dist": "npm run clean-dist && npm run build-dist-min && npm run build-dist-dev",
     "clean-lib": "rimraf lib",
-    "build-lib": "npm run clean-lib && babel --stage 0 src -d lib",
+    "build-lib": "npm run clean-lib && babel src --out-dir lib",
     "clean": "npm run clean-lib && npm run clean-dist",
     "build": "npm run build-lib && npm run build-dist",
     "server-dev": "webpack-dev-server --port 3000 --config demo/webpack.config.dev.js --content-base demo",
@@ -57,13 +57,16 @@
     "check-dev": "npm run lint && npm run test-dev"
   },
   "dependencies": {
-    "babel": "^5.5.8",
-    "babel-core": "^5.5.8",
-    "babel-loader": "^5.3.2",
-    "codemirror": "^5.12.0",
+    "babel-cli": "^6.5.1",
+    "babel-core": "^6.0.0",
+    "babel-loader": "^6.2.3",
+    "babel-polyfill": "^6.5.0",
+    "babel-preset-es2015": "^6.0.0",
+    "babel-preset-react": "^6.0.0",
+    "babel-preset-stage-0": "^6.0.0",
+    "babel-standalone": "^6.4.4",
     "css-loader": "~0.9.0",
-    "react": "^0.14.0",
-    "react-dom": "^0.14.0",
+    "react-addons-test-utils": "^0.14.7",
     "rimraf": "^2.4.0",
     "style-loader": "~0.8.0",
     "url-loader": "~0.5.5",
@@ -73,7 +76,7 @@
     "react": "0.14.x"
   },
   "devDependencies": {
-    "babel-eslint": "^3.1.25",
+    "babel-eslint": "^5.0.0",
     "chai": "^3.2.0",
     "eslint": "^0.24.1",
     "eslint-config-defaults": "^3.0.3",
