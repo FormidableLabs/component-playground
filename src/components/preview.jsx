@@ -7,7 +7,9 @@ const Preview = React.createClass({
     propTypes: {
       code: React.PropTypes.string.isRequired,
       scope: React.PropTypes.object.isRequired,
-      previewComponent: React.PropTypes.node
+      previewComponent: React.PropTypes.node,
+      noRender: React.PropTypes.bool,
+      context: React.PropTypes.object
     },
 
     getInitialState() {
@@ -85,8 +87,9 @@ const Preview = React.createClass({
 
         const compiledCode = this._compileCode();
         if (this.props.noRender) {
+        /* eslint-disable no-eval, max-len */
           var Component = React.createElement(
-            eval(compiledCode).apply(null, scope) //eslint-disable-line no-eval
+            eval(compiledCode).apply(null, scope)
           );
           ReactDOMServer.renderToString(React.createElement(this.props.previewComponent, {}, Component));
           ReactDom.render(
@@ -94,8 +97,9 @@ const Preview = React.createClass({
             mountNode
           );
         } else {
-          eval(compiledCode).apply(null, scope); //eslint-disable-line no-eval
+          eval(compiledCode).apply(null, scope);
         }
+        /* eslint-enable no-eval, max-len */
 
         this.setState({
           error: null

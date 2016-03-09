@@ -1,5 +1,5 @@
 /* eslint new-cap:0 no-unused-vars:0 */
-/* eslint-disable no-var object-shorthand */
+/* eslint-disable no-var, object-shorthand */
 var React = require("react");
 var ReactDom = require("react-dom");
 var Playground = require("../src/index");
@@ -71,3 +71,4 @@ var Index = React.createClass({
 });
 
 ReactDom.render(<Index/>, document.getElementById("content")); //eslint-disable-line
+/* eslint-enable no-var, object-shorthand */
