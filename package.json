@@ -84,7 +84,7 @@
     "eslint-config-defaults": "^3.0.3",
     "eslint-plugin-filenames": "^0.1.1",
     "eslint-plugin-react": "^2.6.4",
-    "isparta-loader": "^0.2.0",
+    "isparta-loader": "^2.0.0",
     "karma": "^0.12.37",
     "karma-chrome-launcher": "^0.2.0",
     "karma-coverage": "^0.4.2",
