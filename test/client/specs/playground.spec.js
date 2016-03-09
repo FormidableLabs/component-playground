@@ -17,7 +17,7 @@ describe("components/playground", function () {
 
     // This is a real DOM node to assert on.
     const divNode = findRenderedDOMComponentWithClass(rendered, "playgroundCode");
-    expect(divNode).to.not.be.undefined;
+    expect(divNode).to.not.be.undefined; //eslint-disable-line no-unused-expressions
   });
 
   it("has expected content with shallow render", function () {
