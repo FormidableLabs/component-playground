@@ -55,7 +55,7 @@ const Preview = React.createClass({
               }
             });
           });
-        `, { presets: ["es2015", "react", "stage-1"] } ).code;
+        `, { presets: ["es2015", "react", "stage-1"] }).code;
       } else {
         return transform(`
           (function (${Object.keys(this.props.scope).join(",")}, mountNode) {
@@ -88,7 +88,7 @@ const Preview = React.createClass({
         const compiledCode = this._compileCode();
         if (this.props.noRender) {
         /* eslint-disable no-eval, max-len */
-          var Component = React.createElement(
+          const Component = React.createElement(
             eval(compiledCode).apply(null, scope)
           );
           ReactDOMServer.renderToString(React.createElement(this.props.previewComponent, {}, Component));
