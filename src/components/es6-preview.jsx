@@ -1,6 +1,4 @@
 /* eslint new-cap:0 no-unused-vars:0 */
-"use strict";
-
 import React from "react";
 import ReactDom from "react-dom";
 import { transform } from "babel-standalone";
@@ -48,10 +46,10 @@ const wrapMap = {
   },
 
   wrapobject(obj) {
-    let pairs = [];
+    const pairs = [];
     let first = true;
 
-    for (let key in obj) {
+    for (const key in obj) {
       pairs.push(
         <span key={key}>
           <span style={{color: "#8A6BA1"}}>
@@ -92,7 +90,7 @@ const Preview = React.createClass({
   },
 
   componentDidUpdate(prevProps) {
-    clearTimeout(this.timeoutID);
+    clearTimeout(this.timeoutID); //eslint-disable-line
     if (this.props.code !== prevProps.code) {
       this._executeCode();
     }
@@ -112,29 +110,29 @@ const Preview = React.createClass({
   },
 
   _setTimeout() {
-    clearTimeout(this.timeoutID);
-    this.timeoutID = setTimeout.apply(null, arguments);
+    clearTimeout(this.timeoutID); //eslint-disable-line
+    this.timeoutID = setTimeout.apply(null, arguments); //eslint-disable-line
   },
 
   _executeCode() {
-    var mountNode = this.refs.mount;
+    const mountNode = this.refs.mount;
 
     try {
       ReactDom.unmountComponentAtNode(mountNode);
     } catch (e) {
-      console.error(e);
+      console.error(e); //eslint-disable-line
     }
 
     try {
-      var scope = [];
-      for (var s in this.props.scope) {
+      const scope = [];
+      for (const s in this.props.scope) {
         if (this.props.scope.hasOwnProperty(s)) {
           scope.push(this.props.scope[s]);
         }
       }
       scope.push(mountNode);
-      var compiledCode = this._compileCode();
-      var Component = React.createElement(
+      const compiledCode = this._compileCode();
+      const Component = React.createElement(
         React.createClass({
           _createConsoleLine(x, multipleArgs) {
             return (
@@ -149,7 +147,7 @@ const Preview = React.createClass({
           render() {
             return (
               <div style={{padding: 15, fontFamily: "Consolas, Courier, monospace"}}>
-                {eval(compiledCode).apply(null, scope).map( (x, i) => {
+                {eval(compiledCode).apply(null, scope).map( (x, i) => {//eslint-disable-line
                   return (
                     <div
                       key={i}

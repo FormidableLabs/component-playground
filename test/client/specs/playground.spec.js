@@ -4,7 +4,7 @@
 import React from "react";
 import { renderIntoDocument, findRenderedDOMComponentWithClass,
   createRenderer } from "react-addons-test-utils";
-import Component from "src/components/playground";
+import Component from "../../../src/components/playground";
 
 describe("components/playground", function () {
 
@@ -17,7 +17,7 @@ describe("components/playground", function () {
 
     // This is a real DOM node to assert on.
     const divNode = findRenderedDOMComponentWithClass(rendered, "playgroundCode");
-    expect(divNode).to.not.be.undefined;
+    expect(divNode).to.not.be.undefined; //eslint-disable-line no-unused-expressions
   });
 
   it("has expected content with shallow render", function () {

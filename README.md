@@ -19,14 +19,7 @@ npm install component-playground
 
 ### Set up
 
-In your html document, add the required CodeMirror scripts at the bottom, before your bundle script:
-
-```html
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.0.0/codemirror.min.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.0.0/mode/javascript/javascript.min.js"></script>
-```
-
-In the head of your document, either add the css files from the demo or from a CDN like:
+In the head of your html document, either add the css files from the demo or from a CDN like:
 
 ```html
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.0.0/codemirror.min.css"/>
