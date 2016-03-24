@@ -1,17 +1,17 @@
 /* eslint new-cap:0 no-unused-vars:0 */
 /* eslint-disable no-var, object-shorthand */
-var React = require("react");
-var ReactDom = require("react-dom");
-var Playground = require("../src/index");
+import React from "react";
+import ReactDOM from "react-dom";
+import Playground from "../src/index";
 
 require("./styles/syntax.css");
 require("./styles/codemirror.css");
 require("./styles/demo.css");
 
-var Button = require("./components/button");
+import Button from "./components/button";
 var componentExample = require("raw!./examples/component.example");
 
-var DebugInfo = require("./components/debug-info");
+import DebugInfo from "./components/debug-info";
 var contextExample = require("raw!./examples/context.example");
 
 var es6Example = require("raw!./examples/es6.example");
@@ -70,5 +70,5 @@ var Index = React.createClass({
   }
 });
 
-ReactDom.render(<Index/>, document.getElementById("content")); //eslint-disable-line
+ReactDOM.render(<Index/>, document.getElementById("content")); //eslint-disable-line
 /* eslint-enable no-var, object-shorthand */
