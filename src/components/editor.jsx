@@ -3,13 +3,16 @@ import React from "react";
 import CodeMirror from "codemirror";
 require("codemirror/mode/javascript/javascript");
 
-
 const Editor = React.createClass({
   propTypes: {
     theme: React.PropTypes.string,
     readOnly: React.PropTypes.bool,
     external: React.PropTypes.bool,
     codeText: React.PropTypes.string,
+    selection: React.PropTypes.shape({
+      startLine: React.PropTypes.number,
+      endLine: React.PropTypes.number
+    }),
     onChange: React.PropTypes.func,
     style: React.PropTypes.object,
     className: React.PropTypes.string
@@ -22,8 +25,16 @@ const Editor = React.createClass({
       smartIndent: false,
       matchBrackets: true,
       theme: this.props.theme,
-      readOnly: this.props.readOnly
+      readOnly: this.props.readOnly,
+      styleSelectedText: this.props.selection ? true : false
     });
+
+    if (this.props.selection && this.props.selection.startLine <= this.props.selection.endLine) {
+      for (var i = this.props.selection.startLine; i <= this.props.selection.endLine; i++) {
+        this.editor.addLineClass(i, "wrap", "CodeMirror-activeline-background");
+      }
+    }
+
     this.editor.on("change", this._handleChange);
   },
 

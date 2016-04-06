@@ -16,6 +16,10 @@ const ReactPlayground = React.createClass({
     docClass: React.PropTypes.func,
     propDescriptionMap: React.PropTypes.object,
     theme: React.PropTypes.string,
+    selection: React.PropTypes.shape({
+      startLine: React.PropTypes.number,
+      endLine: React.PropTypes.number
+    }),
     noRender: React.PropTypes.bool,
     es6Console: React.PropTypes.bool,
     context: React.PropTypes.object,
@@ -88,7 +92,8 @@ const ReactPlayground = React.createClass({
             className="playgroundStage"
             codeText={this.state.code}
             external={this.state.external}
-            theme={this.props.theme} />
+            theme={this.props.theme}
+            selection={this.props.selection}/>
         </div>
         {this.props.collapsableCode ?
           <div className="playgroundToggleCodeBar">
