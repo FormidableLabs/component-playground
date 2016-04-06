@@ -1,8 +1,8 @@
 /* eslint new-cap:0 no-unused-vars:0 */
 import React from "react";
 import CodeMirror from "codemirror";
-require("codemirror/mode/javascript/javascript");
 
+require("codemirror/mode/javascript/javascript");
 
 const Editor = React.createClass({
   propTypes: {
@@ -10,6 +10,7 @@ const Editor = React.createClass({
     readOnly: React.PropTypes.bool,
     external: React.PropTypes.bool,
     codeText: React.PropTypes.string,
+    selectedLines: React.PropTypes.array,
     onChange: React.PropTypes.func,
     style: React.PropTypes.object,
     className: React.PropTypes.string
@@ -24,6 +25,13 @@ const Editor = React.createClass({
       theme: this.props.theme,
       readOnly: this.props.readOnly
     });
+
+    if (Array.isArray(this.props.selectedLines)) {
+      this.props.selectedLines.forEach((lineNumber) => {
+        this.editor.addLineClass(lineNumber, "wrap", "CodeMirror-activeline-background");
+      });
+    }
+
     this.editor.on("change", this._handleChange);
   },
 

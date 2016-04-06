@@ -41,6 +41,13 @@ var Index = React.createClass({
           collapsableCode={true}
           initiallyExpanded/>
 
+        <h2>Code Selection Highlighting</h2>
+
+        <Playground
+          codeText={componentExample}
+          scope={{React: React, Button: Button}}
+          selectedLines={[2, 3, 4, 9]}/>
+
         <h2>Prop Descriptions</h2>
 
         <Playground
