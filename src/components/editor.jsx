@@ -1,6 +1,7 @@
 /* eslint new-cap:0 no-unused-vars:0 */
 import React from "react";
 import CodeMirror from "codemirror";
+
 require("codemirror/mode/javascript/javascript");
 
 const Editor = React.createClass({
@@ -30,7 +31,7 @@ const Editor = React.createClass({
     });
 
     if (this.props.selection && this.props.selection.startLine <= this.props.selection.endLine) {
-      for (var i = this.props.selection.startLine; i <= this.props.selection.endLine; i++) {
+      for (let i = this.props.selection.startLine; i <= this.props.selection.endLine; i++) {
         this.editor.addLineClass(i, "wrap", "CodeMirror-activeline-background");
       }
     }
