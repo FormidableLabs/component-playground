@@ -10,10 +10,7 @@ const Editor = React.createClass({
     readOnly: React.PropTypes.bool,
     external: React.PropTypes.bool,
     codeText: React.PropTypes.string,
-    selection: React.PropTypes.shape({
-      startLine: React.PropTypes.number,
-      endLine: React.PropTypes.number
-    }),
+    selectedLines: React.PropTypes.array,
     onChange: React.PropTypes.func,
     style: React.PropTypes.object,
     className: React.PropTypes.string
@@ -26,14 +23,13 @@ const Editor = React.createClass({
       smartIndent: false,
       matchBrackets: true,
       theme: this.props.theme,
-      readOnly: this.props.readOnly,
-      styleSelectedText: this.props.selection ? true : false
+      readOnly: this.props.readOnly
     });
 
-    if (this.props.selection && this.props.selection.startLine <= this.props.selection.endLine) {
-      for (let i = this.props.selection.startLine; i <= this.props.selection.endLine; i++) {
-        this.editor.addLineClass(i, "wrap", "CodeMirror-activeline-background");
-      }
+    if (Array.isArray(this.props.selectedLines)) {
+      this.props.selectedLines.forEach((lineNumber) => {
+        this.editor.addLineClass(lineNumber, "wrap", "CodeMirror-activeline-background");
+      });
     }
 
     this.editor.on("change", this._handleChange);

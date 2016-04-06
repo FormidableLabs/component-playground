@@ -46,7 +46,7 @@ var Index = React.createClass({
         <Playground
           codeText={componentExample}
           scope={{React: React, Button: Button}}
-          selection={{startLine: 2, endLine: 4}}/>
+          selectedLines={[2, 3, 4, 9]}/>
 
         <h2>Prop Descriptions</h2>
 
