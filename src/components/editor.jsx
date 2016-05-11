@@ -2,7 +2,7 @@
 import React from "react";
 import CodeMirror from "codemirror";
 
-require("codemirror/mode/javascript/javascript");
+require("codemirror/mode/jsx/jsx");
 
 const Editor = React.createClass({
   propTypes: {
@@ -17,7 +17,7 @@ const Editor = React.createClass({
   },
   componentDidMount() {
     this.editor = CodeMirror.fromTextArea(this.refs.editor, {
-      mode: "javascript",
+      mode: "jsx",
       lineNumbers: false,
       lineWrapping: true,
       smartIndent: false,
