@@ -96,7 +96,7 @@
     "karma-sauce-launcher": "^0.2.14",
     "karma-spec-reporter": "0.0.20",
     "karma-webpack": "^1.6.0",
-    "lodash": "^3.9.3",
+    "lodash": "^4.13.1",
     "mocha": "^2.2.5",
     "opener": "^1.4.1",
     "phantomjs": "^1.9.17",

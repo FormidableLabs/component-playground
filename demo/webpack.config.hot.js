@@ -1,14 +1,16 @@
 "use strict";
 
-var _ = require("lodash");
+var cloneDeep = require("lodash/cloneDeep");
+var merge = require("lodash/merge");
+var omit = require("lodash/omit");
 var base = require("./webpack.config.dev");
 
 // Update our own module version.
-var mod = _.cloneDeep(base.module);
+var mod = cloneDeep(base.module);
 // First loader needs react hot.
 mod.loaders[0].loaders = ["react-hot"].concat(mod.loaders[0].loaders);
 
-module.exports = _.merge({}, _.omit(base, "entry", "module"), {
+module.exports = merge({}, omit(base, "entry", "module"), {
   entry: {
     app: ["webpack/hot/dev-server", "./demo/app.jsx"]
   },

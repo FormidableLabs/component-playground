@@ -3,7 +3,7 @@
  * Webpack frontend test configuration.
  */
 var path = require("path");
-var _ = require("lodash");
+var merge = require("lodash/merge");
 var prodCfg = require("./webpack.config");
 var webpack = require("webpack");
 
@@ -16,7 +16,7 @@ module.exports = {
     filename: "main.js",
     publicPath: "/assets/"
   },
-  resolve: _.merge({}, prodCfg.resolve, {
+  resolve: merge({}, prodCfg.resolve, {
     alias: {
       // Allow root import of `src/FOO` from ROOT/src.
       src: path.join(__dirname, "src")
