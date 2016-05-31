@@ -2,10 +2,10 @@
 /**
  * Webpack frontend test (w/ coverage) configuration.
  */
-var _ = require("lodash");
+var merge = require("lodash/merge");
 var testCfg = require("./webpack.config.test");
 
-module.exports = _.merge({}, testCfg, {
+module.exports = merge({}, testCfg, {
   isparta: {
     babel: {
       presets: ["es2015", "stage-1", "react"]
