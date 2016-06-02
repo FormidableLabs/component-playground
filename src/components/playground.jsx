@@ -85,12 +85,13 @@ const ReactPlayground = React.createClass({
         }
         <div className={"playgroundCode" + (this.state.expandedCode ? " expandedCode" : "")}>
           <Editor
-            onChange={this._handleCodeChange}
             className="playgroundStage"
             codeText={this.state.code}
             external={this.state.external}
+            onChange={this._handleCodeChange}
+            selectedLines={this.props.selectedLines}
             theme={this.props.theme}
-            selectedLines={this.props.selectedLines}/>
+          />
         </div>
         {this.props.collapsableCode ?
           <div className="playgroundToggleCodeBar">

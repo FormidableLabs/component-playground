@@ -1,6 +1,6 @@
 /* eslint new-cap:0 no-unused-vars:0 */
 import React from "react";
-import CodeMirror from "codemirror";
+import Codemirror from "react-codemirror";
 
 require("codemirror/mode/jsx/jsx");
 
@@ -16,7 +16,26 @@ const Editor = React.createClass({
     className: React.PropTypes.string
   },
   componentDidMount() {
-    this.editor = CodeMirror.fromTextArea(this.refs.editor, {
+    const editor = this.refs.editor.getCodeMirror();
+    this.highlightSelectedLines(editor, this.props.selectedLines);
+  },
+
+  highlightSelectedLines(editor, selectedLines) {
+    if (Array.isArray(selectedLines)) {
+      selectedLines.forEach((lineNumber) => {
+        editor.addLineClass(lineNumber, "wrap", "CodeMirror-activeline-background");
+      });
+    }
+  },
+
+  updateCode(code) {
+    if (!this.props.readOnly && this.props.onChange) {
+      this.props.onChange(code);
+    }
+  },
+
+  render() {
+    const options = {
       mode: "jsx",
       lineNumbers: false,
       lineWrapping: true,
@@ -24,36 +43,18 @@ const Editor = React.createClass({
       matchBrackets: true,
       theme: this.props.theme,
       readOnly: this.props.readOnly
-    });
-
-    if (Array.isArray(this.props.selectedLines)) {
-      this.props.selectedLines.forEach((lineNumber) => {
-        this.editor.addLineClass(lineNumber, "wrap", "CodeMirror-activeline-background");
-      });
-    }
-
-    this.editor.on("change", this._handleChange);
-  },
-
-  componentDidUpdate() {
-    if (this.props.readOnly || this.props.external) {
-      this.editor.setValue(this.props.codeText);
-    }
-  },
-
-  _handleChange() {
-    if (!this.props.readOnly && this.props.onChange) {
-      this.props.onChange(this.editor.getValue());
-    }
-  },
-
-  render() {
-    const editor = <textarea ref="editor" defaultValue={this.props.codeText} />;
+    };
 
     return (
-      <div style={this.props.style} className={this.props.className}>
-        {editor}
-      </div>
+      <Codemirror
+        className={this.props.className}
+        external={this.props.external}
+        onChange={this.updateCode}
+        options={options}
+        ref="editor"
+        style={this.props.style}
+        value={this.props.codeText}
+      />
     );
   }
 });
