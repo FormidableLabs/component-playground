@@ -1,5 +1,10 @@
 # Component Playground Changelog
 
+## 1.3.0 (2016-06-02)
+
+  * Use `react-codemirror` as Editor component
+  * Upgrade lodash and codemirror
+
 ## 1.2.0 (2016-02-26)
 
   * Use `ReactDOM.render` in example
