@@ -1,85 +1,68 @@
-import React from "react";
+import React, { PropTypes } from "react";
 
 const propTypesArray = [{
   key: "array",
-  test: React.PropTypes.array,
-  isRequired: React.PropTypes.array.isRequired
+  test: PropTypes.array,
+  isRequired: PropTypes.array.isRequired
 }, {
   key: "boolean",
-  test: React.PropTypes.bool,
-  isRequired: React.PropTypes.bool.isRequired
+  test: PropTypes.bool,
+  isRequired: PropTypes.bool.isRequired
 }, {
   key: "function",
-  test: React.PropTypes.func,
-  isRequired: React.PropTypes.func.isRequired
+  test: PropTypes.func,
+  isRequired: PropTypes.func.isRequired
 }, {
   key: "number",
-  test: React.PropTypes.number,
-  isRequired: React.PropTypes.number.isRequired
+  test: PropTypes.number,
+  isRequired: PropTypes.number.isRequired
 }, {
   key: "object",
-  test: React.PropTypes.object,
-  isRequired: React.PropTypes.array.isRequired
+  test: PropTypes.object,
+  isRequired: PropTypes.array.isRequired
 }, {
   key: "string",
-  test: React.PropTypes.string,
-  isRequired: React.PropTypes.string.isRequired
+  test: PropTypes.string,
+  isRequired: PropTypes.string.isRequired
 }, {
   key: "node",
-  test: React.PropTypes.node,
-  isRequired: React.PropTypes.node.isRequired
+  test: PropTypes.node,
+  isRequired: PropTypes.node.isRequired
 }, {
   key: "element",
-  test: React.PropTypes.element,
-  isRequired: React.PropTypes.element.isRequired
+  test: PropTypes.element,
+  isRequired: PropTypes.element.isRequired
 }];
 
-const getReactPropType = function (propTypeFunc) {
-  const propType = {
-    name: "custom",
-    isRequired: false
+
+class Doc extends Component {
+
+  static defaultProps = {
+    propDescriptionMap: {},
+    ignore: []
   };
 
-  for (let i = 0; i < propTypesArray.length; i++) {
-    if (propTypeFunc === propTypesArray[i].test) {
-      propType.name = propTypesArray[i].key;
+  static propTypes = {
+    componentClass: PropTypes.func,
+    propDescriptionMap: PropTypes.object,
+    ignore: PropTypes.array
+  };
 
-      break;
-    }
-
-    if (propTypeFunc === propTypesArray[i].isRequired) {
-      propType.name = propTypesArray[i].key;
-      propType.isRequired = true;
-
-      break;
-    }
-  }
-
-  return propType;
-};
-
-export default React.createClass({
-  propTypes: {
-    componentClass: React.PropTypes.func,
-    propDescriptionMap: React.PropTypes.object,
-    ignore: React.PropTypes.array
-  },
-  getDefaultProps() {
-    return {
-      propDescriptionMap: {},
-      ignore: []
-    };
-  },
   render() {
-    const propTypes = [];
-    let propName;
 
-    for (propName in this.props.componentClass.propTypes) {
-      if (this.props.ignore.indexOf(propName)) {
+    const propTypes = [];
+    const {
+      componentClass,
+      ignore,
+      propDescriptionMap
+    } = this.props;
+
+    for (let propName in componentClass.propTypes) {
+      if (ignore.indexOf(propName) > -1) {
         propTypes.push({
           propName,
-          type: getReactPropType(this.props.componentClass.propTypes[propName]),
-          description: this.props.propDescriptionMap[propName] || ""
+          type,
+          description: propDescriptionMap[propName] || ""
         });
       }
     }
@@ -87,18 +70,20 @@ export default React.createClass({
     return (
       <div>
         <ul>
-          {propTypes.map(function (propObj) {
-            return (
+          {
+            propTypes.map(propObj => (
               <li key={propObj.propName}>
                 <b>{propObj.propName}</b>
-                <i>{": " + propObj.type.name}</i>
+                <i>{`: ${propObj.type.name}`}</i>
                 {propObj.description && " - " + propObj.description}
-                <b>{propObj.type.isRequired ? " required" : ""}</b>
+                <b>{`${propObj.type.isRequired ? " required" : ""}`}</b>
               </li>
-            );
-          })}
+            ));
+          }
         </ul>
       </div>
     );
   }
-});
+}
+
+export default Doc;
