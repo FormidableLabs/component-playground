@@ -23,13 +23,9 @@ class Preview extends Component {
 
   _compileCode = () => {
     const { code, context, noRender, scope } = this.props;
-    // const generateContextTypes = (c) => {
-    //   return `{ ${Object.keys(c).map(val =>
-    //     `${val}: React.PropTypes.any.isRequired`).join(", ")} }`;
-    // };
-    const generateContextTypes = function (context) {
-      const keys = Object.keys(context).map(val => `${val}: React.PropTypes.any.isRequired`);
-      return `{ ${keys.join(", ")} }`;
+    const generateContextTypes = (c) => {
+      return `{ ${Object.keys(c).map(val =>
+        `${val}: React.PropTypes.any.isRequired`).join(", ")} }`;
     };
 
     if (noRender) {
@@ -38,17 +34,17 @@ class Preview extends Component {
           class Comp extends React.Component {
 
             getChildContext() {
-              return ${JSON.stringify(this.props.context)};
+              return ${JSON.stringify(context)};
             }
 
             render() {
               return (
-                ${this.props.code}
+                ${code}
               );
             }
           }
 
-          Comp.childContextTypes = ${generateContextTypes(this.props.context)};
+          Comp.childContextTypes = ${generateContextTypes(context)};
 
           return Comp;
         });
