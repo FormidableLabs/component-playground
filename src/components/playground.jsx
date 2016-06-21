@@ -127,26 +127,4 @@ class ReactPlayground extends Component {
 
 }
 
-// ReactPlayground.defaultProps = {
-//   theme: "monokai",
-//   noRender: true,
-//   context: {},
-//   initiallyExpanded: false
-// };
-
-// ReactPlayground.propTypes = {
-//   codeText: PropTypes.string.isRequired,
-//   scope: PropTypes.object.isRequired,
-//   collapsableCode: PropTypes.bool,
-//   docClass: PropTypes.func,
-//   propDescriptionMap: PropTypes.object,
-//   theme: PropTypes.string,
-//   selectedLines: PropTypes.array,
-//   noRender: PropTypes.bool,
-//   es6Console: PropTypes.bool,
-//   context: PropTypes.object,
-//   initiallyExpanded: PropTypes.bool,
-//   previewComponent: PropTypes.node
-// };
-
 export default ReactPlayground;
