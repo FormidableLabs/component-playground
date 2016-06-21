@@ -1,4 +1,4 @@
-import React, { PropTypes } from "react";
+import React, { Component, PropTypes } from "react";
 
 const propTypesArray = [{
   key: "array",
@@ -34,6 +34,25 @@ const propTypesArray = [{
   isRequired: PropTypes.element.isRequired
 }];
 
+const getReactPropType = propTypeFunc => {
+  let name = "custom";
+  let isRequired = false;
+
+  propTypesArray.some(propType => {
+    if (propTypeFunc === propType.test) {
+      name = propType.key;
+      return true;
+    }
+    if (propTypeFunc === propType.isRequired) {
+      name = propType.key;
+      isRequired = true;
+      return true;
+    }
+    return false;
+  });
+  return { name, isRequired };
+};
+
 
 class Doc extends Component {
 
@@ -56,12 +75,11 @@ class Doc extends Component {
       ignore,
       propDescriptionMap
     } = this.props;
-
-    for (let propName in componentClass.propTypes) {
-      if (ignore.indexOf(propName) > -1) {
+    for (const propName in componentClass.propTypes) {
+      if (ignore.indexOf(propName)) {
         propTypes.push({
           propName,
-          type,
+          type: getReactPropType(componentClass.propTypes[propName]),
           description: propDescriptionMap[propName] || ""
         });
       }
@@ -78,7 +96,7 @@ class Doc extends Component {
                 {propObj.description && " - " + propObj.description}
                 <b>{`${propObj.type.isRequired ? " required" : ""}`}</b>
               </li>
-            ));
+            ))
           }
         </ul>
       </div>
