@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from "react";
-import ReactDom from "react-dom";
+import { render } from "react-dom";
 import ReactDOMServer from "react-dom/server";
 import { transform } from "babel-standalone";
 
@@ -51,7 +51,7 @@ class Preview extends Component {
       `, { presets: ["es2015", "react", "stage-1"] }).code;
     } else {
       return transform(`
-        (function (${Object.keys(scope).join(",")}, mountNode) {
+        ((${Object.keys(scope).join(",")}, mountNode) => {
           ${code}
         });
       `, { presets: ["es2015", "react", "stage-1"] }).code;
@@ -79,7 +79,7 @@ class Preview extends Component {
           eval(compiledCode).apply(null, tempScope)
         );
         ReactDOMServer.renderToString(React.createElement(previewComponent, {}, Comp));
-        ReactDom.render(
+        render(
           React.createElement(previewComponent, {}, Comp),
           mountNode
         );
