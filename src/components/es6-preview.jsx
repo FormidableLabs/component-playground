@@ -1,6 +1,6 @@
 /* eslint new-cap:0 no-unused-vars:0 */
-import React from "react";
-import ReactDom from "react-dom";
+import React, { Component, PropTypes } from "react";
+import { render, unmountComponentAtNode } from "react-dom";
 import { transform } from "babel-standalone";
 
 const getType = function (el) {
@@ -79,105 +79,103 @@ const wrapMap = {
   }
 };
 
-const Preview = React.createClass({
-  propTypes: {
-    code: React.PropTypes.string.isRequired,
-    scope: React.PropTypes.object.isRequired
-  },
+class EsPreview extends Component {
 
-  componentDidMount() {
-    this._executeCode();
-  },
+  static propTypes = {
+    code: PropTypes.string.isRequired,
+    scope: PropTypes.object.isRequired
+  };
 
-  componentDidUpdate(prevProps) {
-    clearTimeout(this.timeoutID); //eslint-disable-line
-    if (this.props.code !== prevProps.code) {
-      this._executeCode();
-    }
-  },
-
-  _compileCode() {
+  _compileCode = () => {
+    const { code, scope } = this.props;
     return transform(`
-      (function(${Object.keys(this.props.scope).join(",")}) {
+      ((${Object.keys(scope).join(",")}) => {
         var list = [];
         var console = { log(...x) {
           list.push({val: x, multipleArgs: x.length !== 1})
         }};
-        ${this.props.code}
+        ${code}
         return list;
       });
     `, { presets: ["es2015", "react", "stage-1"] }).code;
-  },
+  };
 
-  _setTimeout() {
+  _setTimeout = (...args) => {
     clearTimeout(this.timeoutID); //eslint-disable-line
-    this.timeoutID = setTimeout.apply(null, arguments); //eslint-disable-line
-  },
+    this.timeoutID = setTimeout.apply(null, args); //eslint-disable-line
+  };
 
-  _executeCode() {
+  _executeCode = () => {
     const mountNode = this.refs.mount;
 
     try {
-      ReactDom.unmountComponentAtNode(mountNode);
+      unmountComponentAtNode(mountNode);
     } catch (e) {
       console.error(e); //eslint-disable-line
     }
 
     try {
-      const scope = [];
-      for (const s in this.props.scope) {
-        if (this.props.scope.hasOwnProperty(s)) {
-          scope.push(this.props.scope[s]);
+      const { scope } = this.props;
+      const tempScope = [];
+      Object.keys(scope).forEach(s => tempScope.push(scope[s]));
+      tempScope.push(mountNode);
+      const compiledCode = this._compileCode();
+      class Comp extends Component {
+
+        _createConsoleLine = ({ val, multipleArgs }) => (
+          <span style={{ marginRight: "20px" }}>
+            {multipleArgs ?
+              val.map(y => this._createConsoleLine([y], false)) :
+              wrapMap["wrap" + getType(val[0])](val[0])}
+          </span>
+        );
+
+        render() {
+          return (
+            <div style={{ padding: 15, fontFamily: "Consolas, Courier, monospace" }}>
+              {
+                eval(compiledCode).apply(null, tempScope).map((x, i) => ( //eslint-disable-line
+                  <div
+                    key={i}
+                    style={{
+                      borderBottom: "1px solid #ccc",
+                      padding: "4px 0"
+                    }}>
+                    {this._createConsoleLine(x)}
+                  </div>
+                ))
+              }
+            </div>
+          );
         }
       }
-      scope.push(mountNode);
-      const compiledCode = this._compileCode();
-      const Component = React.createElement(
-        React.createClass({
-          _createConsoleLine(x, multipleArgs) {
-            return (
-              <span style={{marginRight: "20px"}}>
-                {multipleArgs ?
-                  x.map((y) => { return this._createConsoleLine([y], false); }) :
-                  wrapMap["wrap" + getType(x[0])](x[0])}
-              </span>
-            );
-          },
-
-          render() {
-            return (
-              <div style={{padding: 15, fontFamily: "Consolas, Courier, monospace"}}>
-                {eval(compiledCode).apply(null, scope).map( (x, i) => {//eslint-disable-line
-                  return (
-                    <div
-                      key={i}
-                      style={{
-                        borderBottom: "1px solid #ccc",
-                        padding: "4px 0"
-                      }}>
-                      {this._createConsoleLine(x.val, x.multipleArgs)}
-                    </div>
-                  );
-                })}
-              </div>
-            );
-          }
-        })
-      );
-      ReactDom.render(Component, mountNode);
+      render(<Comp />, mountNode);
     } catch (err) {
-      this._setTimeout(function () {
-        ReactDom.render(
+      this._setTimeout(() => {
+        render(
           <div className="playgroundError">{err.toString()}</div>,
           mountNode
         );
       }, 500);
     }
-  },
+  };
+
+  componentDidMount = () => {
+    this._executeCode();
+  };
+
+  componentDidUpdate = (prevProps) => {
+    clearTimeout(this.timeoutID); //eslint-disable-line
+    if (this.props.code !== prevProps.code) {
+      this._executeCode();
+    }
+  }
 
   render() {
-    return <div ref="mount" />;
+    return (
+      <div ref="mount" />
+    );
   }
-});
+}
 
-export default Preview;
+export default EsPreview;

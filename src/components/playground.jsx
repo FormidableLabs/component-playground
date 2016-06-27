@@ -1,67 +1,75 @@
 /* eslint no-unused-vars:0 */
-
 import "babel-polyfill";
-import React from "react";
-
+import React, { Component, PropTypes } from "react";
 import Editor from "./editor";
 import Preview from "./preview";
 import EsPreview from "./es6-preview";
 import Doc from "./doc";
 
-const ReactPlayground = React.createClass({
-  propTypes: {
-    codeText: React.PropTypes.string.isRequired,
-    scope: React.PropTypes.object.isRequired,
-    collapsableCode: React.PropTypes.bool,
-    docClass: React.PropTypes.func,
-    propDescriptionMap: React.PropTypes.object,
-    theme: React.PropTypes.string,
-    selectedLines: React.PropTypes.array,
-    noRender: React.PropTypes.bool,
-    es6Console: React.PropTypes.bool,
-    context: React.PropTypes.object,
-    initiallyExpanded: React.PropTypes.bool,
-    previewComponent: React.PropTypes.node
-  },
+class ReactPlayground extends Component {
 
-  getDefaultProps() {
-    return {
-      theme: "monokai",
-      noRender: true,
-      context: {},
-      initiallyExpanded: false
-    };
-  },
+  static defaultProps = {
+    theme: "monokai",
+    noRender: true,
+    context: {},
+    initiallyExpanded: false
+  };
 
-  getInitialState() {
-    return {
-      code: this.props.codeText,
-      expandedCode: this.props.initiallyExpanded,
-      external: true
-    };
-  },
+  static propTypes = {
+    codeText: PropTypes.string.isRequired,
+    scope: PropTypes.object.isRequired,
+    collapsableCode: PropTypes.bool,
+    docClass: PropTypes.func,
+    propDescriptionMap: PropTypes.object,
+    theme: PropTypes.string,
+    selectedLines: PropTypes.array,
+    noRender: PropTypes.bool,
+    es6Console: PropTypes.bool,
+    context: PropTypes.object,
+    initiallyExpanded: PropTypes.bool,
+    previewComponent: PropTypes.node
+  };
 
-  componentWillReceiveProps(nextProps) {
+  state = {
+    code: this.props.codeText,
+    expandedCode: this.props.initiallyExpanded,
+    external: true
+  };
+
+  componentWillReceiveProps = (nextProps) => {
     this.setState({
       code: nextProps.codeText,
       external: true
     });
-  },
+  };
 
-  _handleCodeChange(code) {
+  _handleCodeChange = (code) => {
     this.setState({
       code,
       external: false
     });
-  },
+  };
 
-  _toggleCode() {
+  _toggleCode = () => {
     this.setState({
       expandedCode: !this.state.expandedCode
     });
-  },
+  };
 
   render() {
+    const { code, external, expandedCode } = this.state;
+    const {
+      collapsableCode,
+      context,
+      docClass,
+      es6Console,
+      noRender,
+      previewComponent,
+      propDescriptionMap,
+      scope,
+      selectedLines,
+      theme } = this.props;
+
     if (this.props.noRender === false) {
       if (process.env.NODE_ENV !== "production") {
         /* eslint-disable no-console, no-undef, max-len */
@@ -76,48 +84,48 @@ const ReactPlayground = React.createClass({
     }
 
     return (
-      <div className={"playground" + (this.props.collapsableCode ? " collapsableCode" : "")}>
-        {this.props.docClass ?
-          <Doc
-            componentClass={this.props.docClass}
-            propDescriptionMap={this.props.propDescriptionMap} />
-          : ""
+      <div className={`playground${collapsableCode ? " collapsableCode" : ""}`}>
+        {
+          docClass ?
+            <Doc
+              componentClass={docClass}
+              propDescriptionMap={propDescriptionMap} /> : null
         }
-        <div className={"playgroundCode" + (this.state.expandedCode ? " expandedCode" : "")}>
+        <div className={`playgroundCode${expandedCode ? " expandedCode" : ""}`}>
           <Editor
             className="playgroundStage"
-            codeText={this.state.code}
-            external={this.state.external}
+            codeText={code}
+            external={external}
             onChange={this._handleCodeChange}
-            selectedLines={this.props.selectedLines}
-            theme={this.props.theme}
-          />
+            selectedLines={selectedLines}
+            theme={theme} />
         </div>
-        {this.props.collapsableCode ?
+        {
+          collapsableCode ?
           <div className="playgroundToggleCodeBar">
             <span className="playgroundToggleCodeLink" onClick={this._toggleCode}>
-              {this.state.expandedCode ? "collapse" : "expand"}
+              {expandedCode ? "collapse" : "expand"}
             </span>
-          </div>
-          : ""
+          </div> : null
         }
         <div className="playgroundPreview">
-          {this.props.es6Console ?
+          {
+            es6Console ?
             <EsPreview
-              code={this.state.code}
-              scope={this.props.scope} />
-          :
-          <Preview
-            context={this.props.context}
-            code={this.state.code}
-            scope={this.props.scope}
-            noRender={this.props.noRender}
-            previewComponent={this.props.previewComponent} />
+              code={code}
+              scope={scope} /> :
+            <Preview
+              context={context}
+              code={code}
+              scope={scope}
+              noRender={noRender}
+              previewComponent={previewComponent} />
           }
         </div>
       </div>
     );
   }
-});
+
+}
 
 export default ReactPlayground;
