@@ -28,13 +28,16 @@ class Preview extends Component {
         `${val}: React.PropTypes.any.isRequired`).join(", ")} }`;
     };
 
+    const generateChildContext = (c) =>
+      `{ ${Object.keys(c).map(val => `${val} : ${val}`).join(", ")} }`;
+
     if (noRender) {
       return transform(`
-        ((${Object.keys(scope).join(", ")}, mountNode) => {
+        ((${Object.keys(scope).concat(Object.keys(context)).join(", ")}, mountNode) => {
           class Comp extends React.Component {
 
             getChildContext() {
-              return ${JSON.stringify(context)};
+              return ${generateChildContext(context)};
             }
 
             render() {
@@ -67,16 +70,16 @@ class Preview extends Component {
   _executeCode = () => {
     const mountNode = this.refs.mount;
     const { scope, noRender, previewComponent } = this.props;
-    const tempScope = [];
 
     try {
-      Object.keys(scope).forEach(s => tempScope.push(scope[s]));
-      tempScope.push(mountNode);
+      const scopeArgs = Object.values(scope);
+      const contextArgs = Object.values(this.props.context);
+
       const compiledCode = this._compileCode();
       if (noRender) {
         /* eslint-disable no-eval, max-len */
         const Comp = React.createElement(
-          eval(compiledCode).apply(null, tempScope)
+          eval(compiledCode).apply(null, scopeArgs.concat(contextArgs).concat([mountNode]))
         );
         ReactDOMServer.renderToString(React.createElement(previewComponent, {}, Comp));
         render(
@@ -84,7 +87,7 @@ class Preview extends Component {
           mountNode
         );
       } else {
-        eval(compiledCode).apply(null, tempScope);
+        eval(compiledCode).apply(null, scopeArgs.concat([mountNode]));
       }
       /* eslint-enable no-eval, max-len */
 
