@@ -70,19 +70,6 @@ class ReactPlayground extends Component {
       selectedLines,
       theme } = this.props;
 
-    if (this.props.noRender === false) {
-      if (process.env.NODE_ENV !== "production") {
-        /* eslint-disable no-console, no-undef, max-len */
-        if (typeof console !== "undefined" && console.warn) {
-          console.warn(`
-            Deprecation warning: noRender is being deprecated in favor of wrapped components and will be removed in the 1.x release.
-            https://github.com/FormidableLabs/component-playground/issues/19 for details.
-          `);
-        }
-        /* eslint-enable no-console, no-undef, max-len */
-      }
-    }
-
     return (
       <div className={`playground${collapsableCode ? " collapsableCode" : ""}`}>
         {
