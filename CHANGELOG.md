@@ -1,5 +1,9 @@
 # Component Playground Changelog
 
+## 1.3.1 (2016-08-11)
+
+  * Remove deprecation warnings for `noRender`
+
 ## 1.3.0 (2016-06-02)
 
   * Use `react-codemirror` as Editor component
