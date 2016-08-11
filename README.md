@@ -4,8 +4,7 @@
 # component-playground
 A component for rendering React Components and ES6 code with editable source and live preview
 
-![Component Playground]
-(http://i.imgur.com/se3avpr.png)
+![Component Playground](http://i.imgur.com/se3avpr.png)
 
 ### Demo
 
