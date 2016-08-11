@@ -137,14 +137,13 @@ Turns preview into a simple console for testing out ES6 code. Use `console.log()
   codeText={es6Example} />
 ```
 
-### noRender - (Deprecated, Remove at 1.x)
+### noRender
 _React.PropTypes.bool_
 
-If set to false, allows you bypass the `component-playground`'s component wrapper and render method.
+Defaults to true. If set to false, allows you bypass the `component-playground`'s component wrapper and render method.
 You can use this option to write higher order components directly in your example code and use your
 own Render method.
-NODE: This option **requires** that the `React.render` method be in your code
-_Deprecated in favor of writing example components. See #19 for more information_
+NOTE: This option **requires** that the `React.render` method be in your code
 
 ```
 var ComponentExample = React.createClass({
