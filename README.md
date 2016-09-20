@@ -12,7 +12,7 @@ A component for rendering React Components and ES6 code with editable source and
 
 ### Installation
 
-```
+```sh
 npm install component-playground
 ```
 
@@ -59,7 +59,7 @@ _React.PropTypes.string.isRequired_
 
 An example file would look like:
 
-```
+```js
 <Button style={{background: '#3498db'}}>Hi</Button>
 ```
 
@@ -68,7 +68,7 @@ _React.PropTypes.object.isRequired_
 
 When evaluating the JSX, it needs to be provided a scope object. At the very least, React needs to be provided to the scope, if any custom tags aren't being used. See below:
 
-```
+```js
 <Playground codeText={componentExample} scope={{React: React}}/>
 ```
 
@@ -84,7 +84,7 @@ _React.PropTypes.bool_
 
 Allows the user to collapse the code block.
 
-```
+```js
 <Playground collapsableCode={true} codeText={componentExample} scope={{React: React}}/>
 ```
 
@@ -93,7 +93,7 @@ _React.PropTypes.bool_
 
 Makes collapsable code block initially expanded.
 
-```
+```js
 <Playground
   collapsableCode={true}
   initiallyExpanded={true}
@@ -106,7 +106,7 @@ _React.PropTypes.node_
 
 A component class that will be used to auto-generate docs based on that component's `propTypes`. See `propDescriptionMap` below for how to annotate the generate prop docs.
 
-```
+```js
 <Playground docClass={MyComponent} codeText={componentExample} scope={{React: React}}/>
 ```
 
@@ -115,7 +115,7 @@ _React.PropTypes.string_
 
 Annotation map for the docClass. The key is the prop to annotate, the value is the description of that prop.
 
-```
+```js
 <Playground
   docClass={MyComponent}
   propDescriptionMap={{
@@ -130,7 +130,7 @@ _React.PropTypes.bool_
 
 Turns preview into a simple console for testing out ES6 code. Use `console.log()` in the playground to generate output.
 
-```
+```js
 <Playground
   es6Console={true}
   codeText={es6Example} />
@@ -144,7 +144,7 @@ You can use this option to write higher order components directly in your exampl
 own Render method.
 NOTE: This option **requires** that the `React.render` method be in your code
 
-```
+```js
 var ComponentExample = React.createClass({
   render: function() {
     return (
