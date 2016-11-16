@@ -8,7 +8,7 @@ A component for rendering React Components and ES6 code with editable source and
 
 ### Demo
 
-[http://projects.formidablelabs.com/component-playground](http://projects.formidablelabs.com/component-playground)
+[https://formidable.com/open-source/component-playground/](https://formidable.com/open-source/component-playground/)
 
 ### Installation
 
