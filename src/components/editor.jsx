@@ -2,7 +2,9 @@
 import React, { Component, PropTypes } from "react";
 import Codemirror from "react-codemirror";
 
-require("codemirror/mode/jsx/jsx");
+if (typeof window !== "undefined") {
+  require("codemirror/mode/jsx/jsx");
+}
 
 class Editor extends Component {
 
