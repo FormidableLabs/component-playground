@@ -1,5 +1,9 @@
 # Component Playground Changelog
 
+## 1.3.2 (2017-01-05)
+
+  * Conditionally load JSX codemirror mode in browsers only
+
 ## 1.3.1 (2016-08-11)
 
   * Remove deprecation warnings for `noRender`
