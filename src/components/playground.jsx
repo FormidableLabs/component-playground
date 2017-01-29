@@ -16,7 +16,7 @@ class ReactPlayground extends Component {
     lineNumbers: false,
     lineWrapping: true,
     smartIndent: false,
-    tabSize: 4,
+    tabSize: 4
   };
 
   static propTypes = {
