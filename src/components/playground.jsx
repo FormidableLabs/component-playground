@@ -12,7 +12,11 @@ class ReactPlayground extends Component {
     theme: "monokai",
     noRender: true,
     context: {},
-    initiallyExpanded: false
+    initiallyExpanded: false,
+    lineNumbers: false,
+    lineWrapping: true,
+    smartIndent: false,
+    tabSize: 4,
   };
 
   static propTypes = {
@@ -27,7 +31,11 @@ class ReactPlayground extends Component {
     es6Console: PropTypes.bool,
     context: PropTypes.object,
     initiallyExpanded: PropTypes.bool,
-    previewComponent: PropTypes.node
+    previewComponent: PropTypes.node,
+    lineNumbers: PropTypes.bool,
+    lineWrapping: PropTypes.bool,
+    smartIndent: PropTypes.bool,
+    tabSize: PropTypes.number
   };
 
   state = {
@@ -68,6 +76,10 @@ class ReactPlayground extends Component {
       propDescriptionMap,
       scope,
       selectedLines,
+      lineNumbers,
+      lineWrapping,
+      smartIndent,
+      tabSize,
       theme } = this.props;
 
     return (
@@ -85,6 +97,10 @@ class ReactPlayground extends Component {
             external={external}
             onChange={this._handleCodeChange}
             selectedLines={selectedLines}
+            lineNumbers={lineNumbers}
+            lineWrapping={lineWrapping}
+            smartIndent={smartIndent}
+            tabSize={tabSize}
             theme={theme} />
         </div>
         {

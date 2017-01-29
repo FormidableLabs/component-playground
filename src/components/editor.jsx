@@ -12,6 +12,10 @@ class Editor extends Component {
     theme: PropTypes.string,
     readOnly: PropTypes.bool,
     external: PropTypes.bool,
+    lineNumbers: PropTypes.bool,
+    smartIndent: PropTypes.bool,
+    lineWrapping: PropTypes.bool,
+    tabSize: PropTypes.number,
     codeText: PropTypes.string,
     selectedLines: PropTypes.array,
     onChange: PropTypes.func,
@@ -44,15 +48,20 @@ class Editor extends Component {
       style,
       codeText,
       theme,
+      lineNumbers,
+      smartIndent,
+      lineWrapping,
+      tabSize,
       readOnly
     } = this.props;
 
     const options = {
       mode: "jsx",
-      lineNumbers: false,
-      lineWrapping: true,
-      smartIndent: false,
       matchBrackets: true,
+      lineWrapping,
+      smartIndent,
+      lineNumbers,
+      tabSize,
       theme,
       readOnly
     };
