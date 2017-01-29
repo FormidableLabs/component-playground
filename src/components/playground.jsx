@@ -13,7 +13,8 @@ class ReactPlayground extends Component {
     theme: "monokai",
     noRender: true,
     context: {},
-    initiallyExpanded: false
+    initiallyExpanded: false,
+    onChange: () => {}
   };
 
   static propTypes = {
@@ -28,7 +29,8 @@ class ReactPlayground extends Component {
     es6Console: PropTypes.bool,
     context: PropTypes.object,
     initiallyExpanded: PropTypes.bool,
-    previewComponent: PropTypes.node
+    previewComponent: PropTypes.node,
+    onChange: PropTypes.func
   };
 
   state = {
@@ -45,10 +47,12 @@ class ReactPlayground extends Component {
   };
 
   _handleCodeChange = (code) => {
+    const { onChange } = this.props;
+
     this.setState({
       code,
       external: false
-    });
+    }, () => onChange(code));
   };
 
   _toggleCode = () => {
