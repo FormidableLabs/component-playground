@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from "react";
 import { render } from "react-dom";
 import ReactDOMServer from "react-dom/server";
-import { transform } from "babel-standalone";
+import { transform } from "buble";
 
 class Preview extends Component {
 
@@ -48,13 +48,13 @@ class Preview extends Component {
 
           return Comp;
         });
-      `, { presets: ["es2015", "react", "stage-1"] }).code;
+      `).code;
     } else {
       return transform(`
         ((${Object.keys(scope).join(",")}, mountNode) => {
           ${code}
         });
-      `, { presets: ["es2015", "react", "stage-1"] }).code;
+      `).code;
     }
 
   };

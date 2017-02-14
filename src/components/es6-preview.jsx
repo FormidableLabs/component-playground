@@ -1,7 +1,7 @@
 /* eslint new-cap:0 no-unused-vars:0 */
 import React, { Component, PropTypes } from "react";
 import { render, unmountComponentAtNode } from "react-dom";
-import { transform } from "babel-standalone";
+import { transform } from "buble";
 
 const getType = function (el) {
   let t = typeof el;
@@ -97,7 +97,7 @@ class EsPreview extends Component {
         ${code}
         return list;
       });
-    `, { presets: ["es2015", "react", "stage-1"] }).code;
+    `).code;
   };
 
   _setTimeout = (...args) => {
