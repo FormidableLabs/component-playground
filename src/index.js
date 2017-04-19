@@ -1,3 +1,3 @@
-import Playground from "./components/playground";
+export Playground from "./components/playground";
 
 export default Playground;

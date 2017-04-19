@@ -1,7 +1,7 @@
 /*globals __dirname:false */
 "use strict";
 
-var webpack = require("webpack");
+const webpack = require("webpack");
 
 module.exports = {
 

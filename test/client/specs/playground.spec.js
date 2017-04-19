@@ -2,8 +2,11 @@
  * Client tests
  */
 import React from "react";
-import { renderIntoDocument, findRenderedDOMComponentWithClass,
-  createRenderer } from "react-addons-test-utils";
+import {
+  renderIntoDocument,
+  findRenderedDOMComponentWithClass,
+  createRenderer,
+} from "react-addons-test-utils";
 import Component from "../../../src/components/playground";
 
 describe("components/playground", function () {
