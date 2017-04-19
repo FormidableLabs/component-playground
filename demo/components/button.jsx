@@ -3,9 +3,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Button = () => (
-  <button type="button" onClick={this.props.onClick} style={this.props.buttonStyle}>
-    {this.props.children}
+const Button = (props) => (
+  <button
+    type="button"
+    onClick={props.onClick}
+    style={props.buttonStyle}
+  >
+    {props.children}
   </button>
 );
 
