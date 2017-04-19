@@ -1,3 +1,4 @@
+
 import React, { Component, PropTypes } from "react";
 import { render } from "react-dom";
 import ReactDOMServer from "react-dom/server";
@@ -109,10 +110,14 @@ class Preview extends Component {
 
   render() {
     const { error } = this.state;
+    if (error) {
+      console.error(error); //eslint-disable-line no-undef, no-console
+    }
+
     return (
       <div>
         {error !== null ?
-          <div className="playgroundError">{error}</div> :
+          <div className="playgroundError">Error! See console output for more information.</div> :
           null}
         <div ref="mount" className="previewArea"/>
       </div>
