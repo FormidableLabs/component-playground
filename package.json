@@ -57,13 +57,26 @@
     "check-dev": "npm run lint && npm run test-dev"
   },
   "dependencies": {
+    "babel-cli": "^6.5.1",
+    "babel-core": "^6.0.0",
+    "babel-loader": "^6.2.3",
     "babel-polyfill": "^6.5.0",
+    "babel-preset-es2015": "^6.0.0",
+    "babel-preset-react": "^6.0.0",
+    "babel-preset-stage-0": "^6.0.0",
+    "babel-preset-stage-1": "^6.0.0",
     "babel-standalone": "^6.4.4",
     "codemirror": "^5.15.2",
+    "css-loader": "~0.9.0",
     "prop-types": "^15.5.8",
-    "react": "^15.1.0 || ^0.14.7",
+    "react": "^15.0.1 || ^0.14.7",
+    "react-addons-test-utils": "^15.0.0 || ^0.14.7",
     "react-codemirror": "^0.2.6",
-    "react-dom": "^15.1.0 || ^0.14.7"
+    "react-dom": "^15.0.1 || ^0.14.7",
+    "rimraf": "^2.4.0",
+    "style-loader": "~0.8.0",
+    "url-loader": "~0.5.5",
+    "webpack": "^1.10.0"
   },
   "devDependencies": {
     "babel-cli": "^6.5.1",
@@ -103,9 +116,7 @@
     "sinon": "^1.15.4",
     "sinon-chai": "^2.8.0",
     "webpack-dev-server": "^1.10.0",
-    "rimraf": "^2.4.0",
     "style-loader": "~0.8.0",
-    "url-loader": "~0.5.5",
-    "webpack": "^1.10.0"
+    "url-loader": "~0.5.5"
   }
 }
