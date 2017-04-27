@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from "react";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { render } from "react-dom";
 import ReactDOMServer from "react-dom/server";
 import { transform } from "babel-standalone";
@@ -25,7 +26,7 @@ class Preview extends Component {
     const { code, context, noRender, scope } = this.props;
     const generateContextTypes = (c) => {
       return `{ ${Object.keys(c).map(val =>
-        `${val}: React.PropTypes.any.isRequired`).join(", ")} }`;
+        `${val}: PropTypes.any.isRequired`).join(", ")} }`;
     };
 
     if (noRender) {

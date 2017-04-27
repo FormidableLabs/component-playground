@@ -2,10 +2,11 @@
 "use strict";
 
 import React from "react";
+import PropTypes from "prop-types";
 
 const Button = React.createClass({
   contextTypes: {
-    environment: React.PropTypes.string
+    environment: PropTypes.string
   },
 
   render() {

@@ -1,6 +1,7 @@
 /* eslint no-unused-vars:0 */
 import "babel-polyfill";
-import React, { Component, PropTypes } from "react";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 import Editor from "./editor";
 import Preview from "./preview";
 import EsPreview from "./es6-preview";

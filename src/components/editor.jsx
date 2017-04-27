@@ -1,5 +1,6 @@
 /* eslint new-cap:0 no-unused-vars:0 */
-import React, { Component, PropTypes } from "react";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 import Codemirror from "react-codemirror";
 
 if (typeof window !== "undefined") {

@@ -53,7 +53,7 @@ ReactDOM.render(<Index/>, document.getElementById('root'));
 ### Props
 
 #### `codeText`
-_React.PropTypes.string.isRequired_
+_PropTypes.string.isRequired_
 
 `codeText` takes a string of JSX markup as its value. While you can just pass it a string, I find it is easier to make a separate file and use Webpack's raw loader to load in the raw source. In the example above I use the .example extension, and an examples folder to organize my samples.
 
@@ -64,7 +64,7 @@ An example file would look like:
 ```
 
 #### scope
-_React.PropTypes.object.isRequired_
+_PropTypes.object.isRequired_
 
 When evaluating the JSX, it needs to be provided a scope object. At the very least, React needs to be provided to the scope, if any custom tags aren't being used. See below:
 
@@ -75,12 +75,12 @@ When evaluating the JSX, it needs to be provided a scope object. At the very lea
 Any module/component that is used inside the playground needs to be added to the scope object. See `/demo` for an example of how this works.
 
 ### theme
-_React.PropTypes.string_
+_PropTypes.string_
 
 String specifying which CodeMirror theme to initialize with. Defaults to 'monokai'.
 
 ### collapsableCode
-_React.PropTypes.bool_
+_PropTypes.bool_
 
 Allows the user to collapse the code block.
 
@@ -89,7 +89,7 @@ Allows the user to collapse the code block.
 ```
 
 ### initiallyExpanded
-_React.PropTypes.bool_
+_PropTypes.bool_
 
 Makes collapsable code block initially expanded.
 
@@ -102,7 +102,7 @@ Makes collapsable code block initially expanded.
 ```
 
 ### docClass
-_React.PropTypes.node_
+_PropTypes.node_
 
 A component class that will be used to auto-generate docs based on that component's `propTypes`. See `propDescriptionMap` below for how to annotate the generate prop docs.
 
@@ -111,7 +111,7 @@ A component class that will be used to auto-generate docs based on that componen
 ```
 
 ### propDescriptionMap
-_React.PropTypes.string_
+_PropTypes.string_
 
 Annotation map for the docClass. The key is the prop to annotate, the value is the description of that prop.
 
@@ -126,7 +126,7 @@ Annotation map for the docClass. The key is the prop to annotate, the value is t
 ```
 
 ### es6Console
-_React.PropTypes.bool_
+_PropTypes.bool_
 
 Turns preview into a simple console for testing out ES6 code. Use `console.log()` in the playground to generate output.
 
@@ -137,7 +137,7 @@ Turns preview into a simple console for testing out ES6 code. Use `console.log()
 ```
 
 ### noRender
-_React.PropTypes.bool_
+_PropTypes.bool_
 
 Defaults to true. If set to false, allows you bypass the `component-playground`'s component wrapper and render method.
 You can use this option to write higher order components directly in your example code and use your
