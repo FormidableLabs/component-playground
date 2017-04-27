@@ -2,11 +2,12 @@
 "use strict";
 
 import React from "react";
+import PropTypes from "prop-types";
 
 const Button = React.createClass({
   propTypes: {
-    buttonStyle: React.PropTypes.object,
-    onClick: React.PropTypes.func
+    buttonStyle: PropTypes.object,
+    onClick: PropTypes.func
   },
 
   getDefaultProps() {
