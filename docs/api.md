@@ -3,7 +3,7 @@
 ## Props
 
 ### `codeText` (required)
-*React.propTypes.string.isRequired*
+*PropTypes.string.isRequired*
 
 codeText takes a string of JSX markup as its value. While you can just pass it a string, we find it's easier to make a separate file and use Webpack's raw loader to load in the raw source. In the example above, we used the `.example` extension, and an examples folder to organize my samples. The only requirement for this code is that at the bottom you need to add:
 
@@ -26,7 +26,7 @@ ReactDOM.render(<ComponentExample/>, mountNode);
 ```
 
 ### `scope` (required)
-*React.PropTypes.object.isRequired*
+*PropTypes.object.isRequired*
 
 When evaluating the JSX, it needs to be provided a scope object. At the very least, React needs to be provided to the scope, if any custom tags aren't being used. See below:
 
@@ -37,12 +37,12 @@ When evaluating the JSX, it needs to be provided a scope object. At the very lea
 Any module/component that is used inside the playground needs to be added to the scope object. See the Getting Started Guide for an example of how this works.
 
 ### `theme`
-*React.propTypes.string*
+*PropTypes.string*
 
 String specifying which CodeMirror theme to initialize with. Defaults to "monokai."
 
 ### `noRender`
-*React.propTypes.bool*
+*PropTypes.bool*
 
 If set to true, removes the need to create a class or call ReactDOM.render() within the example code. When true, examples should be structured as the interior of a render method, see below:
 
@@ -53,7 +53,7 @@ If set to true, removes the need to create a class or call ReactDOM.render() wit
 ```
 
 ### `collapsableCode`
-*React.propTypes.bool*
+*PropTypes.bool*
 
 Allows the user to collapse the code block.
 
@@ -62,7 +62,7 @@ Allows the user to collapse the code block.
 ```
 
 ### `docClass`
-*React.propTypes.renderable*
+*PropTypes.renderable*
 
 A component class that will be used to auto-generate docs based on that component's propTypes. See propDescriptionMap below for how to annotate the generate prop docs.
 
@@ -71,7 +71,7 @@ A component class that will be used to auto-generate docs based on that componen
 ```
 
 ### `propDescriptionMap`
-*React.propTypes.string*
+*PropTypes.string*
 
 Annotation map for the docClass. They key is the prop to annotate, the value is the description of that prop.
 
