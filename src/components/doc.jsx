@@ -86,7 +86,7 @@ class Doc extends Component {
     }
 
     return (
-      <div>
+      <div className="playgroundDocs">
         <ul>
           {
             propTypes.map(propObj => (
