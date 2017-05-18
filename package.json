@@ -71,7 +71,7 @@
     "prop-types": "^15.5.10",
     "react": "^15.4.2",
     "react-addons-test-utils": "^15.4.2",
-    "react-codemirror": "^0.2.6",
+    "react-codemirror": "^1.0.0",
     "react-dom": "^15.4.2",
     "rimraf": "^2.4.0",
     "style-loader": "~0.8.0",
