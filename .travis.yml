@@ -2,7 +2,8 @@ language: node_js
 
 node_js:
   - "4"
-  - "6"
+# Disabling tests on node6 until #96 is resolved
+#- "6"
 
 # Use container-based Travis infrastructure.
 sudo: false
