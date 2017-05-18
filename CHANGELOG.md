@@ -1,5 +1,12 @@
 # Component Playground Changelog
 
+## 2.0.0 (2017-05-18)
+
+  * Remove support for React < v15
+  * Add Prop-Types as a dependency
+  * Upgrade `react-codemirror` to 1.0
+  * Add `playgroundDocs` classname to docs component
+
 ## 1.3.2 (2017-01-05)
 
   * Conditionally load JSX codemirror mode in browsers only
