@@ -65,7 +65,7 @@
     "babel-preset-react": "^6.0.0",
     "babel-preset-stage-0": "^6.0.0",
     "babel-preset-stage-1": "^6.0.0",
-    "babel-standalone": "^6.4.4",
+    "buble": "^0.15.2",
     "codemirror": "^5.15.2",
     "css-loader": "~0.9.0",
     "prop-types": "^15.5.10",
