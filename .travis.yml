@@ -15,14 +15,16 @@ branches:
   only:
     - master
 
-cache: yarn
-
 before_install:
   # GUI for real browsers.
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
 
 script:
-  - yarn check-ci
-  - yarn install --production
-  - yarn build
+  - node --version
+  - npm run check-ci
+
+    # Prune deps to just production and ensure we can still build
+  - npm prune --production
+  - npm install --production
+  - npm run build
