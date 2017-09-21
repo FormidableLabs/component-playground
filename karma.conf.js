@@ -8,11 +8,6 @@
  */
 var webpackCfg = require("./webpack.config.test");
 
-// BUG: Karma 0.13 is broken for circular imports
-// TODO: Upgrade Karma to 0.13 when upstream bug is fixed.
-// https://github.com/FormidableLabs/
-//        formidable-react-component-boilerplate/issues/25
-
 module.exports = function (config) {
   // Start with the "dev" (webpack-dev-server is already running) config
   // and add in the webpack stuff.
