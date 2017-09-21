@@ -3,7 +3,6 @@ language: node_js
 node_js:
   - 4
   - 6
-  - 8
 
 addons:
   firefox: "49.0"
@@ -23,6 +22,8 @@ before_install:
 script:
   - node --version
   - npm run check-ci
+  - yarn --version
+  - yarn check-ci
 
     # Prune deps to just production and ensure we can still build
   - npm prune --production
