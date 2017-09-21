@@ -21,11 +21,9 @@ before_install:
 
 script:
   - node --version
-  - npm run check-ci
   - yarn --version
-  - yarn check-ci
+  - yarn run check-ci
 
     # Prune deps to just production and ensure we can still build
-  - npm prune --production
-  - npm install --production
-  - npm run build
+  - yarn install --production
+  - yarn run build
