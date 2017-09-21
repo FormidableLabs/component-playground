@@ -1,9 +1,12 @@
 language: node_js
 
 node_js:
-  - "4"
-# Disabling tests on node6 until #96 is resolved
-#- "6"
+  - 4
+  - 6
+  - 8
+
+addons:
+  firefox: "49.0"
 
 # Use container-based Travis infrastructure.
 sudo: false
@@ -20,6 +23,10 @@ before_install:
   - sh -e /etc/init.d/xvfb start
 
 script:
-  - yarn check-ci
+  - node --version
+  - yarn --version
+  - yarn run check-ci
+
+    # Prune deps to just production and ensure we can still build
   - yarn install --production
-  - yarn build
+  - yarn run build
