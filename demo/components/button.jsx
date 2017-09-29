@@ -14,8 +14,8 @@ const Button = (props) => (
 );
 
 Button.propTypes = {
-  buttonStyle: React.PropTypes.object,
-  onClick: React.PropTypes.func,
+  buttonStyle: PropTypes.object,
+  onClick: PropTypes.func,
 }
 
 export default Button;
