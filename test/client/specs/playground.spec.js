@@ -4,14 +4,14 @@
 import React from "react";
 import {
   renderIntoDocument,
-  findRenderedDOMComponentWithClass,
+  findRenderedDOMComponentWithClass
 } from "react-dom/test-utils";
-import ShallowRenderer from 'react-test-renderer/shallow';
+import ShallowRenderer from "react-test-renderer/shallow";
 import Component from "../../../src/components/playground";
 
-describe("components/playground", function () {
+describe("components/playground", () => {
 
-  it("has expected content with deep render", function () {
+  it("has expected content with deep render", () => {
     // This is a "deep" render that renders children + all into an actual
     // browser DOM node.
     //
@@ -23,7 +23,7 @@ describe("components/playground", function () {
     expect(divNode).to.not.be.undefined; //eslint-disable-line no-unused-expressions
   });
 
-  it("has expected content with shallow render", function () {
+  it("has expected content with shallow render", () => {
     // This is a "shallow" render that renders only the current component
     // without using the actual DOM.
     //

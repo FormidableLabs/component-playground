@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { render } from "react-dom";
@@ -25,11 +26,11 @@ class Preview extends Component {
   _compileCode = () => {
     const { code, context, noRender, scope } = this.props;
     const generateContextTypes = (c) => {
-      return `{ ${Object.keys(c).map(val =>
+      return `{ ${Object.keys(c).map((val) =>
         `${val}: PropTypes.any.isRequired`).join(", ")} }`;
     };
 
-    const scopeWithProps = {...scope, PropTypes};
+    const scopeWithProps = { ...scope, PropTypes };
 
     if (noRender) {
       return transform(`
@@ -62,27 +63,22 @@ class Preview extends Component {
 
   };
 
-  _setTimeout = (...args) => {
-    clearTimeout(this.timeoutID); //eslint-disable-line no-undef
-    this.timeoutID = setTimeout.apply(null, args); //eslint-disable-line no-undef
-  };
-
   _executeCode = () => {
-    const mountNode = this.refs.mount;
+    const mountNode = this.mount;
     const { scope, noRender, previewComponent } = this.props;
 
-    const scopeWithProps = {...scope, PropTypes};
+    const scopeWithProps = { ...scope, PropTypes };
 
     const tempScope = [];
 
     try {
-      Object.keys(scopeWithProps).forEach(s => tempScope.push(scopeWithProps[s]));
+      Object.keys(scopeWithProps).forEach((s) => tempScope.push(scopeWithProps[s]));
       tempScope.push(mountNode);
       const compiledCode = this._compileCode();
       if (noRender) {
         /* eslint-disable no-eval, max-len */
         const Comp = React.createElement(
-          eval(compiledCode).apply(null, tempScope)
+          eval(compiledCode)(...tempScope)
         );
         ReactDOMServer.renderToString(React.createElement(previewComponent, {}, Comp));
         render(
@@ -90,14 +86,16 @@ class Preview extends Component {
           mountNode
         );
       } else {
-        eval(compiledCode).apply(null, tempScope);
+        eval(compiledCode)(...tempScope);
       }
       /* eslint-enable no-eval, max-len */
-
+      clearTimeout(this.timeoutID);
       this.setState({ error: null });
     } catch (err) {
-      this._setTimeout(() => {
-        this.setState({ error: err.toString() });
+      const error = err.toString();
+      clearTimeout(this.timeoutID); //eslint-disable-line no-undef
+      this.timeoutID = setTimeout(() => {
+        this.setState({ error });
       }, 500);
     }
   };
@@ -107,7 +105,6 @@ class Preview extends Component {
   };
 
   componentDidUpdate = (prevProps) => {
-    clearTimeout(this.timeoutID); //eslint-disable-line
     if (this.props.code !== prevProps.code) {
       this._executeCode();
     }
@@ -120,7 +117,7 @@ class Preview extends Component {
         {error !== null ?
           <div className="playgroundError">{error}</div> :
           null}
-        <div ref="mount" className="previewArea"/>
+        <div ref={(c) => { this.mount = c; }} className="previewArea"/>
       </div>
     );
   }

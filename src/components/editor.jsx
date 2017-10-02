@@ -10,24 +10,24 @@ if (typeof window !== "undefined") {
 class Editor extends Component {
 
   static propTypes = {
-    theme: PropTypes.string,
-    readOnly: PropTypes.bool,
-    external: PropTypes.bool,
+    className: PropTypes.string,
     codeText: PropTypes.string,
-    selectedLines: PropTypes.array,
+    external: PropTypes.bool,
     onChange: PropTypes.func,
+    readOnly: PropTypes.bool,
+    selectedLines: PropTypes.array,
     style: PropTypes.object,
-    className: PropTypes.string
+    theme: PropTypes.string
   };
 
   componentDidMount = () => {
-    const editor = this.refs.editor.editor;
+    const editor = this.editor.editor;
     this.highlightSelectedLines(editor, this.props.selectedLines);
   };
 
   highlightSelectedLines = (editor, selectedLines) => {
     if (Array.isArray(selectedLines)) {
-      selectedLines.forEach(lineNumber =>
+      selectedLines.forEach((lineNumber) =>
         editor.addLineClass(lineNumber, "wrap", "CodeMirror-activeline-background"));
     }
   };
@@ -60,13 +60,14 @@ class Editor extends Component {
 
     return (
       <Codemirror
-        ref="editor"
+        ref={(c) => { this.editor = c; }}
         className={className}
         external={external}
         options={options}
         style={style}
         value={codeText}
-        onChange={this.updateCode} />
+        onChange={this.updateCode}
+      />
     );
   }
 
