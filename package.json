@@ -1,6 +1,6 @@
 {
   "name": "component-playground",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "A component for rendering React components with editable source and live preview",
   "keywords": [
     "React",
