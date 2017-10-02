@@ -5,8 +5,8 @@ import React from "react";
 import {
   renderIntoDocument,
   findRenderedDOMComponentWithClass,
-  createRenderer,
-} from "react-addons-test-utils";
+} from "react-dom/test-utils";
+import ShallowRenderer from 'react-test-renderer/shallow';
 import Component from "../../../src/components/playground";
 
 describe("components/playground", function () {
@@ -28,7 +28,7 @@ describe("components/playground", function () {
     // without using the actual DOM.
     //
     // https://facebook.github.io/react/docs/test-utils.html#shallow-rendering
-    const renderer = createRenderer();
+    const renderer = new ShallowRenderer();
     renderer.render(<Component />);
     const output = renderer.getRenderOutput();
     expect(output.type).to.equal("div");

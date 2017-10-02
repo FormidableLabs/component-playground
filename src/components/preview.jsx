@@ -69,6 +69,7 @@ class Preview extends Component {
     const mountNode = this.refs.mount;
     const { scope, noRender, previewComponent } = this.props;
     const tempScope = [];
+    tempScope.push(PropTypes);
 
     try {
       Object.keys(scope).forEach(s => tempScope.push(scope[s]));

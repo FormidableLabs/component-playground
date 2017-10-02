@@ -1,3 +1,4 @@
+"use strict";
 /* eslint new-cap:0 no-unused-vars:0 */
 /* eslint-disable no-var, object-shorthand */
 import React from "react";
