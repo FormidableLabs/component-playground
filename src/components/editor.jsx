@@ -1,7 +1,7 @@
 /* eslint new-cap:0 no-unused-vars:0 */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Codemirror from "react-codemirror";
+import Codemirror from "react-codemirror2";
 
 if (typeof window !== "undefined") {
   require("codemirror/mode/jsx/jsx");
@@ -21,7 +21,8 @@ class Editor extends Component {
   };
 
   componentDidMount = () => {
-    const editor = this.refs.editor.getCodeMirror();
+    console.log(this.refs.editor)
+    const editor = this.refs.editor.editor;
     this.highlightSelectedLines(editor, this.props.selectedLines);
   };
 
@@ -32,7 +33,8 @@ class Editor extends Component {
     }
   };
 
-  updateCode = (code) => {
+  updateCode = (editor, meta, code) => {
+    console.log(code);
     if (!this.props.readOnly && this.props.onChange) {
       this.props.onChange(code);
     }
