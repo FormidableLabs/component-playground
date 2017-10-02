@@ -21,7 +21,6 @@ class Editor extends Component {
   };
 
   componentDidMount = () => {
-    console.log(this.refs.editor)
     const editor = this.refs.editor.editor;
     this.highlightSelectedLines(editor, this.props.selectedLines);
   };
@@ -34,7 +33,6 @@ class Editor extends Component {
   };
 
   updateCode = (editor, meta, code) => {
-    console.log(code);
     if (!this.props.readOnly && this.props.onChange) {
       this.props.onChange(code);
     }
