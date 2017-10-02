@@ -29,9 +29,11 @@ class Preview extends Component {
         `${val}: PropTypes.any.isRequired`).join(", ")} }`;
     };
 
+    const scopeWithProps = {...scope, PropTypes};
+
     if (noRender) {
       return transform(`
-        ((${Object.keys(scope).join(", ")}, mountNode) => {
+        ((${Object.keys(scopeWithProps).join(", ")}, mountNode) => {
           class Comp extends React.Component {
 
             getChildContext() {
@@ -52,7 +54,7 @@ class Preview extends Component {
       `, { presets: ["es2015", "react", "stage-1"] }).code;
     } else {
       return transform(`
-        ((${Object.keys(scope).join(",")}, mountNode) => {
+        ((${Object.keys(scopeWithProps).join(",")}, mountNode) => {
           ${code}
         });
       `, { presets: ["es2015", "react", "stage-1"] }).code;
@@ -68,11 +70,13 @@ class Preview extends Component {
   _executeCode = () => {
     const mountNode = this.refs.mount;
     const { scope, noRender, previewComponent } = this.props;
+
+    const scopeWithProps = {...scope, PropTypes};
+
     const tempScope = [];
-    tempScope.push(PropTypes);
 
     try {
-      Object.keys(scope).forEach(s => tempScope.push(scope[s]));
+      Object.keys(scopeWithProps).forEach(s => tempScope.push(scopeWithProps[s]));
       tempScope.push(mountNode);
       const compiledCode = this._compileCode();
       if (noRender) {
