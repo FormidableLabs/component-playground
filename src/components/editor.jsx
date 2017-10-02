@@ -1,7 +1,7 @@
 /* eslint new-cap:0 no-unused-vars:0 */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Codemirror from "react-codemirror";
+import Codemirror from "react-codemirror2";
 
 if (typeof window !== "undefined") {
   require("codemirror/mode/jsx/jsx");
@@ -10,29 +10,29 @@ if (typeof window !== "undefined") {
 class Editor extends Component {
 
   static propTypes = {
-    theme: PropTypes.string,
-    readOnly: PropTypes.bool,
-    external: PropTypes.bool,
+    className: PropTypes.string,
     codeText: PropTypes.string,
-    selectedLines: PropTypes.array,
+    external: PropTypes.bool,
     onChange: PropTypes.func,
+    readOnly: PropTypes.bool,
+    selectedLines: PropTypes.array,
     style: PropTypes.object,
-    className: PropTypes.string
+    theme: PropTypes.string
   };
 
   componentDidMount = () => {
-    const editor = this.refs.editor.getCodeMirror();
+    const editor = this.editor.editor;
     this.highlightSelectedLines(editor, this.props.selectedLines);
   };
 
   highlightSelectedLines = (editor, selectedLines) => {
     if (Array.isArray(selectedLines)) {
-      selectedLines.forEach(lineNumber =>
+      selectedLines.forEach((lineNumber) =>
         editor.addLineClass(lineNumber, "wrap", "CodeMirror-activeline-background"));
     }
   };
 
-  updateCode = (code) => {
+  updateCode = (editor, meta, code) => {
     if (!this.props.readOnly && this.props.onChange) {
       this.props.onChange(code);
     }
@@ -60,13 +60,14 @@ class Editor extends Component {
 
     return (
       <Codemirror
-        ref="editor"
+        ref={(c) => { this.editor = c; }}
         className={className}
         external={external}
         options={options}
         style={style}
         value={codeText}
-        onChange={this.updateCode} />
+        onChange={this.updateCode}
+      />
     );
   }
 

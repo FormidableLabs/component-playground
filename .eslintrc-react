@@ -1,7 +1,17 @@
 ---
 extends:
-  - "defaults/configurations/walmart/es6-react"
+  - "formidable/configurations/es6-react"
   - ".eslintrc-base"
+
+rules:
+  "no-invalid-this": off
+  "react/no-multi-comp": off
+  "react/sort-prop-types": off
+  "import/no-unresolved": off
+  "react/sort-comp": off
+  "no-magic-numbers": off
+  "react/jsx-handler-names": off
 
 globals:
   "CodeMirror": true
+

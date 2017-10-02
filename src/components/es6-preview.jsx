@@ -18,15 +18,15 @@ const getType = function (el) {
 
 const wrapMap = {
   wrapnumber(num) {
-    return (<span style={{color: "#6170d5"}}>{num}</span>);
+    return (<span style={{ color: "#6170d5" }}>{num}</span>);
   },
 
   wrapstring(str) {
-    return (<span style={{color: "#F2777A"}}>{"'" + str + "'"}</span>);
+    return (<span style={{ color: "#F2777A" }}>{`'${ str }'`}</span>);
   },
 
   wrapboolean(bool) {
-    return (<span style={{color: "#48A1CF"}}>{bool ? "true" : "false"}</span>);
+    return (<span style={{ color: "#48A1CF" }}>{bool ? "true" : "false"}</span>);
   },
 
   wraparray(arr) {
@@ -36,7 +36,7 @@ const wrapMap = {
         {arr.map((entry, i) => {
           return (
             <span key={i}>
-              {wrapMap["wrap" + getType(entry)](entry)}
+              {wrapMap[`wrap${ getType(entry)}`](entry)}
               {i !== arr.length - 1 ? ", " : ""}
             </span>
           );
@@ -53,11 +53,11 @@ const wrapMap = {
     for (const key in obj) {
       pairs.push(
         <span key={key}>
-          <span style={{color: "#8A6BA1"}}>
+          <span style={{ color: "#8A6BA1" }}>
             {(first ? "" : ", ") + key}
           </span>
           {": "}
-          {wrapMap["wrap" + getType(obj[key])](obj[key])}
+          {wrapMap[`wrap${ getType(obj[key])}`](obj[key])}
         </span>
       );
 
@@ -68,15 +68,15 @@ const wrapMap = {
   },
 
   wrapfunction() {
-    return (<i style={{color: "#48A1CF"}}>{"function"}</i>);
+    return (<i style={{ color: "#48A1CF" }}>{"function"}</i>);
   },
 
   wrapnull() {
-    return (<span style={{color: "#777"}}>{"null"}</span>);
+    return (<span style={{ color: "#777" }}>{"null"}</span>);
   },
 
   wrapundefined() {
-    return (<span style={{color: "#777"}}>{"undefined"}</span>);
+    return (<span style={{ color: "#777" }}>{"undefined"}</span>);
   }
 };
 
@@ -107,7 +107,7 @@ class EsPreview extends Component {
   };
 
   _executeCode = () => {
-    const mountNode = this.refs.mount;
+    const mountNode = this.mount;
 
     try {
       unmountComponentAtNode(mountNode);
@@ -118,7 +118,7 @@ class EsPreview extends Component {
     try {
       const { scope } = this.props;
       const tempScope = [];
-      Object.keys(scope).forEach(s => tempScope.push(scope[s]));
+      Object.keys(scope).forEach((s) => tempScope.push(scope[s]));
       tempScope.push(mountNode);
       const compiledCode = this._compileCode();
       class Comp extends Component {
@@ -126,8 +126,8 @@ class EsPreview extends Component {
         _createConsoleLine = ({ val, multipleArgs }) => (
           <span style={{ marginRight: "20px" }}>
             {multipleArgs ?
-              val.map(y => this._createConsoleLine([y], false)) :
-              wrapMap["wrap" + getType(val[0])](val[0])}
+              val.map((y) => this._createConsoleLine([y], false)) :
+              wrapMap[`wrap${ getType(val[0])}`](val[0])}
           </span>
         );
 
@@ -141,7 +141,8 @@ class EsPreview extends Component {
                     style={{
                       borderBottom: "1px solid #ccc",
                       padding: "4px 0"
-                    }}>
+                    }}
+                  >
                     {this._createConsoleLine(x)}
                   </div>
                 ))
@@ -174,7 +175,7 @@ class EsPreview extends Component {
 
   render() {
     return (
-      <div ref="mount" />
+      <div ref={(c) => { this.mount = c; }} />
     );
   }
 }

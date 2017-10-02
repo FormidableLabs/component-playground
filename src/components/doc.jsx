@@ -35,11 +35,11 @@ const propTypesArray = [{
   isRequired: PropTypes.element.isRequired
 }];
 
-const getReactPropType = propTypeFunc => {
+const getReactPropType = (propTypeFunc) => {
   let name = "custom";
   let isRequired = false;
 
-  propTypesArray.some(propType => {
+  propTypesArray.some((propType) => {
     if (propTypeFunc === propType.test) {
       name = propType.key;
       return true;
@@ -64,8 +64,8 @@ class Doc extends Component {
 
   static propTypes = {
     componentClass: PropTypes.func,
-    propDescriptionMap: PropTypes.object,
-    ignore: PropTypes.array
+    ignore: PropTypes.array,
+    propDescriptionMap: PropTypes.object
   };
 
   render() {
@@ -90,11 +90,11 @@ class Doc extends Component {
       <div className="playgroundDocs">
         <ul>
           {
-            propTypes.map(propObj => (
+            propTypes.map((propObj) => (
               <li key={propObj.propName}>
                 <b>{propObj.propName}</b>
                 <i>{`: ${propObj.type.name}`}</i>
-                {propObj.description && " - " + propObj.description}
+                {propObj.description && ` - ${ propObj.description}`}
                 <b>{`${propObj.type.isRequired ? " required" : ""}`}</b>
               </li>
             ))

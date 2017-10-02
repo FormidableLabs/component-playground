@@ -77,7 +77,8 @@ class ReactPlayground extends Component {
           docClass ?
             <Doc
               componentClass={docClass}
-              propDescriptionMap={propDescriptionMap} /> : null
+              propDescriptionMap={propDescriptionMap}
+            /> : null
         }
         <div className={`playgroundCode${expandedCode ? " expandedCode" : ""}`}>
           <Editor
@@ -86,28 +87,31 @@ class ReactPlayground extends Component {
             external={external}
             onChange={this._handleCodeChange}
             selectedLines={selectedLines}
-            theme={theme} />
+            theme={theme}
+          />
         </div>
         {
           collapsableCode ?
-          <div className="playgroundToggleCodeBar">
-            <span className="playgroundToggleCodeLink" onClick={this._toggleCode}>
-              {expandedCode ? "collapse" : "expand"}
-            </span>
-          </div> : null
+            <div className="playgroundToggleCodeBar">
+              <span className="playgroundToggleCodeLink" onClick={this._toggleCode}>
+                {expandedCode ? "collapse" : "expand"}
+              </span>
+            </div> : null
         }
         <div className="playgroundPreview">
           {
             es6Console ?
-            <EsPreview
-              code={code}
-              scope={scope} /> :
-            <Preview
-              context={context}
-              code={code}
-              scope={scope}
-              noRender={noRender}
-              previewComponent={previewComponent} />
+              <EsPreview
+                code={code}
+                scope={scope}
+              /> :
+              <Preview
+                context={context}
+                code={code}
+                scope={scope}
+                noRender={noRender}
+                previewComponent={previewComponent}
+              />
           }
         </div>
       </div>

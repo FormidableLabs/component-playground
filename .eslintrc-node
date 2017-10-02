@@ -1,4 +1,7 @@
 ---
 extends:
-  - "defaults/configurations/walmart/es5-node"
+  - "formidable/configurations/es5-node"
   - ".eslintrc-base"
+
+rules:
+  global-require: off

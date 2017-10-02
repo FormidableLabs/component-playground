@@ -3,4 +3,4 @@ plugins:
   - "filenames"
 
 rules:
-  "filenames/filenames": [2, "^[a-z0-9\\-\\.]+$"] # dash-cased filenames.
+  "filenames/match-regex": [2, "^[a-z0-9\\-\\.]+$"] # dash-cased filenames.
