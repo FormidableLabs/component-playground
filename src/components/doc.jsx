@@ -92,7 +92,7 @@ class Doc extends Component {
           {
             propTypes.map((propObj) => (
               <li key={propObj.propName}>
-                <b>{propObj.propName}:</b>
+                <b>`${propObj.propName}: `</b>
                 <i>{propObj.type.name}</i>
                 {propObj.description && ` - ${ propObj.description}`}
                 <b>{`${propObj.type.isRequired ? " required" : ""}`}</b>
