@@ -68,11 +68,13 @@
     "babel-standalone": "^6.26.0",
     "codemirror": "^5.30.0",
     "prop-types": "^15.6.0",
-    "react": "^16.0.0",
     "react-codemirror2": "^2.0.2",
-    "react-dom": "^16.0.0",
     "rimraf": "^2.6.2",
     "webpack": "^1.15.0"
+  },
+  "peerDependencies": {
+    "react": "^15.6.0 || ^16.0.0",
+    "react-dom": "^15.6.0 || ^16.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.1",
@@ -103,6 +105,8 @@
     "opener": "^1.4.1",
     "phantomjs-prebuilt": "^2.1.15",
     "raw-loader": "^0.5.1",
+    "react": "^15.6.0 || ^16.0.0",
+    "react-dom": "^15.6.0 || ^16.0.0",
     "react-hot-loader": "^1.2.8",
     "react-test-renderer": "^16.0.0",
     "sinon": "^1.16.1",
