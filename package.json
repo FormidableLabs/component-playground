@@ -20,9 +20,12 @@
     "url": "https://github.com/FormidableLabs/component-playground/issues"
   },
   "scripts": {
-    "postinstall": "node -e \"require('fs').stat('lib', function(e,s){process.exit(e || !s.isDirectory() ? 1 : 0)})\" || npm run build-lib",
+    "postinstall": "cd lib || npm run build-lib",
     "preversion": "npm run test",
+    "postversion": "publishr postversion -V",
+    "postpublish": "publishr postpublish -V",
     "version": "npm run clean && npm run build && git add -A dist",
+    "version-dry-run": "publishr dry-run -V",
     "clean-dist": "rimraf dist",
     "build-dist-min": "webpack --config webpack.config.js",
     "build-dist-dev": "webpack --config webpack.config.dev.js",
@@ -104,6 +107,7 @@
     "mocha": "^2.2.5",
     "opener": "^1.4.1",
     "phantomjs-prebuilt": "^2.1.15",
+    "publishr": "^1.0.0",
     "raw-loader": "^0.5.1",
     "react": "^15.6.0 || ^16.0.0",
     "react-dom": "^15.6.0 || ^16.0.0",
@@ -114,5 +118,18 @@
     "style-loader": "~0.8.0",
     "url-loader": "~0.5.5",
     "webpack-dev-server": "^1.14.0"
+  },
+  "publishr": {
+    "dependencies": [
+      "^babel-(?!standalone)",
+      "^rimraf$",
+      "^webpack$"
+    ],
+    "scripts": {
+      "postinstall": ""
+    },
+    "files": {
+      ".npmignore": ".npmignore.publishr"
+    }
   }
 }
