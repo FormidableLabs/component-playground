@@ -89485,12 +89485,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	              _react2.default.createElement(
 	                "b",
 	                null,
-	                propObj.propName
+	                "`$",
+	                propObj.propName,
+	                ": `"
 	              ),
 	              _react2.default.createElement(
 	                "i",
 	                null,
-	                ": " + propObj.type.name
+	                propObj.type.name
 	              ),
 	              propObj.description && " - " + propObj.description,
 	              _react2.default.createElement(
