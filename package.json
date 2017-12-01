@@ -22,6 +22,8 @@
   "scripts": {
     "postinstall": "cd lib || npm run build-lib",
     "preversion": "npm run test",
+    "postversion": "publishr postversion -V",
+    "postpublish": "publishr postpublish -V",
     "version": "npm run clean && npm run build && git add -A dist",
     "version-dry-run": "publishr dry-run -V",
     "clean-dist": "rimraf dist",
