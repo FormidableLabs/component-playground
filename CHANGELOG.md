@@ -1,5 +1,9 @@
 # Component Playground Changelog
 
+## Unreleased
+
+  * Move `prop-types` to `peerDependencies`
+
 ## 2.0.0 (2017-05-18)
 
   * Remove support for React < v15
