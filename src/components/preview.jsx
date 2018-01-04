@@ -31,14 +31,16 @@ class Preview extends Component {
     };
 
     const scopeWithProps = { ...scope, PropTypes };
+    const generateChildContext = (c) =>
+      `{ ${Object.keys(c).map(val => `${val} : ${val}`).join(", ")} }`;
 
     if (noRender) {
       return transform(`
-        ((${Object.keys(scopeWithProps).join(", ")}, mountNode) => {
+        ((${Object.keys(scopeWithProps).concat(Object.keys(context)).join(", ")}, mountNode) => {
           class Comp extends React.Component {
 
             getChildContext() {
-              return ${JSON.stringify(context)};
+              return ${generateChildContext(context)};
             }
 
             render() {
@@ -69,16 +71,16 @@ class Preview extends Component {
 
     const scopeWithProps = { ...scope, PropTypes };
 
-    const tempScope = [];
 
     try {
-      Object.keys(scopeWithProps).forEach((s) => tempScope.push(scopeWithProps[s]));
-      tempScope.push(mountNode);
+      const scopeArgs = Object.values(scopeWithProps);
+      const contextArgs = Object.values(this.props.context);
+
       const compiledCode = this._compileCode();
       if (noRender) {
         /* eslint-disable no-eval, max-len */
         const Comp = React.createElement(
-          eval(compiledCode)(...tempScope)
+          eval(compiledCode)(...scopeArgs.concat(contextArgs).concat([mountNode]))
         );
         ReactDOMServer.renderToString(React.createElement(previewComponent, {}, Comp));
         render(
@@ -86,7 +88,7 @@ class Preview extends Component {
           mountNode
         );
       } else {
-        eval(compiledCode)(...tempScope);
+        eval(compiledCode)(...scopeArgs.concat([mountNode]));
       }
       /* eslint-enable no-eval, max-len */
       clearTimeout(this.timeoutID);
