@@ -32,7 +32,7 @@ class Preview extends Component {
 
     const scopeWithProps = { ...scope, PropTypes };
     const generateChildContext = (c) =>
-      `{ ${Object.keys(c).map(val => `${val} : ${val}`).join(", ")} }`;
+      `{ ${Object.keys(c).map((val) => `${val} : ${val}`).join(", ")} }`;
 
     if (noRender) {
       return transform(`
