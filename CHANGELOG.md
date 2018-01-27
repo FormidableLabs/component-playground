@@ -1,8 +1,9 @@
 # Component Playground Changelog
 
-## Unreleased
+## 3.1.0 (2018-01-26)
 
-  * Move `prop-types` to `peerDependencies`
+  * Add `es/` build.
+  * Add `publishr` workflow for more honed `npm` package.
 
 ## 2.0.0 (2017-05-18)
 
