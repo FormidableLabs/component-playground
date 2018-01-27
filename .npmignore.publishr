@@ -1,2 +1,5 @@
+/*
+!dist
 dist/*.map
-gulpfile.js
+!lib
+!es
