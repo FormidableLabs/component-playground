@@ -56,7 +56,8 @@ out/
 # App Files
 # --------------------
 .tmp
-dist/*.map
+dist
 lib
+es
 node_modules/
 coverage
