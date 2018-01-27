@@ -2,7 +2,7 @@
 
 ## Set Up
 
-In your HTML document, add the required CodeMirror scripts at the bottom, before your bundle script: 
+In your HTML document, add the required CodeMirror scripts at the bottom, before your bundle script:
 
 ```html
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.0.0/codemirror.min.js"></script>
