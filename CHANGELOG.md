@@ -1,6 +1,6 @@
 # Component Playground Changelog
 
-## 3.1.0 (2018-01-26)
+## 3.1.1 (2018-01-26)
 
   * Add `es/` build.
   * Add `publishr` workflow for more honed `npm` package.
