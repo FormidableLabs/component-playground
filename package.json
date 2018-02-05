@@ -135,5 +135,6 @@
     "files": {
       ".npmignore": ".npmignore.publishr"
     }
-  }
+  },
+  "sideEffects": false
 }
