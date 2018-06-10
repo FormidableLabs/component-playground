@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { UnControlled as Codemirror } from "react-codemirror2";
 
-if (typeof window !== "undefined") {
+if (typeof window !== "undefined" && typeof window.navigator !== "undefined") {
   require("codemirror/mode/jsx/jsx");
 }
 
