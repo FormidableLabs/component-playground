@@ -1,7 +1,7 @@
 /* eslint new-cap:0 no-unused-vars:0 */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Codemirror from "react-codemirror2";
+import { UnControlled as Codemirror } from "react-codemirror2";
 
 if (typeof window !== "undefined") {
   require("codemirror/mode/jsx/jsx");
