@@ -1,5 +1,9 @@
 # Component Playground Changelog
 
+## 3.2.0 (2018-06-11)
+
+* Update to `react-codemirror2@^5.0.0`
+
 ## 3.1.2 (2018-05-01)
 
 * Fix backticks.
