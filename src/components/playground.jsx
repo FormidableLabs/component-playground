@@ -7,6 +7,8 @@ import Preview from "./preview";
 import EsPreview from "./es6-preview";
 import Doc from "./doc";
 
+// TODO: refactor to remove componentWillReceiveProps
+// eslint-disable-next-line react/no-deprecated
 class ReactPlayground extends Component {
 
   static defaultProps = {
@@ -60,6 +62,7 @@ class ReactPlayground extends Component {
   render() {
     const { code, external, expandedCode } = this.state;
     const {
+      codeText,
       collapsableCode,
       context,
       docClass,
@@ -83,7 +86,7 @@ class ReactPlayground extends Component {
         <div className={`playgroundCode${expandedCode ? " expandedCode" : ""}`}>
           <Editor
             className="playgroundStage"
-            codeText={code}
+            codeText={codeText}
             external={external}
             onChange={this._handleCodeChange}
             selectedLines={selectedLines}
