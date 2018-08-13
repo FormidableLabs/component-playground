@@ -16,6 +16,7 @@ class Preview extends Component {
     scope: PropTypes.object.isRequired,
     previewComponent: PropTypes.node,
     noRender: PropTypes.bool,
+    onError: PropTypes.func.isRequired,
     context: PropTypes.object
   };
 
@@ -90,10 +91,12 @@ class Preview extends Component {
       }
       /* eslint-enable no-eval, max-len */
       clearTimeout(this.timeoutID);
+      this.props.onError(null);
       this.setState({ error: null });
     } catch (err) {
       const error = err.toString();
       clearTimeout(this.timeoutID); //eslint-disable-line no-undef
+      this.props.onError(err);
       this.timeoutID = setTimeout(() => {
         this.setState({ error });
       }, 500);

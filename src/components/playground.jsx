@@ -30,7 +30,8 @@ class ReactPlayground extends Component {
     es6Console: PropTypes.bool,
     context: PropTypes.object,
     initiallyExpanded: PropTypes.bool,
-    previewComponent: PropTypes.node
+    previewComponent: PropTypes.node,
+    onUpdate: PropTypes.func
   };
 
   state = {
@@ -46,11 +47,26 @@ class ReactPlayground extends Component {
     });
   };
 
+  componentDidUpdate = (prevProps, prevState) => {
+    if (this.state.code !== prevState.code && this.props.onUpdate) {
+      this.props.onUpdate({
+        code: this.state.code,
+        evalError: this.previewError
+      });
+    }
+  };
+
   _handleCodeChange = (code) => {
     this.setState({
       code,
       external: false
     });
+  };
+
+  _handlePreviewError = (error) => {
+    // error may be an error object, or null (if there was no problem).
+    // this callback is expected to run before componentDidUpdate.
+    this.previewError = error;
   };
 
   _toggleCode = () => {
@@ -107,6 +123,7 @@ class ReactPlayground extends Component {
               <EsPreview
                 code={code}
                 scope={scope}
+                onError={this._handlePreviewError}
               /> :
               <Preview
                 context={context}
@@ -114,6 +131,7 @@ class ReactPlayground extends Component {
                 scope={scope}
                 noRender={noRender}
                 previewComponent={previewComponent}
+                onError={this._handlePreviewError}
               />
           }
         </div>

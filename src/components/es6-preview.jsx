@@ -84,7 +84,8 @@ class EsPreview extends Component {
 
   static propTypes = {
     code: PropTypes.string.isRequired,
-    scope: PropTypes.object.isRequired
+    scope: PropTypes.object.isRequired,
+    onError: PropTypes.func.isRequired
   };
 
   _compileCode = () => {
@@ -152,7 +153,9 @@ class EsPreview extends Component {
         }
       }
       render(<Comp />, mountNode);
+      this.props.onError(null);
     } catch (err) {
+      this.props.onError(err);
       this._setTimeout(() => {
         render(
           <div className="playgroundError">{err.toString()}</div>,
