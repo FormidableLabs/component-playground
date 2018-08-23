@@ -125,7 +125,7 @@
   },
   "publishr": {
     "dependencies": [
-      "^babel-(?!standalone)",
+      "^babel-(?!(standalone|polyfill))",
       "^rimraf$",
       "^webpack$"
     ],

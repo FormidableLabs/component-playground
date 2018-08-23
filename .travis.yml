@@ -1,9 +1,9 @@
 language: node_js
 
 node_js:
-  - 4
-  - 6
-  - 8
+  - "6"
+  - "8"
+  - "10"
 
 addons:
   firefox: "49.0"
@@ -22,11 +22,15 @@ before_install:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
 
+install:
+  # Fail build if yarn.lock is out of date.
+  - yarn install --frozen-lockfile
+
 script:
   - node --version
   - yarn --version
   - yarn run check-ci
 
-    # Prune deps to just production and ensure we can still build
+  # Prune deps to just production and ensure we can still build
   - yarn install --production
   - yarn run build
