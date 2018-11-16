@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { render, unmountComponentAtNode } from "react-dom";
 import { transform } from "babel-standalone";
+import { getHyphenatedClassNames } from '../utils/string';
 
 const getType = function (el) {
   let t = typeof el;
@@ -84,7 +85,8 @@ class EsPreview extends Component {
 
   static propTypes = {
     code: PropTypes.string.isRequired,
-    scope: PropTypes.object.isRequired
+    scope: PropTypes.object.isRequired,
+    hyphenatedClassNames: PropTypes.bool
   };
 
   _compileCode = () => {
@@ -108,6 +110,7 @@ class EsPreview extends Component {
 
   _executeCode = () => {
     const mountNode = this.mount;
+    const { hyphenatedClassNames = false } = this.props;
 
     try {
       unmountComponentAtNode(mountNode);
@@ -155,7 +158,7 @@ class EsPreview extends Component {
     } catch (err) {
       this._setTimeout(() => {
         render(
-          <div className="playgroundError">{err.toString()}</div>,
+          <div className={getHyphenatedClassNames("playgroundError", hyphenatedClassNames)}>{err.toString()}</div>,
           mountNode
         );
       }, 500);

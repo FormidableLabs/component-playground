@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { getHyphenatedClassNames } from '../utils/string';
 
 const propTypesArray = [{
   key: "array",
@@ -65,7 +66,8 @@ class Doc extends Component {
   static propTypes = {
     componentClass: PropTypes.func,
     ignore: PropTypes.array,
-    propDescriptionMap: PropTypes.object
+    propDescriptionMap: PropTypes.object,
+    hyphenatedClassNames: PropTypes.bool
   };
 
   render() {
@@ -74,7 +76,8 @@ class Doc extends Component {
     const {
       componentClass,
       ignore,
-      propDescriptionMap
+      propDescriptionMap,
+      hyphenatedClassNames = false
     } = this.props;
     for (const propName in componentClass.propTypes) {
       if (ignore.indexOf(propName)) {
@@ -87,7 +90,7 @@ class Doc extends Component {
     }
 
     return (
-      <div className="playgroundDocs">
+      <div className={getHyphenatedClassNames("playgroundDocs", hyphenatedClassNames)}>
         <ul>
           {
             propTypes.map((propObj) => (
