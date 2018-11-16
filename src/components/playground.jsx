@@ -6,7 +6,7 @@ import Editor from "./editor";
 import Preview from "./preview";
 import EsPreview from "./es6-preview";
 import Doc from "./doc";
-import { getHyphenatedClassNames } from '../utils/string';
+import { getHyphenatedClassNames } from "../utils/string";
 
 // TODO: refactor to remove componentWillReceiveProps
 // eslint-disable-next-line react/no-deprecated
@@ -79,7 +79,11 @@ class ReactPlayground extends Component {
     } = this.props;
 
     return (
-      <div className={collapsableCode ? getHyphenatedClassNames("playground collapsableCode", hyphenatedClassNames) : "playground"}>
+      <div
+        className={collapsableCode ?
+          getHyphenatedClassNames("playground collapsableCode", hyphenatedClassNames)
+          : "playground"}
+      >
         {
           docClass ?
             <Doc
@@ -88,7 +92,11 @@ class ReactPlayground extends Component {
               hyphenatedClassNames={hyphenatedClassNames}
             /> : null
         }
-        <div className={expandedCode ? getHyphenatedClassNames("playgroundCode expandedCode", hyphenatedClassNames) : getHyphenatedClassNames("playgroundCode", hyphenatedClassNames)}>
+        <div
+          className={expandedCode ?
+            getHyphenatedClassNames("playgroundCode expandedCode", hyphenatedClassNames)
+            : getHyphenatedClassNames("playgroundCode", hyphenatedClassNames)}
+        >
           <Editor
             className={getHyphenatedClassNames("playgroundStage", hyphenatedClassNames)}
             codeText={codeText}
@@ -100,8 +108,15 @@ class ReactPlayground extends Component {
         </div>
         {
           collapsableCode ?
-            <div className={getHyphenatedClassNames("playgroundToggleCodeBar", hyphenatedClassNames)}>
-              <span className={getHyphenatedClassNames("playgroundToggleCodeLink", hyphenatedClassNames)} onClick={this._toggleCode}>
+            <div
+              className={getHyphenatedClassNames("playgroundToggleCodeBar", hyphenatedClassNames)}
+            >
+              <span
+                className={
+                  getHyphenatedClassNames("playgroundToggleCodeLink", hyphenatedClassNames)
+                }
+                onClick={this._toggleCode}
+              >
                 {expandedCode ? "collapse" : "expand"}
               </span>
             </div> : null

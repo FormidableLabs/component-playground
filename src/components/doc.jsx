@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { getHyphenatedClassNames } from '../utils/string';
+import { getHyphenatedClassNames } from "../utils/string";
 
 const propTypesArray = [{
   key: "array",

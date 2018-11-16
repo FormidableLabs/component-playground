@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { render } from "react-dom";
 import ReactDOMServer from "react-dom/server";
 import { transform } from "babel-standalone";
-import { getHyphenatedClassNames } from '../utils/string';
+import { getHyphenatedClassNames } from "../utils/string";
 
 class Preview extends Component {
 
@@ -118,9 +118,17 @@ class Preview extends Component {
     return (
       <div>
         {error !== null ?
-          <div className={getHyphenatedClassNames("playgroundError", hyphenatedClassNames)}>{error}</div> :
-          null}
-        <div ref={(c) => { this.mount = c; }} className={getHyphenatedClassNames("previewArea", hyphenatedClassNames)} />
+          <div
+            className={getHyphenatedClassNames("playgroundError", hyphenatedClassNames)}
+          >
+            {error}
+          </div> :
+          null
+        }
+        <div
+          ref={(c) => { this.mount = c; }}
+          className={getHyphenatedClassNames("previewArea", hyphenatedClassNames)}
+        />
       </div>
     );
   }

@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { render, unmountComponentAtNode } from "react-dom";
 import { transform } from "babel-standalone";
-import { getHyphenatedClassNames } from '../utils/string';
+import { getHyphenatedClassNames } from "../utils/string";
 
 const getType = function (el) {
   let t = typeof el;
@@ -158,7 +158,11 @@ class EsPreview extends Component {
     } catch (err) {
       this._setTimeout(() => {
         render(
-          <div className={getHyphenatedClassNames("playgroundError", hyphenatedClassNames)}>{err.toString()}</div>,
+          <div
+            className={getHyphenatedClassNames("playgroundError", hyphenatedClassNames)}
+          >
+            {err.toString()}
+          </div>,
           mountNode
         );
       }, 500);
