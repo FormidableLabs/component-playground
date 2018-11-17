@@ -38,7 +38,7 @@
     "build-es": "npm run clean-es && babel src --out-dir es",
     "clean": "npm run clean-lib && npm run clean-dist && npm run clean-es",
     "build": "npm run build-lib && npm run build-dist && npm run build-es",
-    "server-dev": "webpack-dev-server --port 4000 --config demo/webpack.config.dev.js --content-base demo",
+    "server-dev": "webpack-dev-server --port 3000 --config demo/webpack.config.dev.js --content-base demo",
     "server-hot": "webpack-dev-server --port 3000 --config demo/webpack.config.hot.js --hot --content-base demo",
     "server-test": "webpack-dev-server --port 3001 --config webpack.config.test.js",
     "dev": "npm run server-dev & npm run server-test",
