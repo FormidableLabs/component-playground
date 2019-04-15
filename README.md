@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/FormidableLabs/component-playground.svg?branch=master)](https://travis-ci.org/FormidableLabs/component-playground)
 ![](https://badge-size.herokuapp.com/FormidableLabs/component-playground/master/dist/component-playground.min.js?compression=gzip)
+[![Maintenance Status][maintenance-image]](#maintenance-status)
 
 # component-playground
 A component for rendering React Components and ES6 code with editable source and live preview
@@ -173,3 +174,9 @@ Here are the various factors at play:
 - **SSR**: `component-playground` is not server-side renderable, `react-live` is.
 - **Extra features**: `component-playground` supports raw evaluation and pretty-printed output out-of-the-box, while `react-live` does not.
 - **Error handling**: `component-playground` might have more predictable error handling than `react-live` in some cases (due to `react-dom`, although this might change with React 16).
+
+## Maintenance Status
+
+ **Archived:** This project is no longer maintained by Formidable. We are no longer responding to issues or pull requests unless they relate to security concerns. We encourage interested developers to fork this project and make it their own!
+
+[maintenance-image]: https://img.shields.io/badge/maintenance-archived-red.svg
