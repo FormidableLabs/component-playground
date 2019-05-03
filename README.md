@@ -7,10 +7,6 @@ A component for rendering React Components and ES6 code with editable source and
 
 ![Component Playground](http://i.imgur.com/se3avpr.png)
 
-### Demo
-
-[https://formidable.com/open-source/component-playground/](https://formidable.com/open-source/component-playground/)
-
 ### Installation
 
 ```sh
