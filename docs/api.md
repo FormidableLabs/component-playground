@@ -85,3 +85,19 @@ Annotation map for the docClass. They key is the prop to annotate, the value is 
   scope={{React}}
 />
 ```
+
+### `onUpdate`
+*PropTypes.func*
+
+A function which gets called whenever the code updates after the initial render. The callback is fired with a single hash argument which looks like:
+
+```js
+{
+  code,
+  evalError
+}
+```
+
+`code` is the new code text.
+
+`evalError` will either be `null` (if there was no error) or the error object caught during attempted compilation and execution of the new code.
