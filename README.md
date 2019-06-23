@@ -153,6 +153,18 @@ var ComponentExample = React.createClass({
 React.render(<ComponentExample/>, mountNode);
 ```
 
+### hyphenatedClassNames
+_React.PropTypes.bool_
+
+Defaults to false. If set to false, allows return the classnames of the component wrapper and rest of them as hyphenated.
+You can use this option to have the classnames as hyphenated.
+
+```js
+  <Playground
+    hyphenatedClassNames={true}
+  />
+```
+
 ### Comparison to [react-live](https://github.com/FormidableLabs/react-live)
 
 There are multiple options when it comes to live, editable React component environments. Formidable actually has **two** first class projects to help you out: [`component-playground`](https://github.com/FormidableLabs/component-playground) and [`react-live`](https://github.com/FormidableLabs/react-live). Let's briefly look at the libraries, use cases, and factors that might help in deciding which is right for you.

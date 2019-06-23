@@ -6,6 +6,7 @@ import Editor from "./editor";
 import Preview from "./preview";
 import EsPreview from "./es6-preview";
 import Doc from "./doc";
+import { getHyphenatedClassNames } from "../utils/string";
 
 // TODO: refactor to remove componentWillReceiveProps
 // eslint-disable-next-line react/no-deprecated
@@ -30,7 +31,8 @@ class ReactPlayground extends Component {
     es6Console: PropTypes.bool,
     context: PropTypes.object,
     initiallyExpanded: PropTypes.bool,
-    previewComponent: PropTypes.node
+    previewComponent: PropTypes.node,
+    hyphenatedClassNames: PropTypes.node
   };
 
   state = {
@@ -72,20 +74,31 @@ class ReactPlayground extends Component {
       propDescriptionMap,
       scope,
       selectedLines,
-      theme } = this.props;
+      theme,
+      hyphenatedClassNames = false
+    } = this.props;
 
     return (
-      <div className={`playground${collapsableCode ? " collapsableCode" : ""}`}>
+      <div
+        className={collapsableCode ?
+          getHyphenatedClassNames("playground collapsableCode", hyphenatedClassNames)
+          : "playground"}
+      >
         {
           docClass ?
             <Doc
               componentClass={docClass}
               propDescriptionMap={propDescriptionMap}
+              hyphenatedClassNames={hyphenatedClassNames}
             /> : null
         }
-        <div className={`playgroundCode${expandedCode ? " expandedCode" : ""}`}>
+        <div
+          className={expandedCode ?
+            getHyphenatedClassNames("playgroundCode expandedCode", hyphenatedClassNames)
+            : getHyphenatedClassNames("playgroundCode", hyphenatedClassNames)}
+        >
           <Editor
-            className="playgroundStage"
+            className={getHyphenatedClassNames("playgroundStage", hyphenatedClassNames)}
             codeText={codeText}
             external={external}
             onChange={this._handleCodeChange}
@@ -95,18 +108,26 @@ class ReactPlayground extends Component {
         </div>
         {
           collapsableCode ?
-            <div className="playgroundToggleCodeBar">
-              <span className="playgroundToggleCodeLink" onClick={this._toggleCode}>
+            <div
+              className={getHyphenatedClassNames("playgroundToggleCodeBar", hyphenatedClassNames)}
+            >
+              <span
+                className={
+                  getHyphenatedClassNames("playgroundToggleCodeLink", hyphenatedClassNames)
+                }
+                onClick={this._toggleCode}
+              >
                 {expandedCode ? "collapse" : "expand"}
               </span>
             </div> : null
         }
-        <div className="playgroundPreview">
+        <div className={getHyphenatedClassNames("playgroundPreview", hyphenatedClassNames)}>
           {
             es6Console ?
               <EsPreview
                 code={code}
                 scope={scope}
+                hyphenatedClassNames={hyphenatedClassNames}
               /> :
               <Preview
                 context={context}
@@ -114,6 +135,7 @@ class ReactPlayground extends Component {
                 scope={scope}
                 noRender={noRender}
                 previewComponent={previewComponent}
+                hyphenatedClassNames={hyphenatedClassNames}
               />
           }
         </div>
