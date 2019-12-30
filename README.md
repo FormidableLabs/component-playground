@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/FormidableLabs/component-playground.svg?branch=master)](https://travis-ci.org/FormidableLabs/component-playground)
+[![Build Status](https://travis-ci.com/FormidableLabs/component-playground.svg?branch=master)](https://travis-ci.com/FormidableLabs/component-playground)
 ![](https://badge-size.herokuapp.com/FormidableLabs/component-playground/master/dist/component-playground.min.js?compression=gzip)
 [![Maintenance Status][maintenance-image]](#maintenance-status)
 
